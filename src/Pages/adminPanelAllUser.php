@@ -34,7 +34,7 @@ $user = $_SESSION['user'];
     include_once '../Pages/elements/head.php';
 ?>
 <div id="table-container">
-    <table class="table table-striped students-table">
+    <table>
         <tr>
             <td>Nome</td>
             <td>Data de Nascimento</td>
