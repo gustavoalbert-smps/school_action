@@ -34,11 +34,11 @@ $user = $_SESSION['user'];
     include_once '../Pages/elements/head.php';
 ?>
 <div id="table-container">
-    <table>
+    <table class="table">
         <tr>
-            <td>Nome</td>
-            <td>Data de Nascimento</td>
-            <td>Genero</td>
+            <th>Nome</th>
+            <th>Data de Nascimento</th>
+            <th>Genero</th>
         </tr>
     <?php foreach ($people as $people):?>
         <tr>
