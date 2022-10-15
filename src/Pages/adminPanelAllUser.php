@@ -40,14 +40,14 @@ $user = $_SESSION['user'];
             <td>Data de Nascimento</td>
             <td>Genero</td>
         </tr>
-    <?php foreach ($peoples as $people) { ?>
+    <?php foreach ($people as $people):?>
         <tr>
-            
-            <td><?=$people['name']?></td>
-            <td></td>
-            <td></td>
+            <td><?= $people['name']?></td>
+            <td><?= $people['birth_date']?></td>
+            <td><?= $people['gender']?></td>
+        </tr>
 
-    <?php } ?>
+    <?php endforeach; ?>
 <?php
     include_once '../Pages/elements/footer.php';
 ?>
