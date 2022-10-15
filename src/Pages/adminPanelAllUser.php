@@ -7,7 +7,7 @@ use Alura\Pdo\Infrastructure\Repository\PdoStudentRepository;
 use Alura\Pdo\Infrastructure\Repository\PdoTeacherRepository;
 use Alura\Pdo\Infrastructure\Persistence\ConnectDatabase;
 
-//require_once '../../vendor/autoload.php';
+require_once '../../vendor/autoload.php';
 
 session_start();
 
