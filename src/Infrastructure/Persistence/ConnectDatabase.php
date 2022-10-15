@@ -2,7 +2,7 @@
 
 namespace Alura\Pdo\Infrastructure\Persistence;
 
-require_once '../../vendor/autoload.php';
+//require_once '../../vendor/autoload.php';
 
 use PDO;
 
@@ -14,7 +14,7 @@ class ConnectDatabase
     $host = "localhost";
     $db = "school_db";
     $user = "school";
-    $pass = "school@12";
+    $pass = "School@12";
 
     $connection = new PDO("mysql:host=$host;dbname=$db",$user,$pass);
     

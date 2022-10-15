@@ -7,7 +7,7 @@ use Alura\Pdo\Infrastructure\Repository\PdoStudentRepository;
 use Alura\Pdo\Infrastructure\Repository\PdoTeacherRepository;
 use Alura\Pdo\Infrastructure\Persistence\ConnectDatabase;
 
-require_once '../../vendor/autoload.php';
+//require_once '../../vendor/autoload.php';
 
 session_start();
 
@@ -33,7 +33,21 @@ $user = $_SESSION['user'];
 <?php 
     include_once '../Pages/elements/head.php';
 ?>
+<div id="table-container">
+    <table class="table table-striped students-table">
+        <tr>
+            <td>Nome</td>
+            <td>Data de Nascimento</td>
+            <td>Genero</td>
+        </tr>
+    <?php foreach ($peoples as $people) { ?>
+        <tr>
+            
+            <td><?=$people['name']?></td>
+            <td></td>
+            <td></td>
 
+    <?php } ?>
 <?php
     include_once '../Pages/elements/footer.php';
 ?>

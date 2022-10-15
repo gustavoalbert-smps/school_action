@@ -6,7 +6,7 @@ use Alura\Pdo\Infrastructure\Repository\PdoPeopleRepository;
 use Alura\Pdo\Infrastructure\Repository\PdoStudentRepository;
 use Alura\Pdo\Infrastructure\Repository\PdoTeacherRepository;
 
-require_once '../../vendor/autoload.php';
+  require_once '../../vendor/autoload.php';
 
 session_start();
 
