@@ -153,6 +153,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     </div>
     </form>
+    <p style = "text-align: center;">School Action &copy; 2022 developed by Gustavo Albert and Isaias Araujo</p>
   </main><!-- End #main -->
 </body>
+</html>
 
