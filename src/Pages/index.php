@@ -28,6 +28,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['password'] = $user->getPassword();
         $_SESSION['teacher'] = $user->getIsTeacher();
         $_SESSION['people_id'] = $user->getReferenceId();
+        $_SESSION['name'] = $people->getName();
+        $_SESSION['birth_date'] = $people->getBirthDate();
+        $_SESSION['gender'] = $people->getGender();
+        $_SESSION['admin'] = $people->getIsAdmin();
         
         if ($people->getIsAdmin() === 1) {
             header('Location: /pdo/src/Pages/adminPanel.php');
