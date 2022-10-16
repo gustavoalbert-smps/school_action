@@ -19,19 +19,15 @@ $matter = $matterRepository->getMatterByTeacherId($teacher->getId());
 
 ?>
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Academico</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Dev: Gustavo Albert">
-    </head>
+<?php
+    require_once '../Pages/elements/head.php';
+?>
 
-    <body>
-        <ul>
-            <li><a href="schoolClass.php?id=<?php echo $matter->getClassId();?>">Turmas</a></li>
-            <li><img src="imgs/student-icon.svg" alt=""><a href="environments/student/studentsModule.php">Estudantes</a></li>
-        </ul>
-    </body>
-</html>
+<ul>
+    <li><a href="schoolClass.php?id=<?php echo $matter->getClassId();?>">Turmas</a></li>
+    <li><img src="imgs/student-icon.svg" alt=""><a href="environments/student/studentsModule.php">Estudantes</a></li>
+</ul>
+
+<?php
+    require_once '../Pages/elements/footer.php';
+?>
