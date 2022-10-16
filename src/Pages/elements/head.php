@@ -270,7 +270,7 @@
   </header><!-- End Header -->
 
   <!-- ======= Sidebar ======= -->
-<?php include_once 'elements/sidebarAdmin.html';?>
+<?php include_once 'elements/sidebar.php';?>
   <!-- ======= End Sidebar ======= -->
 
   
