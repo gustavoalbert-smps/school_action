@@ -11,10 +11,10 @@ class ConnectDatabase
     public static function connect() :PDO
     {
        
-    $host = "localhost";
-    $db = "school_db";
-    $user = "school";
-    $pass = "School@12";
+    $host = "us-cdbr-east-06.cleardb.net"; 
+    $db = "heroku_de282252de2da63";
+    $user = "b52465a7c79918";
+    $pass = "e99bcde1";
 
     $connection = new PDO("mysql:host=$host;dbname=$db",$user,$pass);
     
