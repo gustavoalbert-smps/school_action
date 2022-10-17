@@ -19,7 +19,6 @@ $class = $classRepository->getClass(intval($_GET['id']));
 $students = [];
 $students += $studentRepository->getStudentsByClass(intval($_GET['id']));
 
-$user = $_SESSION['user'];
 ?>
 
 <?php

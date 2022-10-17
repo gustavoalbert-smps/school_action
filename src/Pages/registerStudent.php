@@ -19,7 +19,7 @@ $studentRepository = new PdoStudentRepository($connection);
 
 $classes = $classRepository->allClasses();
 
-$user = $_SESSION['user'];
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $people = new People(null, $_POST['name'], $_POST['gender'], new DateTimeImmutable($_POST['birth_date']), 0);

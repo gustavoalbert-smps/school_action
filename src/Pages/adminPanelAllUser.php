@@ -26,8 +26,6 @@ $teachers = $userController->totalUsersType('teacher');
 
 $students = $userController->totalUsersType('');
 
-$user = $_SESSION['user'];
-
 ?>
 
 <?php 
