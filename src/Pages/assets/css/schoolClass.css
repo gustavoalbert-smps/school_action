@@ -1,11 +1,19 @@
 .table-striped {
-    background-color: #b7d1fa;
+    background-color: #fffff9;
     vertical-align: middle;
+    border-color: transparent;
 }
 
 .table-striped>tbody>tr:nth-child(odd)>td,
 .table-striped>tbody>tr:nth-child(odd)>th {
-    background-color: #5086de;
+    background-color: #fdfdd5;
+}
+
+.title {
+    background-color: #fffc62;
+    vertical-align: middle;
+    height: 66px;
+    margin-bottom: 0px;
 }
 
 .table-striped .student-tr.name {

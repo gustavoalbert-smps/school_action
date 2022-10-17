@@ -32,25 +32,27 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
 
 <h3>TURMA: <?php echo "{$class->getYear()}{$class->getIdentifier()} ";?> TURNO: <?php echo strtoupper($class->getShift());?></h1>
 
-<div id="table-container">
+<div id="table-container">   
     <table class="table table-striped students-table">
-        <tr>
-            <td class="head" align="center">Nome</td>
-            <td class="head" align="center">Data de Nascimento</td>
-            <td class="head" align="center">Classe Pertencente</td>
-            <td class="head"></td>
-        </tr>
-    <?php foreach ($students as $student) { ?>
-        <tr>
-            <td class="student-tr name" align="center"><a class="student" href="student.php?id=<?php echo $student->id()?>"><?php echo $student->getName() ?></a></td>
-            <td class="student-tr" align="center"><?php echo $student->getBirthDate()->format('d-m-Y') ?></td>
-            <td class="student-tr" align="center"><?php echo $student->getClassId() ?></td>
-            <td class="student-tr" align="center">
-                <button class="btn" id="x" onclick="window.location.href='/student/removeStudent.php?id=<?php echo $student->id()?>'">
-                    <img class="x-icon" src="../Pages/imgs/x-icon.svg" alt="x-icon">
-                </button>
-            </td>
-        </tr>
+        <thead>
+            <tr class="title">
+                <td class="head" align="center">Nome</td>
+                <td class="head" align="center">Data de Nascimento</td>
+                <td class="head" align="center">Classe Pertencente</td>
+                <td class="head"></td>
+            </tr>
+        </thead>
+        <?php foreach ($students as $student) { ?>
+            <tr>
+                <td class="student-tr name" align="center"><a class="student" href="student.php?id=<?php echo $student->id()?>"><?php echo $student->getName() ?></a></td>
+                <td class="student-tr" align="center"><?php echo $student->getBirthDate()->format('d-m-Y') ?></td>
+                <td class="student-tr" align="center"><?php echo $student->getClassId() ?></td>
+                <td class="student-tr" align="center">
+                    <button class="btn" id="x" onclick="window.location.href='/student/removeStudent.php?id=<?php echo $student->id()?>'">
+                        <img class="x-icon" src="../Pages/imgs/x-icon.svg" alt="x-icon">
+                    </button>
+                </td>
+            </tr>
     <?php } ?>
     </table>
 </div>
