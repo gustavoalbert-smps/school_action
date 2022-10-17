@@ -1,8 +1,6 @@
 <?php 
 require_once '../../vendor/autoload.php';
 
-session_start();
-
 if ($_SESSION['admin'] === 1) { ?>
 
 <aside id="sidebar" class="sidebar">
