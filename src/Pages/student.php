@@ -12,7 +12,6 @@ $repository = new PdoStudentRepository($connection);
 
 $student = $repository->getStudent(intval($_GET['id']));
 
-$user = $_SESSION['user'];
 ?>
 
 <?php 

@@ -17,8 +17,6 @@ $teacher = $teacherRepository->getTeacherByPeopleId($_SESSION['people_id']);
 $matterRepository = new PdoMatterRepository($connection);
 $matter = $matterRepository->getMatterByTeacherId($teacher->getId());
 
-$user = $_SESSION['user'];
-
 ?>
 
 <?php
