@@ -11,29 +11,31 @@ require_once '../../vendor/autoload.php';
 
 session_start();
 
-$connection = ConnectDatabase::connect();
+if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
+    $_SESSION = array();
+    header('Location: /pdo/src/Pages/index.php');
+} else {
+    $connection = ConnectDatabase::connect();
 
-$classRepository = new PdoSchoolClassRepository($connection);
-$peopleRepository = new PdoPeopleRepository($connection);
-$studentRepository = new PdoStudentRepository($connection);
+    $classRepository = new PdoSchoolClassRepository($connection);
+    $peopleRepository = new PdoPeopleRepository($connection);
+    $studentRepository = new PdoStudentRepository($connection);
 
-$classes = $classRepository->allClasses();
+    $classes = $classRepository->allClasses();
 
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $people = new People(null, $_POST['name'], $_POST['gender'], new DateTimeImmutable($_POST['birth_date']), 0);
+        $peopleRepository->save($people);
+        
+        $id = intval($connection->lastInsertId());
+        
+        $bdPeople = $peopleRepository->getPeople($id);
 
+        $student = new Student(null, $bdPeople->getPeopleId(), $_POST['name'], $_POST['gender'], new DateTimeImmutable($_POST['birth_date']), $_POST['class'], 0);
+        $studentRepository->save($student);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $people = new People(null, $_POST['name'], $_POST['gender'], new DateTimeImmutable($_POST['birth_date']), 0);
-    $peopleRepository->save($people);
-    
-    $id = intval($connection->lastInsertId());
-    
-    $bdPeople = $peopleRepository->getPeople($id);
-
-    $student = new Student(null, $bdPeople->getPeopleId(), $_POST['name'], $_POST['gender'], new DateTimeImmutable($_POST['birth_date']), $_POST['class'], 0);
-    $studentRepository->save($student);
-
-    header('Location: registerStudent.php');
-}
+        header('Location: registerStudent.php');
+    }
 ?>
 
 <?php
@@ -72,4 +74,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <?php
     require_once '../Pages/elements/footer.php';
+    }
 ?>

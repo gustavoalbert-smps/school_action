@@ -7,10 +7,14 @@ require_once '../../vendor/autoload.php';
 
 session_start();
 
-$connection = ConnectDatabase::connect();
-$repository = new PdoStudentRepository($connection);
+if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
+    $_SESSION = array();
+    header('Location: /pdo/src/Pages/index.php');
+} else {
+    $connection = ConnectDatabase::connect();
+    $repository = new PdoStudentRepository($connection);
 
-$student = $repository->getStudent(intval($_GET['id']));
+    $student = $repository->getStudent(intval($_GET['id']));
 
 ?>
 
@@ -23,4 +27,5 @@ $student = $repository->getStudent(intval($_GET['id']));
 
 <?php 
     require_once '../Pages/elements/footer.php';
+    }
 ?> 

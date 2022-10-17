@@ -1,5 +1,16 @@
+<?php
 
-<?php include_once 'elements/head.php';?>
+require_once '../../vendor/autoload.php';
+
+session_start();
+
+if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
+    $_SESSION = array();
+    header('Location: /pdo/src/Pages/index.php');
+} else {
+
+include_once 'elements/head.php';
+?>
     <div class="pagetitle">
       <h1>Profile</h1>
       <nav>
@@ -288,6 +299,9 @@
 
         </div>
       </div>
-<?php include_once 'elements/footer.php';?>
+<?php 
+include_once 'elements/footer.php';
+    }
+?>
 
  

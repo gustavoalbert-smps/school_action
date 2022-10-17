@@ -7,24 +7,20 @@ require_once '../../vendor/autoload.php';
 
 session_start();
 
+if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
+    $_SESSION = array();
+    header('Location: /pdo/src/Pages/index.php');
+} else {
+
 $connection = ConnectDatabase::connect();
 
 $repository = new PdoStudentRepository($connection);
 
 $student = $repository->getStudentByPeopleId($_SESSION['people_id']);
 
+include_once 'elements/head.php';
+
 ?>
-
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <title>Alunos</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Dev: Gustavo Albert">
-</head>
-
-<body>
     
     <h2>Olá, seja bem vindo</h2>
     <!-- começar e preparar esta tela para o estudante (student_panel) -->
@@ -33,6 +29,8 @@ $student = $repository->getStudentByPeopleId($_SESSION['people_id']);
         <li><a href="">Boletim</a></li>
         <li><a href="">Matérias</a></li>
     </ul>
-</body>
 
-</html>
+<?php
+    include_once 'elements/footer.php';
+    }
+?>

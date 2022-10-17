@@ -11,21 +11,24 @@ require_once '../../vendor/autoload.php';
 
 session_start();
 
-$connection = ConnectDatabase::connect();
+if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
+    $_SESSION = array();
+    header('Location: /pdo/src/Pages/index.php');
+} else {
+    $connection = ConnectDatabase::connect();
 
-$userRepository = new PdoUserRepository($connection);
-$peopleRepository = new PdoPeopleRepository($connection);
-$studentRepository = new PdoStudentRepository($connection);
-$eacherRepository = new PdoTeacherRepository($connection);
+    $userRepository = new PdoUserRepository($connection);
+    $peopleRepository = new PdoPeopleRepository($connection);
+    $studentRepository = new PdoStudentRepository($connection);
+    $eacherRepository = new PdoTeacherRepository($connection);
 
-$userController = new UserController($connection);
+    $userController = new UserController($connection);
 
-$people = $userController->Users($peopleRepository);
+    $people = $userController->Users($peopleRepository);
 
-$teachers = $userController->totalUsersType('teacher');
+    $teachers = $userController->totalUsersType('teacher');
 
-$students = $userController->totalUsersType('');
-
+    $students = $userController->totalUsersType('');
 ?>
 
 <?php 
@@ -48,4 +51,5 @@ $students = $userController->totalUsersType('');
     <?php endforeach; ?>
 <?php
     include_once '../Pages/elements/footer.php';
+    }
 ?>

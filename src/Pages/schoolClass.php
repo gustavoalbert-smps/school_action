@@ -8,16 +8,21 @@ require_once '../../vendor/autoload.php';
 
 session_start();
 
-$connection = ConnectDatabase::connect();
+if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
+    $_SESSION = array();
+    header('Location: /pdo/src/Pages/index.php');
+} else {
 
-$classRepository = new PdoSchoolClassRepository($connection);
+    $connection = ConnectDatabase::connect();
 
-$studentRepository = new PdoStudentRepository($connection);
+    $classRepository = new PdoSchoolClassRepository($connection);
 
-$class = $classRepository->getClass(intval($_GET['id']));
+    $studentRepository = new PdoStudentRepository($connection);
 
-$students = [];
-$students += $studentRepository->getStudentsByClass(intval($_GET['id']));
+    $class = $classRepository->getClass(intval($_GET['id']));
+
+    $students = [];
+    $students += $studentRepository->getStudentsByClass(intval($_GET['id']));
 
 ?>
 
@@ -54,4 +59,5 @@ $students += $studentRepository->getStudentsByClass(intval($_GET['id']));
         
 <?php
     require_once '../Pages/elements/footer.php';
+    }
 ?>

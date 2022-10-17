@@ -9,13 +9,18 @@ require_once '../../vendor/autoload.php';
 
 session_start();
 
-$connection = ConnectDatabase::connect();
+if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
+    $_SESSION = array();
+    header('Location: /pdo/src/Pages/index.php');
+} else {
 
-$teacherRepository = new PdoTeacherRepository($connection);
-$teacher = $teacherRepository->getTeacherByPeopleId($_SESSION['people_id']);
+    $connection = ConnectDatabase::connect();
 
-$matterRepository = new PdoMatterRepository($connection);
-$matter = $matterRepository->getMatterByTeacherId($teacher->getId());
+    $teacherRepository = new PdoTeacherRepository($connection);
+    $teacher = $teacherRepository->getTeacherByPeopleId($_SESSION['people_id']);
+
+    $matterRepository = new PdoMatterRepository($connection);
+    $matter = $matterRepository->getMatterByTeacherId($teacher->getId());
 
 ?>
 
@@ -30,4 +35,5 @@ $matter = $matterRepository->getMatterByTeacherId($teacher->getId());
 
 <?php
     require_once '../Pages/elements/footer.php';
+    }
 ?>

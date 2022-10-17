@@ -5,17 +5,24 @@ use Alura\Pdo\Infrastructure\Repository\PdoStudentRepository;
 
 require_once '../../vendor/autoload.php';
 
+session_start();
+
+if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
+    $_SESSION = array();
+    header('Location: /pdo/src/Pages/index.php');
+} else {
+
 $connection = ConnectDatabase::connect();
 $repository = new PdoStudentRepository($connection);
 
 $student = $repository->getStudent(intval($_GET['id']));
+
 ?>
 
 <?php
     require_once '../Pages/elements/head.php';
 ?>
 
-<main>
     <nav class="navbar navbar-dark bg-dark p-0">
         <!-- Navbar content -->
         <ul class="nav justify-content-center m-0">
@@ -41,8 +48,9 @@ $student = $repository->getStudent(intval($_GET['id']));
             </div>
         </section>
     </div>
-</main>
+
 
 <?php
     require_once 'elements/footer.php';
+    }
 ?>
