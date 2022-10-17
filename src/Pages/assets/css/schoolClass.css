@@ -1,0 +1,30 @@
+.table-striped {
+    background-color: #b7d1fa;
+    vertical-align: middle;
+}
+
+.table-striped>tbody>tr:nth-child(odd)>td,
+.table-striped>tbody>tr:nth-child(odd)>th {
+    background-color: #5086de;
+}
+
+.table-striped .student-tr.name {
+    color: #000000;
+    transition: 0.5s;
+}
+
+.table-striped .student-tr.name:hover {
+    -webkit-transform: scale(1.15);
+    transform: scale(1.15);
+    background-color: #ffffff;
+}
+
+.btn img.x-icon {
+    width: 35px;
+    transition: 00.5s;
+    padding: 0px;
+}
+
+.btn img.x-icon:hover {
+    transform: scale(1.25);
+}

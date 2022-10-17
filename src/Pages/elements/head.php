@@ -35,6 +35,7 @@ session_start();
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+  <link href="assets/css/schoolClass.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.4.0
