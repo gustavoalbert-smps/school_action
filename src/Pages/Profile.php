@@ -112,7 +112,7 @@ include_once 'elements/head.php';
                     </div>
 
                     <div class="row mb-3">
-                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
+                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Nome completo</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="fullName" type="text" class="form-control" id="fullName" value="Kevin Anderson">
                       </div>
@@ -157,25 +157,25 @@ include_once 'elements/head.php';
                         <div class="form-check">
                           <input class="form-check-input" type="checkbox" id="changesMade" checked>
                           <label class="form-check-label" for="changesMade">
-                            Changes made to your account
+                            vamos colocar aqui alguma configuração
                           </label>
                         </div>
                         <div class="form-check">
                           <input class="form-check-input" type="checkbox" id="newProducts" checked>
                           <label class="form-check-label" for="newProducts">
-                            Information on new products and services
+                            vamos colocar aqui alguma configuração
                           </label>
                         </div>
                         <div class="form-check">
                           <input class="form-check-input" type="checkbox" id="proOffers">
                           <label class="form-check-label" for="proOffers">
-                            Marketing and promo offers
+                            vamos colocar aqui alguma configuração
                           </label>
                         </div>
                         <div class="form-check">
                           <input class="form-check-input" type="checkbox" id="securityNotify" checked disabled>
                           <label class="form-check-label" for="securityNotify">
-                            Security alerts
+                            vamos colocar aqui alguma coisa
                           </label>
                         </div>
                       </div>
@@ -193,28 +193,28 @@ include_once 'elements/head.php';
                   <form>
 
                     <div class="row mb-3">
-                      <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
+                      <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Senha Atual</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="password" type="password" class="form-control" id="currentPassword">
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
+                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Nova senha</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="newpassword" type="password" class="form-control" id="newPassword">
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
+                      <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Digite sua senha novamente</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="renewpassword" type="password" class="form-control" id="renewPassword">
                       </div>
                     </div>
 
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Change Password</button>
+                      <button type="submit" class="btn btn-primary">Alterar Senha</button>
                     </div>
                   </form><!-- End Change Password Form -->
 
