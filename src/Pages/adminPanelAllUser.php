@@ -43,7 +43,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
             </tr>
         <?php foreach ($people as $people):?>
             <tr>
-                <td><a href="/pdo/src/Pages/adminAllProfile.php?id=<?= $people['id']?>"><?= $people['name']?></a></td>
+                <td><a href="/pdo/src/Pages/Profile.php?id=<?= $people['id']?>"><?= $people['name']?></a></td>
                 <td><?= $people['birth_date']?></td>
                 <td><?= $people['gender']?></td>
             </tr>
