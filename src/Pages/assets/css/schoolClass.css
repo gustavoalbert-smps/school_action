@@ -10,14 +10,14 @@
 }
 
 .title {
-    background-color: #fffc62;
+    color: #ffffff;
+    background-color: #5f6fff;
     vertical-align: middle;
     height: 66px;
     margin-bottom: 0px;
 }
 
 .table-striped .student-tr.name {
-    color: #000000;
     transition: 0.5s;
 }
 
@@ -25,6 +25,11 @@
     -webkit-transform: scale(1.15);
     transform: scale(1.15);
     background-color: #ffffff;
+}
+
+.name a {
+    color: #000000;
+    transition: 0.5s;
 }
 
 .btn img.x-icon {
