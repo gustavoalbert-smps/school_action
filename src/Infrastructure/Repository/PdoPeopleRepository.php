@@ -48,7 +48,7 @@ class PdoPeopleRepository implements PeopleInterface
 
     public function getAllPeople(): array
     {
-        $sqlQuery = 'SELECT name, birth_date, gender FROM people';
+        $sqlQuery = 'SELECT id,name, birth_date, gender FROM people';
 
         $statement = $this->connection->prepare($sqlQuery);
 
