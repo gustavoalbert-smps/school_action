@@ -92,7 +92,7 @@ include_once 'elements/head.php';
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label ">Nome completo</div>
-                    <div class="col-lg-9 col-md-8">Kevin Anderson</div>
+                    <div class="col-lg-9 col-md-8"><?= $people['name']?></div>
                   </div>
 
                   <div class="row">
@@ -102,12 +102,12 @@ include_once 'elements/head.php';
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Telefone</div>
-                    <div class="col-lg-9 col-md-8">(436) 486-3538 x29071</div>
+                    <div class="col-lg-9 col-md-8"><?= $people['phone']?></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Email</div>
-                    <div class="col-lg-9 col-md-8">k.anderson@example.com</div>
+                    <div class="col-lg-9 col-md-8"><?= $people['email']?></div>
                   </div>
 
                 </div>
