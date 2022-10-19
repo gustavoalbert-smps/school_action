@@ -1,6 +1,22 @@
 <?php
 
+use Alura\Pdo\Infrastructure\Controller\PeopleController;
+use Alura\Pdo\Infrastructure\Repository\PdoUserRepository;
+use Alura\Pdo\Infrastructure\Repository\PdoPeopleRepository;
+use Alura\Pdo\Infrastructure\Repository\PdoStudentRepository;
+use Alura\Pdo\Infrastructure\Repository\PdoTeacherRepository;
+use Alura\Pdo\Infrastructure\Persistence\ConnectDatabase;
+
 require_once '../../vendor/autoload.php';
+$connection = ConnectDatabase::connect();
+
+$peopleRepository = new PdoPeopleRepository($connection);
+
+$peopleController = new PeopleController($connection);
+
+$id = $_GET['id'];
+
+$people = $peopleController->getPeople($peopleRepository,$id);
 
 session_start();
 
@@ -30,7 +46,7 @@ include_once 'elements/head.php';
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
               <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-              <h2>Kevin Anderson</h2>
+              <h2><?= $people['name']?></h2>
               <h3>Web Designer</h3>
               <div class="social-links mt-2">
                 <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
