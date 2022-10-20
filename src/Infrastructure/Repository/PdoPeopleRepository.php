@@ -90,7 +90,7 @@ class PdoPeopleRepository implements PeopleInterface
         
         return $statement->execute([
             ':name' => $people->getName(),
-            ':birth_date' => $people->getBirthDate(),
+            ':birth_date' => $people->getBirthDate()->format('Y-m-d'),
             ':gender' => $people->getGender(),
             ':id' => $people->getPeopleId()
         ]);
