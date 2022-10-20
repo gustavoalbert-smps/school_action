@@ -16,6 +16,7 @@ $peopleController = new PeopleController($connection);
 
 $id = $_GET['id'];
 
+
 $people = $peopleController->getPeople($peopleRepository,$id);
 
 session_start();
@@ -77,7 +78,7 @@ include_once 'elements/head.php';
                 <li class="nav-item">
                   <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Configurações</button>
                 </li>
-
+    
                 <li class="nav-item">
                   <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Reset senha</button>
                 </li>
@@ -115,7 +116,7 @@ include_once 'elements/head.php';
                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                   <!-- Profile Edit Form -->
-                  <form>
+                  <form action="ProfileUpdate.php" method="POST">
                     <div class="row mb-3">
                       <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Imagem do perfil</label>
                       <div class="col-md-8 col-lg-9">
@@ -127,10 +128,12 @@ include_once 'elements/head.php';
                       </div>
                     </div>
 
+                    <input type="hidden" name="id" value="<?=$id?>">
+
                     <div class="row mb-3">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Nome completo</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="fullName" type="text" class="form-control" id="fullName" value="Kevin Anderson">
+                        <input name="fullName" type="text" class="form-control" id="fullName" value=<?= $people['name']?>>
                       </div>
                     </div>
 
@@ -144,14 +147,14 @@ include_once 'elements/head.php';
                     <div class="row mb-3">
                       <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Telefone</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="phone" type="text" class="form-control" id="Phone" value="(436) 486-3538 x29071">
+                        <input name="phone" type="text" class="form-control" id="Phone" value=<?= $people['phone']?>>
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="email" type="email" class="form-control" id="Email" value="k.anderson@example.com">
+                        <input name="email" type="email" class="form-control" id="Email" value=<?= $people['email']?>>
                       </div>
                     </div>
 
