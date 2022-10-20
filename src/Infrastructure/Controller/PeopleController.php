@@ -2,6 +2,10 @@
 
 namespace Alura\Pdo\Infrastructure\Controller;
 
+use Alura\Pdo\Infrastructure\Repository\PdoPeopleRepository;
+use Alura\Pdo\Infrastructure\Repository\PdoTeacherRepository;
+use Alura\Pdo\Infrastructure\Repository\PdoUserRepository;
+
 use PDO;
 
 require_once '../../vendor/autoload.php';
@@ -15,5 +19,8 @@ class PeopleController
         $this->connection = $connection;
     }
 
-    
+    public function getPeople($peopleRepository,$id)
+    {
+        return $peopleRepository->getPeople($id);
+    }
 }
