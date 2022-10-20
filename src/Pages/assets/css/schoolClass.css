@@ -1,12 +1,11 @@
+.pagetitle {
+    padding-bottom: 1rem;
+}
+
 .table-striped {
     background-color: #fffff9;
     vertical-align: middle;
     border-color: transparent;
-}
-
-.table-striped>tbody>tr:nth-child(odd)>td,
-.table-striped>tbody>tr:nth-child(odd)>th {
-    background-color: #fdfdd5;
 }
 
 .title {
@@ -24,7 +23,7 @@
 .table-striped .student-tr.name:hover {
     -webkit-transform: scale(1.15);
     transform: scale(1.15);
-    background-color: #ffffff;
+    background-color: #999999;
 }
 
 .name a {
@@ -40,4 +39,16 @@
 
 .btn img.x-icon:hover {
     transform: scale(1.25);
+}
+
+.register-student {
+    display: inline-flex;
+    margin: 0.75rem 0 0.75rem 0;
+}
+
+.register-student a {
+    color: #ffffff;
+    background-color: #5f6fff;
+    padding: 1rem;
+    border-radius: 0.25rem;
 }

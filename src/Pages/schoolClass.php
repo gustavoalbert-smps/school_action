@@ -30,7 +30,15 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
     require_once '../Pages/elements/head.php';
 ?>
 
-<h3>TURMA: <?php echo "{$class->getYear()}{$class->getIdentifier()} ";?> TURNO: <?php echo strtoupper($class->getShift());?></h1>
+<div class="pagetitle">
+      <h1>Visualização de Turma</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="classes.php">Turmas</a></li>
+          <li class="breadcrumb-item active"><?php echo "{$class->getYear()}{$class->getIdentifier()} ";?> <?php echo strtoupper($class->getShift());?></li>
+        </ol>
+      </nav>
+</div>
 
 <div id="table-container">   
     <table class="table table-striped students-table">
@@ -59,7 +67,9 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
     </table>
 </div>
 
-<a href="registerStudent.php">Cadastrar Aluno</a>
+<div class="register-student">
+    <a href="registerStudent.php">Cadastrar Aluno</a>
+</div>
         
 <?php
     require_once '../Pages/elements/footer.php';
