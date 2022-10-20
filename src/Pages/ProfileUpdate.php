@@ -13,6 +13,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
     $_SESSION = array();
     header('Location: /pdo/src/Pages/index.php');
 } else {
+   
     $connection = ConnectDatabase::connect();
 
     $controller = new PeopleController($connection);
@@ -32,6 +33,21 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
         $_POST['phone'], 
         $_POST['email']
     );
+
+    // echo 'olá';
+    // print_r($_FILES);
+    $filename = $people->getPeopleId().'.'.substr($_FILES['fileToUpload']['type'],6);
+    print_r($filename);
+
+    $location = "assets/img/".$filename;
+
+
+
+    if(move_uploaded_file($_FILES['fileToUpload']['tmp_name'],$location)){ 
+        echo 'show deu certo';
+    }else{
+        echo 'não deu certo';
+    }
 
     header("Location: /pdo/src/Pages/Profile.php?id={$_POST['id']}");
 }
