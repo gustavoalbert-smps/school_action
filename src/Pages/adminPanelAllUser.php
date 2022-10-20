@@ -34,19 +34,20 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
 <?php 
     include_once '../Pages/elements/head.php';
 ?>
-<div id="table-container">
-    <table class="table">
-        <tr>
-            <th>Nome</th>
-            <th>Data de Nascimento</th>
-            <th>Genero</th>
-        </tr>
-    <?php foreach ($people as $people):?>
-        <tr>
-            <td><?= $people['name']?></td>
-            <td><?= $people['birth_date']?></td>
-            <td><?= $people['gender']?></td>
-        </tr>
+    <div id="table-container">
+        <table class="table">
+            <tr>
+                <th>Nome</th>
+                <th>Data de Nascimento</th>
+                <th>Genero</th>
+            </tr>
+        <?php foreach ($people as $people):?>
+            <tr>
+                <td><a href="/pdo/src/Pages/Profile.php?id=<?= $people['id']?>"><?= $people['name']?></a></td>
+                <td><?= $people['birth_date']?></td>
+                <td><?= $people['gender']?></td>
+            </tr>
+    </div>
 
     <?php endforeach; ?>
 <?php

@@ -19,7 +19,7 @@ class PdoPeopleRepository implements PeopleInterface
         $this->connection = $connection;
     }
 
-    public function getPeople(int $id): People
+    public function getPeople(int $id): array
     {
         $sqlQuery = 'SELECT * FROM people WHERE id = :id';
 
@@ -30,7 +30,7 @@ class PdoPeopleRepository implements PeopleInterface
 
         $people = $statement->fetch(PDO::FETCH_ASSOC);
 
-        return new People($people['id'], $people['name'], $people['gender'], new DateTimeImmutable($people['birth_date']), $people['admin']);
+        return $people;
     }
 
     public function getAllPeopleCount(): int
@@ -48,7 +48,7 @@ class PdoPeopleRepository implements PeopleInterface
 
     public function getAllPeople(): array
     {
-        $sqlQuery = 'SELECT name, birth_date, gender FROM people';
+        $sqlQuery = 'SELECT id,name, birth_date, gender FROM people';
 
         $statement = $this->connection->prepare($sqlQuery);
 
