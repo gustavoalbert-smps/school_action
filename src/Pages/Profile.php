@@ -47,7 +47,7 @@ include_once 'elements/head.php';
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
               <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-              <h2><?= $people['name']?></h2>
+              <h2><?= $people->getName()?></h2>
               <h3>Web Designer</h3>
               <div class="social-links mt-2">
                 <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
@@ -93,7 +93,7 @@ include_once 'elements/head.php';
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label ">Nome completo</div>
-                    <div class="col-lg-9 col-md-8"><?= $people['name']?></div>
+                    <div class="col-lg-9 col-md-8"><?= $people->getName()?></div>
                   </div>
 
                   <div class="row">
@@ -103,12 +103,12 @@ include_once 'elements/head.php';
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Telefone</div>
-                    <div class="col-lg-9 col-md-8"><?= $people['phone']?></div>
+                    <div class="col-lg-9 col-md-8"><?php echo 'phone';?></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Email</div>
-                    <div class="col-lg-9 col-md-8"><?= $people['email']?></div>
+                    <div class="col-lg-9 col-md-8"><?php echo 'email';?></div>
                   </div>
 
                 </div>
@@ -133,7 +133,7 @@ include_once 'elements/head.php';
                     <div class="row mb-3">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Nome completo</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="fullName" type="text" class="form-control" id="fullName" value=<?= $people['name']?>>
+                        <input name="fullName" type="text" class="form-control" id="fullName" value=<?= $people->getName();?>>
                       </div>
                     </div>
 
@@ -147,14 +147,14 @@ include_once 'elements/head.php';
                     <div class="row mb-3">
                       <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Telefone</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="phone" type="text" class="form-control" id="Phone" value=<?= $people['phone']?>>
+                        <input name="phone" type="text" class="form-control" id="Phone" value=<?php echo 'phone';?>>
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="email" type="email" class="form-control" id="Email" value=<?= $people['email']?>>
+                        <input name="email" type="email" class="form-control" id="Email" value=<?php echo 'email';?>>
                       </div>
                     </div>
 

@@ -2,6 +2,7 @@
 
 namespace Alura\Pdo\Infrastructure\Controller;
 
+use Alura\Pdo\Domain\Model\People;
 use Alura\Pdo\Infrastructure\Repository\PdoPeopleRepository;
 use Alura\Pdo\Infrastructure\Repository\PdoTeacherRepository;
 use Alura\Pdo\Infrastructure\Repository\PdoUserRepository;
@@ -19,7 +20,7 @@ class PeopleController
         $this->connection = $connection;
     }
 
-    public function getPeople($peopleRepository,$id)
+    public function getPeople($peopleRepository,$id): People
     {
         return $peopleRepository->getPeople($id);
     }
