@@ -32,11 +32,6 @@ class SchoolClass
     {
         return $this->identifier;
     }
-    
-    public function getMatter(): string
-    {
-        return $this->matter;
-    }
    
     public function getShift(): string
     {

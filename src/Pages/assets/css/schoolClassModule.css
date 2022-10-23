@@ -1,0 +1,15 @@
+.class-card {
+    background: linear-gradient(to right bottom,#4b4b4b, #a5a5a5);
+    width: min(100% - 2rem, 600px );
+    margin-inline: auto;
+    margin-bottom: 45px;
+    box-shadow: 0 20px 30px -6px rgba(75, 75, 75, 0.7);
+}
+
+.class-identifier {
+    color: #919cff;
+}
+
+.class-shift {
+    color: #ffffff;
+}
