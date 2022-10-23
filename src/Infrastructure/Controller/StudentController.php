@@ -2,6 +2,7 @@
 
 namespace Alura\Pdo\Infrastructure\Controller;
 
+use Alura\Pdo\Infrastructure\Repository\PdoStudentRepository;
 use PDO;
 
 require_once '../../vendor/autoload.php';
@@ -15,5 +16,8 @@ class StudentController
         $this->connection = $connection;
     }
 
-    
+    public function numberOfStudentsByClass(PdoStudentRepository $studentRepository, int $classId): int
+    {
+        return $studentRepository->countStudentsByClass($classId);
+    }
 }

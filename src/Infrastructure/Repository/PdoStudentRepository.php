@@ -64,15 +64,15 @@ class PdoStudentRepository implements StudentInterface
         return $this->getListOfStudents($statement);
     }
 
-    public function getStudentsByClass(int $id): array
+    public function countStudentsByClass(int $id): int
     {
-        $sqlQuery = 'SELECT * FROM students WHERE class_id = :id;';
+        $sqlQuery = 'SELECT id FROM students WHERE class_id = :id;';
 
         $statement = $this->connection->prepare($sqlQuery);
         $statement->bindValue(':id', $id, PDO::PARAM_INT);
         $statement->execute();
 
-        return $this->getListOfStudents($statement);
+        return $statement->rowCount();
     }
 
     public function getStudentByPeopleId(int $peopleId): Student
