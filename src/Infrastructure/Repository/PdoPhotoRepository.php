@@ -30,7 +30,7 @@ class PdoPhotoRepository implements PhotoInterface
 
         $photo = $statement->fetch(PDO::FETCH_ASSOC);
 
-        $Photo = new Photo ($photo['id'],$photo['path'],$photo['people_id']); 
+        $Photo = new Photo ($photo['id'],$photo['name'],$photo['type'],$photo['path'],$photo['people_id']); 
 
         return $Photo;
     }
