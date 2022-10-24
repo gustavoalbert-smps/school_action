@@ -1,0 +1,28 @@
+.class-card {
+    background: linear-gradient(to right bottom, #4b4b4b, #a5a5a5);
+    width: min(100% - 2rem, 600px);
+    margin-inline: auto;
+    margin-bottom: 45px;
+    box-shadow: 0 20px 30px -6px rgba(75, 75, 75, 0.7);
+    transition: 0.75s;
+}
+
+.class-card:hover {
+    transform: translatey(10px);
+    box-shadow: none;
+}
+
+.class-text {
+    color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.class-text .class-students {
+    font-weight: 600;
+}
+
+.class-identifier {
+    color: #919cff;
+}

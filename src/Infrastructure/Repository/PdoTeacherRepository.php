@@ -46,6 +46,24 @@ class PdoTeacherRepository implements TeacherInterface
             $people['admin']);
     }
 
+    public function teacherClasses(int $teacherId): array
+    {
+        $sqlQuery = 'SELECT matters.id as matter_id, teachers.id as teacher_id, school_classes.id as school_id FROM (
+            (matters INNER JOIN teachers ON matters.teacher_id = :teacher_id)
+            INNER JOIN school_classes ON matters.class_id = school_classes.id);';
+
+        $statement = $this->connection->prepare($sqlQuery);
+        
+        $statement->execute([
+            ':teacher_id' => $teacherId
+        ]);
+
+        $stData = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $stData;
+
+    }
+
     public function getTeacherByPeopleId(int $peopleId): Teacher
     {
         $sqlQuery = 'SELECT * FROM teachers WHERE people_id = :id;';
