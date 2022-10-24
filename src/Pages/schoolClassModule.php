@@ -40,10 +40,15 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
         <div class="card class-card">
             <div class="card-body">
                 <h5 class="card-title class-identifier">TURMA <?php echo "{$class->getYear()}{$class->getIdentifier()}";?></h5>
-                <p class="card-text class-shift">
-                    <?php echo $class->getShift();?>
-                    <span class="n-students"><?php echo $studentController->numberOfStudentsByClass($studentRepository, $class->getId());?> ESTUDANTES</span>
-                </p>
+                <div class="class-text">
+                    <p class="card-text class-shift">
+                        <?php echo $class->getShift();?>
+                    </p>
+                    <p class="card-text class-students">
+                        <?php echo $studentController->numberOfStudentsByClass($studentRepository, $class->getId());?> ESTUDANTES
+                    </p>
+                </div>
+                <a href="schoolClass.php?id=<?php echo $class->getId();?>" class="stretched-link"></a>
             </div>
         </div>
     <?php endforeach;?>
