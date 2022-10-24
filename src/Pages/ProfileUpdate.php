@@ -13,6 +13,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
     $_SESSION = array();
     header('Location: /pdo/src/Pages/index.php');
 } else {
+   
     $connection = ConnectDatabase::connect();
 
     $controller = new PeopleController($connection);
@@ -33,6 +34,5 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
         $_POST['email']
     );
 
-    header("Location: /pdo/src/Pages/Profile.php?id={$_POST['id']}");
+
 }
-?>
