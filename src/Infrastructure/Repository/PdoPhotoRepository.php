@@ -19,7 +19,7 @@ class PdoPhotoRepository implements PhotoInterface
 
     public function getPhoto(int $id): Photo
     {
-        $sqlquery = 'SELECT * FROM photo WHERE id = :id';
+        $sqlquery = 'SELECT * FROM photos WHERE id = :id';
 
         $statement = $this->connection->prepare($sqlquery);
 
