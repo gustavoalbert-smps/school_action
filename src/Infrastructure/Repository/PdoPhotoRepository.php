@@ -19,6 +19,7 @@ class PdoPhotoRepository implements PhotoInterface
 
     public function getPhoto(int $id): Photo
     {
+
         $sqlquery = 'SELECT * FROM photos WHERE id = :id';
 
         $statement = $this->connection->prepare($sqlquery);
@@ -30,7 +31,9 @@ class PdoPhotoRepository implements PhotoInterface
 
         $photo = $statement->fetch(PDO::FETCH_ASSOC);
 
-        return new photo ($photo['id'],$photo['path'],$photo['people_id']);
+        $Photo = new Photo ($photo['id'],$photo['path'],$photo['people_id']); 
+
+        return $Photo;
     }
     public function insert(Photo $photo): bool
     {

@@ -1,23 +1,15 @@
 <?php
 
 use Alura\Pdo\Infrastructure\Controller\PeopleController;
+use Alura\Pdo\Infrastructure\Controller\PhotoController;
 use Alura\Pdo\Infrastructure\Repository\PdoUserRepository;
+use Alura\Pdo\Infrastructure\Repository\PdoPhotoRepository;
 use Alura\Pdo\Infrastructure\Repository\PdoPeopleRepository;
 use Alura\Pdo\Infrastructure\Repository\PdoStudentRepository;
 use Alura\Pdo\Infrastructure\Repository\PdoTeacherRepository;
 use Alura\Pdo\Infrastructure\Persistence\ConnectDatabase;
 
 require_once '../../vendor/autoload.php';
-$connection = ConnectDatabase::connect();
-
-$peopleRepository = new PdoPeopleRepository($connection);
-
-$peopleController = new PeopleController($connection);
-
-$id = $_GET['id'];
-
-
-$people = $peopleController->getPeople($peopleRepository,$id);
 
 session_start();
 
@@ -25,9 +17,28 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
     $_SESSION = array();
     header('Location: /pdo/src/Pages/index.php');
 } else {
+  $connection = ConnectDatabase::connect();
 
-include_once 'elements/head.php';
+  $peopleRepository = new PdoPeopleRepository($connection);
+  
+  $peopleController = new PeopleController($connection);
+  
+  $id = $_GET['id'];
+  
+  $photoRepository = new PdoPhotoRepository($connection);
+  
+  $photoController = new PhotoController($connection);
+  
+  $photo = $photoController->Photo($photoRepository, 4);
+  
+  // echo var_dump($photo);
+  echo $photo->getPhotoId();
+  
+  $people = $peopleController->getPeople($peopleRepository,$id);
+  
+// include_once 'elements/head.php';
 ?>
+    <h1><?= $photo->getPath()?></h1>
     <div class="pagetitle">
       <h1>Profile</h1>
       <nav>
@@ -45,7 +56,7 @@ include_once 'elements/head.php';
 
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-
+                
               <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
               <h2><?= $people->getName()?></h2>
               <h3>Web Designer</h3>
@@ -248,7 +259,7 @@ include_once 'elements/head.php';
         </div>
       </div>
 <?php 
-include_once 'elements/footer.php';
+// include_once 'elements/footer.php';
     }
 ?>
 

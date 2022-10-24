@@ -4,12 +4,13 @@
     class Photo
     {
         
-        protected int $id;
-        protected string $path;
-        protected int $people_id;
+        private int $id;
+        private string $path;
+        private $people_id;
         
-        public function __construct(string $path, int $people_id)
+        public function __construct(int $id, string $path, int $people_id)
         {
+            $this->$id = $id;
             $this->$path = $path;
             $this->people_id = $people_id;
         }
