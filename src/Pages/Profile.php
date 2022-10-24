@@ -18,10 +18,6 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
     header('Location: /pdo/src/Pages/index.php');
 } else {
   $connection = ConnectDatabase::connect();
-
-  $peopleRepository = new PdoPeopleRepository($connection);
-  
-  $peopleController = new PeopleController($connection);
   
   $id = $_GET['id'];
   
@@ -30,15 +26,15 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
   $photoController = new PhotoController($connection);
   
   $photo = $photoController->Photo($photoRepository, 4);
+
+  $peopleRepository = new PdoPeopleRepository($connection);
   
-  // echo var_dump($photo);
-  echo $photo->getPhotoId();
+  $peopleController = new PeopleController($connection);
   
   $people = $peopleController->getPeople($peopleRepository,$id);
   
-// include_once 'elements/head.php';
+  include_once 'elements/head.php';
 ?>
-    <h1><?= $photo->getPath()?></h1>
     <div class="pagetitle">
       <h1>Profile</h1>
       <nav>
@@ -259,7 +255,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
         </div>
       </div>
 <?php 
-// include_once 'elements/footer.php';
+  include_once 'elements/footer.php';
     }
 ?>
 

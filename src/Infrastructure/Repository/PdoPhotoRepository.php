@@ -24,9 +24,8 @@ class PdoPhotoRepository implements PhotoInterface
 
         $statement = $this->connection->prepare($sqlquery);
 
-        $statement -> execute
-        ([
-            ':id' => $id,
+        $statement->execute([
+            ':id' => $id
         ]);
 
         $photo = $statement->fetch(PDO::FETCH_ASSOC);
@@ -35,6 +34,7 @@ class PdoPhotoRepository implements PhotoInterface
 
         return $Photo;
     }
+    
     public function insert(Photo $photo): bool
     {
 
@@ -44,7 +44,7 @@ class PdoPhotoRepository implements PhotoInterface
 
         return $statement-> execute([
             ':path'=> $photo->getPath(),
-            'people_id' => $photo->getPhotoPeopleId()
+            'people_id' => $photo->getPeople_id()
         ]);
     }
     public function update (Photo $photo): bool
@@ -56,14 +56,14 @@ class PdoPhotoRepository implements PhotoInterface
         return $statement->execute
         ([
             'path'=>$photo->getPath(),
-            'People_id'=>$photo->getPhotoPeopleId(),
-            'id'=>$photo->getPhotoId()
+            'People_id'=>$photo->getPeople_id(),
+            'id'=>$photo->getId()
             
         ]);
     }
     public function save(Photo $photo): bool
     {
-        if ($people->getPeopleId() === null) {
+        if ($photo->getPeople_id() === null) {
             return $this->insert($photo);
         }
 
@@ -76,7 +76,7 @@ class PdoPhotoRepository implements PhotoInterface
 
         $statement = $this->connection->prepare($sqlRemove);
         return $statement->execute([
-            ':id' => $people->getPhotoId()
+            ':id' => $photo->getId()
         ]);
     }
     public function resize(Photo $photo)
