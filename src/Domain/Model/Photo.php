@@ -3,7 +3,8 @@
 
     class Photo
     {
-    
+        
+        protected int $id;
         protected string $path;
         protected int $people_id;
         
@@ -12,7 +13,10 @@
             $this->$path = $path;
             $this->people_id = $people_id;
         }
-
+        public function getPhotoId()
+        {
+            $this->$id;
+        }
         public function getPath()
         {
             $this->$path;
