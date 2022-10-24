@@ -1,23 +1,15 @@
 <?php
 
 use Alura\Pdo\Infrastructure\Controller\PeopleController;
+use Alura\Pdo\Infrastructure\Controller\PhotoController;
 use Alura\Pdo\Infrastructure\Repository\PdoUserRepository;
+use Alura\Pdo\Infrastructure\Repository\PdoPhotoRepository;
 use Alura\Pdo\Infrastructure\Repository\PdoPeopleRepository;
 use Alura\Pdo\Infrastructure\Repository\PdoStudentRepository;
 use Alura\Pdo\Infrastructure\Repository\PdoTeacherRepository;
 use Alura\Pdo\Infrastructure\Persistence\ConnectDatabase;
 
 require_once '../../vendor/autoload.php';
-$connection = ConnectDatabase::connect();
-
-$peopleRepository = new PdoPeopleRepository($connection);
-
-$peopleController = new PeopleController($connection);
-
-$id = $_GET['id'];
-
-
-$people = $peopleController->getPeople($peopleRepository,$id);
 
 session_start();
 
@@ -25,8 +17,23 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
     $_SESSION = array();
     header('Location: /pdo/src/Pages/index.php');
 } else {
+  $connection = ConnectDatabase::connect();
+  
+  $id = $_GET['id'];
+  
+  $photoRepository = new PdoPhotoRepository($connection);
+  
+  $photoController = new PhotoController($connection);
+  
+  $photo = $photoController->Photo($photoRepository, 4);
 
-include_once 'elements/head.php';
+  $peopleRepository = new PdoPeopleRepository($connection);
+  
+  $peopleController = new PeopleController($connection);
+  
+  $people = $peopleController->getPeople($peopleRepository,$id);
+  
+  include_once 'elements/head.php';
 ?>
     <div class="pagetitle">
       <h1>Profile</h1>
@@ -45,7 +52,7 @@ include_once 'elements/head.php';
 
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-
+                
               <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
               <h2><?= $people->getName()?></h2>
               <h3>Web Designer</h3>
@@ -116,12 +123,13 @@ include_once 'elements/head.php';
                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                   <!-- Profile Edit Form -->
-                  <form action="ProfileUpdate.php" method="POST">
+                  <form action="ProfileUpdate.php" method="POST" enctype="multipart/form-data">
                     <div class="row mb-3">
                       <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Imagem do perfil</label>
                       <div class="col-md-8 col-lg-9">
-                        <img src="assets/img/profile-img.jpg" alt="Profile">
+                        <img src="assets/img/messages-3.jpg" alt="Profile">
                         <div class="pt-2">
+                          <input type="file" name="fileToUpload" id="fileToUpload">
                           <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
                           <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
                         </div>
@@ -247,7 +255,7 @@ include_once 'elements/head.php';
         </div>
       </div>
 <?php 
-include_once 'elements/footer.php';
+  include_once 'elements/footer.php';
     }
 ?>
 
