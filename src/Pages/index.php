@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($user->getIsTeacher() === 0) {
                 header('Location: /pdo/src/Pages/studentsModule.php');
             } else {
-                header('Location: /pdo/src/Pages/homePage.php');
+                header('Location: /pdo/src/Pages/schoolClassModule.php');
             }
         }
     }
