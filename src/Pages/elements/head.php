@@ -30,14 +30,15 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+  <link href="assets/css/sidebar.css" rel="stylesheet">
   <link href="assets/css/schoolClass.css" rel="stylesheet">
   <link href="assets/css/schoolClassModule.css" rel="stylesheet">
 
+  <!-- Scripts -->
+  <script src="https://kit.fontawesome.com/075cada2e7.js" crossorigin="anonymous"></script>
+
   <!-- =======================================================
-  * Template Name: NiceAdmin - v2.4.0
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
+
   ======================================================== -->
 </head>
 <body>
