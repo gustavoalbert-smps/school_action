@@ -43,7 +43,7 @@ if ($_SESSION['admin'] === 1) { ?>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link collapsed" href="../schoolClassModule.php">                            
+                        <a class="nav-link collapsed" href="schoolClassModule.php">                            
                             <i class="fa-solid fa-chalkboard-user class-i"></i>                        
                             <span>Turmas</span>
                         </a>
