@@ -759,10 +759,6 @@ cardAdmin {
     background: #f6f9ff;
 }
 
-.sidebar-nav .nav-link:hover i {
-    color: #4154f1;
-}
-
 .sidebar-nav .nav-link .bi-chevron-down {
     margin-right: 0;
     transition: transform 0.2s ease-in-out;
