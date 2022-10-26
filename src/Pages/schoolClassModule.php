@@ -42,7 +42,14 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
                 <h5 class="card-title class-identifier">TURMA <?php echo "{$class->getYear()}{$class->getIdentifier()}";?></h5>
                 <div class="class-text">
                     <p class="card-text class-shift">
-                        <?php echo $class->getShift();?>
+                        <?php 
+                        if ($class->getShift() === 'manha'){
+                            $shift = 'MANHÃ';
+                        } else {
+                            $shift = 'TARDE';
+                        }
+                        echo $shift;
+                        ?>
                     </p>
                     <p class="card-text class-students">
                         <?php echo $studentController->numberOfStudentsByClass($studentRepository, $class->getId());?> ESTUDANTES
