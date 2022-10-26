@@ -31,7 +31,7 @@ if ($_SESSION['admin'] === 1) { ?>
 </aside>
 
 
-<?php } else { 
+<?php } else {
         if ($_SESSION['teacher'] === 1) { ?>
             <aside id="sidebar" class="sidebar">
 
