@@ -54,7 +54,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
               <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
               <h2><?= $people->getName()?></h2>
               <h3>Web Designer</h3>
-              <form action="ProfileUpdate.php" method="POST">
+              <form action="ProfileUpdate.php" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="id" value=<?= $id?>>
                 <input type="file" name="img" id="id_img">
                 <input type="submit" value="Enviar">
