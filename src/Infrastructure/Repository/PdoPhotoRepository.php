@@ -30,21 +30,23 @@ class PdoPhotoRepository implements PhotoInterface
 
         $photo = $statement->fetch(PDO::FETCH_ASSOC);
 
-        $Photo = new Photo ($photo['id'],$photo['name'],$photo['type'],$photo['path'],$photo['people_id']); 
+        $Photo = new Photo ($photo['id'],$photo['people_id'],$photo['name'],$photo['type']); 
 
         return $Photo;
     }
     
-    public function insert(Photo $photo): bool
+    public function insert(int $people_id, Array $file): bool
     {
 
-        $sqlInsert = 'INSERT photos (path, people_id) value (:path,:people_id)';
+        $sqlInsert = 'INSERT photos (people_id,name,type) VALUE (:people_id,:name,:type)';
 
         $statement = $this->connection->prepare($sqlInsert);
 
-        return $statement-> execute([
-            ':path'=> $photo->getPath(),
-            'people_id' => $photo->getPeople_id()
+        return $statement-> execute
+        ([
+            ':people_id'=> $people_id,
+            ':name' => $file['img']['name'],
+            ':type'=>substr($file['img']['type'],6)
         ]);
     }
     public function update (Photo $photo): bool
