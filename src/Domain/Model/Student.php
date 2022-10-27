@@ -26,7 +26,7 @@ class Student extends People
     }
 
 //getters
-    public function id(): ?int
+    public function getId(): ?int
     {
         return $this->id;
     }
