@@ -28,9 +28,9 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
 
     if($_FILES['img']['size'] !== 0)
     {
-        // move_uploaded_file($file['img']['tmp_name'], 'assets/img/');
+        $name = $_POST['id'].'-'.date("Y-m-d").'.'.substr($_FILES['img']['type'],6);
         $photoController->insetPhoto($photoRepository,$_POST['id'],$_FILES);
-        
+        move_uploaded_file($_FILES['img']['tmp_name'], 'assets/img/'.$name);
     }
 
     $people = $controller->getPeople($peopleRepository, $_POST['id']);
