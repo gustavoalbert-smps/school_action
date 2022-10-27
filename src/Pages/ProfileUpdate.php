@@ -31,6 +31,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
         $name = $_POST['id'].'-'.date("Y-m-d").'.'.substr($_FILES['img']['type'],6);
         $photoController->insetPhoto($photoRepository,$_POST['id'],$_FILES);
         move_uploaded_file($_FILES['img']['tmp_name'], 'assets/img/'.$name);
+        header('Location: /pdo/src/Pages/Profile.php?id='.$_POST['id']);
     }
 
     $people = $controller->getPeople($peopleRepository, $_POST['id']);
