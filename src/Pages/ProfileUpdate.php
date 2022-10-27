@@ -28,9 +28,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
 
     if($_FILES['img']['size'] !== 0)
     {
-        $name = $_POST['id'].'-'.date("Y-m-d").'.'.substr($_FILES['img']['type'],6);
-        $photoController->insetPhoto($photoRepository,$_POST['id'],$_FILES);
-        move_uploaded_file($_FILES['img']['tmp_name'], 'assets/img/'.$name);
+        $photoController->insertPhoto($photoRepository,$_POST['id'],$_FILES);
         header('Location: /pdo/src/Pages/Profile.php?id='.$_POST['id']);
     }
 
