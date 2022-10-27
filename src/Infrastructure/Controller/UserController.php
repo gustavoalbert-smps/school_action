@@ -2,6 +2,7 @@
 
 namespace Alura\Pdo\Infrastructure\Controller;
 
+use Alura\Pdo\Domain\Model\User;
 use Alura\Pdo\Infrastructure\Repository\PdoPeopleRepository;
 use Alura\Pdo\Infrastructure\Repository\PdoTeacherRepository;
 use Alura\Pdo\Infrastructure\Repository\PdoUserRepository;
@@ -18,10 +19,16 @@ class UserController
         $this->connection = $connection;
     }
 
+    public function getUserWithPeopleId(PdoUserRepository $userRepository, int $peopleId): User
+    {
+        return $userRepository->getUserByPeopleId($peopleId);
+    }
+
     public function totalUsers(PdoPeopleRepository $peopleRepository): int
     {
         return $peopleRepository->getAllPeopleCount();
     }
+
     public function Users(PdoPeopleRepository $peopleRepository): array
     {
         return $peopleRepository->getAllPeople();
@@ -48,5 +55,10 @@ class UserController
         $statement->execute();
 
         return count($statement->fetchAll(PDO::FETCH_ASSOC));
+    }
+
+    public function removeUser(PdoUserRepository $userRepository, User $user): bool
+    {
+        return $userRepository->remove($user);
     }
 }
