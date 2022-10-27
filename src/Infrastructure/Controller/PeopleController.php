@@ -25,6 +25,15 @@ class PeopleController
         return $peopleRepository->getPeople($id);
     }
 
+    public function insertPeople(PdoPeopleRepository $peopleRepository, string $name, string $gender, string $birthDate, int $admin): People
+    {
+        $people = new People(null, $name, $gender, new DateTimeImmutable($birthDate), $admin);
+
+        $peopleRepository->save($people);
+
+        return $people;
+    }
+    
     public function updatePeople(PdoPeopleRepository $peopleRepository, int $id, string $name, string $gender, DateTimeImmutable $birthdate, int $admin, string $job,string $phone, string $email): bool
     {
         $people = new People(
