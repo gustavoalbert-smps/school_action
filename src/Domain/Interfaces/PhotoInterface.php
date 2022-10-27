@@ -8,7 +8,7 @@ require_once '../../vendor/autoload.php';
 
 interface PhotoInterface
 {
-    public function insert(Photo $photo): bool;
+    public function insert(int $people_id, Array $file): bool;
 
     public function update(Photo $photo): bool;
 

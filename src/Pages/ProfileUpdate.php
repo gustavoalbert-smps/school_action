@@ -2,8 +2,10 @@
 
 use Alura\Pdo\Domain\Model\People;
 use Alura\Pdo\Infrastructure\Controller\PeopleController;
+use Alura\Pdo\Infrastructure\Controller\PhotoController;
 use Alura\Pdo\Infrastructure\Persistence\ConnectDatabase;
 use Alura\Pdo\Infrastructure\Repository\PdoPeopleRepository;
+use Alura\Pdo\Infrastructure\Repository\PdoPhotoRepository;
 
 require_once '../../vendor/autoload.php';
 
@@ -19,6 +21,17 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
     $controller = new PeopleController($connection);
 
     $peopleRepository = new PdoPeopleRepository($connection);
+
+    $photoRepository = new PdoPhotoRepository($connection);
+
+    $photoController = new photoController($connection);
+
+    if($_FILES['img']['size'] !== 0)
+    {
+        // move_uploaded_file($file['img']['tmp_name'], 'assets/img/');
+        $photoController->insetPhoto($photoRepository,$_POST['id'],$_FILES);
+        
+    }
 
     $people = $controller->getPeople($peopleRepository, $_POST['id']);
 
