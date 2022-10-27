@@ -34,7 +34,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
       <h1>Visualização de Turma</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="classes.php">Turmas</a></li>
+          <li class="breadcrumb-item"><a href="schoolClassModule.php">Turmas</a></li>
           <li class="breadcrumb-item active"><?php echo "{$class->getYear()}{$class->getIdentifier()} ";?> <?php echo strtoupper($class->getShift());?></li>
         </ol>
       </nav>
