@@ -26,8 +26,11 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
 
     $photoController = new photoController($connection);
 
-    if($_FILE['img']['size'] !== 0){
-        echo 'aqui';// $photoController->insetPhoto($photoRepository,$_POST['id'],$_FILE);
+    if($_FILES['img']['size'] !== 0)
+    {
+        // $photoController->insetPhoto($photoRepository,$_POST['id'],$_FILES);
+        move_uploaded_file($_FILES['img']['tmp_name'], "/assets/img");
+        print_r($_FILES);
     }
 
     $people = $controller->getPeople($peopleRepository, $_POST['id']);
