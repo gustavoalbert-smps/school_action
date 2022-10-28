@@ -20,7 +20,7 @@ class PhotoController
     {
        
         return $PhotoRepository->getPhoto($id);
-    } 
+    }
     public function insertPhoto($PhotoRepository,$people_id,$file)
     {
         return $PhotoRepository->insert($people_id,$file);

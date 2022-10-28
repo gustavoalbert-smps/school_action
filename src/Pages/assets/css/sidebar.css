@@ -1,0 +1,8 @@
+.sidebar-nav .nav-link.collapsed i {
+    color: #012970;
+    min-width: 20px;
+}
+
+.sidebar-nav .nav-link:hover i {
+    color: #4154f1;
+}

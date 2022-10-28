@@ -15,24 +15,24 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
   $_SESSION = array();
   header('Location: /pdo/src/Pages/index.php');
 } else {
-  $connection = ConnectDatabase::connect();
+  if ($_SESSION['admin'] === 1){
+    $connection = ConnectDatabase::connect();
 
-  $userRepository = new PdoUserRepository($connection);
-  $peopleRepository = new PdoPeopleRepository($connection);
-  $studentRepository = new PdoStudentRepository($connection);
-  $eacherRepository = new PdoTeacherRepository($connection);
+    $userRepository = new PdoUserRepository($connection);
+    $peopleRepository = new PdoPeopleRepository($connection);
+    $studentRepository = new PdoStudentRepository($connection);
+    $eacherRepository = new PdoTeacherRepository($connection);
 
-  $userController = new UserController($connection);
+    $userController = new UserController($connection);
 
-  $people = $userController->totalUsers($peopleRepository);
+    $people = $userController->totalUsers($peopleRepository);
 
-  $teachers = $userController->totalUsersType('teacher');
+    $teachers = $userController->totalUsersType('teacher');
 
-  $students = $userController->totalUsersType('');
-
+    $students = $userController->totalUsersType('');
+    
+    include_once 'elements/head.php';
 ?>
-
-<?php include_once 'elements/head.php';?>
 
     <div class="pagetitle">
       <h1>Painel do Administrador</h1>
@@ -81,6 +81,13 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
   </main>
 
 <?php 
-  include_once 'elements/footer.php';
+    include_once 'elements/footer.php';
+    } else {
+      if ($_SESSION['teacher'] === 0) {
+        header('Location: /pdo/src/Pages/studentsModule.php');
+      } else {
+        header('Location: /pdo/src/Pages/schoolClassModule.php');
+      }
+    }
   }
 ?>
