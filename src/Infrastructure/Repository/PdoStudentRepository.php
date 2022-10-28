@@ -129,7 +129,7 @@ class PdoStudentRepository implements StudentInterface
 
     public function save(Student $student): bool
     {
-        if ($student->id() === null) {
+        if ($student->getId() === null) {
             return $this->insert($student);
         }
 
@@ -154,7 +154,7 @@ class PdoStudentRepository implements StudentInterface
 
         $statement = $this->connection->prepare($sqlUpdate);
         $statement->bindValue(':class_id', $student->getClassId());
-        $statement->bindValue(':id', $student->id(), PDO::PARAM_INT);
+        $statement->bindValue(':id', $student->getId(), PDO::PARAM_INT);
 
         return $statement;
     }
@@ -164,7 +164,7 @@ class PdoStudentRepository implements StudentInterface
         $sqlRemove = 'DELETE FROM students WHERE id = :id';
 
         $statement = $this->connection->prepare($sqlRemove);
-        $statement->bindValue(':id', $student->id());
+        $statement->bindValue(':id', $student->getId());
         
         return $statement->execute();
     }

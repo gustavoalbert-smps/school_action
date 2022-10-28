@@ -48,6 +48,21 @@ class PdoUserRepository implements UserInterface
         );
     }
 
+    public function getUserByPeopleId(int $peopleId): User
+    {
+        $sqlQuery = 'SELECT * FROM users WHERE people_id = :id;';
+
+        $statement = $this->connection->prepare($sqlQuery);
+        
+        $statement->execute([
+            ':id' => $peopleId 
+        ]);
+
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $this->getUser($user['id']);
+    }
+
     public function isValidUser(string $user, string $password): bool 
     {
         $sqlQuery = 'SELECT id, user FROM users WHERE user = :user AND password = :password;';

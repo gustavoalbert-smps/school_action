@@ -18,6 +18,11 @@ class StudentController
         $this->connection = $connection;
     }
 
+    public function getStudent(PdoStudentRepository $studentRepository, int $id): Student
+    {
+        return $studentRepository->getStudent($id);
+    }
+
     public function numberOfStudentsByClass(PdoStudentRepository $studentRepository, int $classId): int
     {
         return $studentRepository->countStudentsByClass($classId);
@@ -30,5 +35,10 @@ class StudentController
         $studentRepository->save($student);
 
         return $student;
+    }
+    
+    public function removeStudent(PdoStudentRepository $studentRepository, Student $student): bool
+    {
+        return $studentRepository->remove($student);
     }
 }

@@ -46,4 +46,9 @@ class PeopleController
 
         return $peopleRepository->save($people);
     }
+
+    public function removePeople(PdoPeopleRepository $peopleRepository, People $people): bool
+    {
+        return $peopleRepository->remove($people);
+    }
 }

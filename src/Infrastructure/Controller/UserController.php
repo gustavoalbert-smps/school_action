@@ -20,10 +20,16 @@ class UserController
         $this->connection = $connection;
     }
 
+    public function getUserWithPeopleId(PdoUserRepository $userRepository, int $peopleId): User
+    {
+        return $userRepository->getUserByPeopleId($peopleId);
+    }
+
     public function totalUsers(PdoPeopleRepository $peopleRepository): int
     {
         return $peopleRepository->getAllPeopleCount();
     }
+
     public function Users(PdoPeopleRepository $peopleRepository): array
     {
         return $peopleRepository->getAllPeople();
@@ -52,6 +58,7 @@ class UserController
         return count($statement->fetchAll(PDO::FETCH_ASSOC));
     }
 
+
     public function insertUser(PdoUserRepository $userRepository, string $user, string $password, int $teacher, int $peopleId, string $name, string $gender, string $birthDate, int $admin): User
     {
         $user = new User(null, $user, $password, $teacher, $peopleId, $peopleId, $name, $gender, new DateTimeImmutable($birthDate), $admin);
@@ -59,5 +66,11 @@ class UserController
         $userRepository->save($user);
 
         return $user;
+    }
+
+    public function removeUser(PdoUserRepository $userRepository, User $user): bool
+    {
+        return $userRepository->remove($user);
+
     }
 }
