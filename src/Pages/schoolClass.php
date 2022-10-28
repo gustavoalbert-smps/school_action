@@ -12,7 +12,6 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
     $_SESSION = array();
     header('Location: /pdo/src/Pages/index.php');
 } else {
-
     $connection = ConnectDatabase::connect();
 
     $classRepository = new PdoSchoolClassRepository($connection);
@@ -53,12 +52,12 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
         <?php foreach ($students as $student) { ?>
             <tr>
                 <td class="student-tr name" align="center">
-                    <a class="student" href="student.php?id=<?php echo $student->id()?>"><?php echo $student->getName() ?></a>
+                    <a class="student" href="student.php?id=<?php echo $student->getId()?>"><?php echo $student->getName() ?></a>
                 </td>
                 <td class="student-tr" align="center"><?php echo $student->getBirthDate()->format('d-m-Y') ?></td>
                 <td class="student-tr" align="center"><?php echo $student->getClassId() ?></td>
                 <td class="student-tr" align="center">
-                    <button class="btn" id="x" onclick="window.location.href='/student/removeStudent.php?id=<?php echo $student->id()?>'">
+                    <button class="btn" id="x" onclick="window.location.href='removeStudent.php?id=<?php echo $student->getId();?>'">
                         <img class="x-icon" src="../Pages/imgs/x-icon.svg" alt="x-icon">
                     </button>
                 </td>
