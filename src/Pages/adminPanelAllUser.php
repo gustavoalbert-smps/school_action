@@ -35,17 +35,19 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
 ?>
 
         <div id="table-container">
-            <table class="table">
-                <tr>
-                    <th>Nome</th>
-                    <th>Data de Nascimento</th>
-                    <th>Genero</th>
-                </tr>
+            <table class="table table-striped students-table">
+                <thead>
+                    <tr class = "title">
+                        <td class="head" align="center">Nome</td>
+                        <td class="head" align="center">Data de Nascimento</td>
+                        <td class="head" align="center">Genero</td>
+                    </tr>
+                </thead>    
             <?php foreach ($people as $people):?>
                 <tr>
-                    <td><a href="/pdo/src/Pages/Profile.php?id=<?= $people['id']?>"><?= $people['name']?></a></td>
-                    <td><?= $people['birth_date']?></td>
-                    <td><?= $people['gender']?></td>
+                    <td class="student-tr" align="center"><a href="/pdo/src/Pages/Profile.php?id=<?= $people['id']?>"><?= $people['name']?></a></td>
+                    <td class="student-tr" align="center"><?= $people['birth_date']?></td>
+                    <td class="student-tr" align="center"><?= $people['gender']?></td>
                 </tr>
         </div>
 
