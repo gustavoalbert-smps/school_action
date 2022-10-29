@@ -57,11 +57,11 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
                 
               <img src="assets/img/".<?= $photo->getName().'.'.$photo->getType()?> alt="Profile" class="rounded-circle">
               <h2><?= $people->getName()?></h2>
-              <h3>Web Designer</h3>
+              <h3 class = "mb-3" >Web Designer</h3>
               <form action="ProfileUpdate.php" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="id" value=<?= $id?>>
-                <input class = "form-control" type="file" name="img" id="id_img">
-                <input type="submit" value="Enviar">
+                <input class = "form-control mb-3" type="file" name="img" id="id_img">
+                <input class = "form-control  mb-3" type="submit" value="Enviar">
               </form>
               <div class="social-links mt-2">
                 <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
