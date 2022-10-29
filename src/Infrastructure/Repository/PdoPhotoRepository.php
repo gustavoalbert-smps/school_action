@@ -42,7 +42,6 @@ class PdoPhotoRepository implements PhotoInterface
 
         $statement = $this->connection->prepare($sqlInsert);
 
-   feature/UpdateImgProfile1.3
         $statement-> execute
         ([
             ':people_id'=> $people_id,
