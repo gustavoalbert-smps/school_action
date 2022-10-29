@@ -6,6 +6,7 @@ use Alura\Pdo\Domain\Model\User;
 use Alura\Pdo\Infrastructure\Repository\PdoPeopleRepository;
 use Alura\Pdo\Infrastructure\Repository\PdoTeacherRepository;
 use Alura\Pdo\Infrastructure\Repository\PdoUserRepository;
+use DateTimeImmutable;
 use PDO;
 
 require_once '../../vendor/autoload.php';
@@ -57,8 +58,19 @@ class UserController
         return count($statement->fetchAll(PDO::FETCH_ASSOC));
     }
 
+
+    public function insertUser(PdoUserRepository $userRepository, string $user, string $password, int $teacher, int $peopleId, string $name, string $gender, string $birthDate, int $admin): User
+    {
+        $user = new User(null, $user, $password, $teacher, $peopleId, $peopleId, $name, $gender, new DateTimeImmutable($birthDate), $admin);
+
+        $userRepository->save($user);
+
+        return $user;
+    }
+
     public function removeUser(PdoUserRepository $userRepository, User $user): bool
     {
         return $userRepository->remove($user);
+
     }
 }

@@ -130,9 +130,10 @@ class PdoUserRepository implements UserInterface
         $statement = $this->connection->prepare($sqlQuery);
 
         return $statement->execute([
-            ':user' => $user->getId(),
+            ':user' => $user->getUser(),
             ':password' => $user->getPassword(),
-            ':teacher' => $user->getIsTeacher()
+            ':teacher' => $user->getIsTeacher(),
+            ':people_id' => $user->getReferenceId()
         ]);
     }
 
