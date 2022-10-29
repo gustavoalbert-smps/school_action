@@ -60,7 +60,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
               <h3>Web Designer</h3>
               <form action="ProfileUpdate.php" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="id" value=<?= $id?>>
-                <input type="file" name="img" id="id_img">
+                <input class = "form-control" type="file" name="img" id="id_img">
                 <input type="submit" value="Enviar">
               </form>
               <div class="social-links mt-2">
