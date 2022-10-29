@@ -29,12 +29,16 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
   
   $peopleController = new PeopleController($connection);
   
-  $people = $peopleController->getPeople($peopleRepository,$id);
+  $people = $peopleController -> getPeople($peopleRepository,$id);
+
+  $photo = $photoController -> Photo($photoRepository,$id);
+
+
   
   include_once 'elements/head.php';
 ?>
     <div class="pagetitle">
-      <h1>Profile</h1>
+      <h1><?= $photo->getName() ?></h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -51,7 +55,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
                 
-              <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+              <img src="assets/img/".<?= $photo->getName().'.'.$photo->getType()?> alt="Profile" class="rounded-circle">
               <h2><?= $people->getName()?></h2>
               <h3>Web Designer</h3>
               <form action="ProfileUpdate.php" method="POST" enctype="multipart/form-data">

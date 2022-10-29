@@ -18,9 +18,11 @@ class PhotoController
 
     public function Photo(PdoPhotoRepository $PhotoRepository, int $id): Photo
     {
+       
         return $PhotoRepository->getPhoto($id);
-    } 
-    public function insetPhoto($PhotoRepository,$people_id,$file){
+    }
+    public function insertPhoto($PhotoRepository,$people_id,$file)
+    {
         return $PhotoRepository->insert($people_id,$file);
     } 
 }

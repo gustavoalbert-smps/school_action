@@ -19,8 +19,7 @@ class PdoPhotoRepository implements PhotoInterface
 
     public function getPhoto(int $id): Photo
     {
-
-        $sqlquery = 'SELECT * FROM photos WHERE id = :id';
+        $sqlquery = 'SELECT * FROM photos WHERE people_id = :id';
 
         $statement = $this->connection->prepare($sqlquery);
 
@@ -37,17 +36,20 @@ class PdoPhotoRepository implements PhotoInterface
     
     public function insert(int $people_id, Array $file): bool
     {
+        $name = $_POST['id'].'-'.date("Y-m-d").time().'.'.substr($file['img']['type'],6);
 
         $sqlInsert = 'INSERT photos (people_id,name,type) VALUE (:people_id,:name,:type)';
 
         $statement = $this->connection->prepare($sqlInsert);
 
-        return $statement-> execute
+        $statement-> execute
         ([
             ':people_id'=> $people_id,
-            ':name' => $file['img']['name'],
+            ':name' => $name,
             ':type'=>substr($file['img']['type'],6)
         ]);
+
+        return move_uploaded_file($file['img']['tmp_name'], 'assets/img/'.$name);
     }
     public function update (Photo $photo): bool
     {
@@ -81,13 +83,14 @@ class PdoPhotoRepository implements PhotoInterface
             ':id' => $photo->getId()
         ]);
     }
-}
+
 //     public function resize(Photo $photo)
 //     {
 //         $altura = "200";
 // 	    $largura = "200";
 //         $filename = $people->getPeopleId().'.'.substr($_FILES['fileToUpload']['type'],6);
 // 	// echo "Altura pretendida: $altura - largura pretendida: $largura <br>";
+
 	
 // 	    switch($_FILES['fileToUpload']['type']):
 // 		    case 'image/jpeg';
@@ -148,3 +151,4 @@ class PdoPhotoRepository implements PhotoInterface
 // 	    endswitch;  
 //     }
 // }
+}
