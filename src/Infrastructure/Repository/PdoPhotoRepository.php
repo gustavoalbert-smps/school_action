@@ -151,4 +151,4 @@ class PdoPhotoRepository implements PhotoInterface
 // 	    endswitch;  
 //     }
 // }
-
+}
