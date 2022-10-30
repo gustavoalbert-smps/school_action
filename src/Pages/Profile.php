@@ -31,18 +31,20 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
   
   $people = $peopleController -> getPeople($peopleRepository,$id);
 
-    if($photoController -> PhotoIf($photoRepository,$id)){
+    if($photoController -> photoIf($photoRepository,$id) == 1)
+    {
       $photo = $photoController -> Photo($photoRepository,$id);
     }
-    else
+    elseif($photoController -> photoIf($photoRepository,$id) == 0)
     {
-      $photo = true;
+      $photo = 0;
     }
     
+     print_r($photoController -> photoIf($photoRepository,$id));
  
   // $resize = $photoRepository-> resize($photo);
 
- include_once 'elements/head.php';
+include_once 'elements/head.php';
 ?>
     <div class="pagetitle">
       <nav>
@@ -60,10 +62,10 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
 
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-              <?php if($photo == true):?>  
-                <img src="assets/img/ProfileDefault.png" alt="Profile" class="rounded-circle">
+              <?php if($photo == 1):?>  
+                <img src='assets/img/<?= $photo->getName()?>' alt="Profile" class="rounded-circle">
               <?php else:?> 
-                <img src="assets/img/".<?= $photo->getName().'.'.$photo->getType()?> alt="Profile" class="rounded-circle">
+                <img src="assets/img/ProfileDefault.png" alt="Profile" class="rounded-circle">
               <?php endif;?>  
               <h2><?= $people->getName()?></h2>
               <h3>Web Designer</h3>
