@@ -31,14 +31,20 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
   
   $people = $peopleController -> getPeople($peopleRepository,$id);
 
-  $photo = $photoController -> Photo($photoRepository,$id);
+    if($photoController -> PhotoIf($photoRepository,$id)){
+      $photo = $photoController -> Photo($photoRepository,$id);
+    }
+    else
+    {
+      $photo = true;
+    }
+    
+ 
+  // $resize = $photoRepository-> resize($photo);
 
-
-  
-  include_once 'elements/head.php';
+ include_once 'elements/head.php';
 ?>
     <div class="pagetitle">
-      <h1><?= $photo->getName() ?></h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -54,8 +60,11 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
 
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-                
-              <img src="assets/img/".<?= $photo->getName().'.'.$photo->getType()?> alt="Profile" class="rounded-circle">
+              <?php if($photo == true):?>  
+                <img src="assets/img/ProfileDefault.png" alt="Profile" class="rounded-circle">
+              <?php else:?> 
+                <img src="assets/img/".<?= $photo->getName().'.'.$photo->getType()?> alt="Profile" class="rounded-circle">
+              <?php endif;?>  
               <h2><?= $people->getName()?></h2>
               <h3>Web Designer</h3>
               <form action="ProfileUpdate.php" method="POST" enctype="multipart/form-data">
