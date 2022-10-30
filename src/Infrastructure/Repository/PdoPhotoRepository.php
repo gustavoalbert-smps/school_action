@@ -28,13 +28,15 @@ class PdoPhotoRepository implements PhotoInterface
 
         $photo = $statement->fetch(PDO::FETCH_ASSOC);
 
+        print_r($photo);
+
         if($photo == "")
         {
-            return false;
+            return  0;
         }
         else
         {
-            return true;
+            return 1;
         }
     }
     public function getPhoto(int $id): Photo
