@@ -16,17 +16,20 @@ class PhotoController
         $this->connection = $connection;   
     }
 
-    public function Photo(PdoPhotoRepository $PhotoRepository, int $id): Photo
+    public function Photo(PdoPhotoRepository $PhotoRepository, int $people_id): Photo
     {
-       
-        return $PhotoRepository->getPhoto($id);
+        return $PhotoRepository->getPhoto($people_id);
     }
     public function insertPhoto($PhotoRepository,$people_id,$file)
     {
         return $PhotoRepository->insert($people_id,$file);
     }
-    public function photoIf(PdoPhotoRepository $PhotoRepository,$id): bool
+    public function countPhoto(PdoPhotoRepository $PhotoRepository,$id): int
     {
-        return $PhotoRepository->checkPhoto($id);
+        return $PhotoRepository->countPhoto($id);
+    }
+    public function size(PdoPhotoRepository $PhotoRepository, int $altura , int $largura)
+    {
+        return $PhotoRepository->resize($photo, $altura, $largura);
     } 
 }
