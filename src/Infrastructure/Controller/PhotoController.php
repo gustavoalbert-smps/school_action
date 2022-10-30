@@ -25,7 +25,7 @@ class PhotoController
     {
         return $PhotoRepository->insert($people_id,$file);
     }
-    public function PhotoIf(PdoPhotoRepository $PhotoRepository,$id)
+    public function photoIf(PdoPhotoRepository $PhotoRepository,$id): bool
     {
         return $PhotoRepository->checkPhoto($id);
     } 
