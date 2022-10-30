@@ -16,9 +16,9 @@ class PdoPhotoRepository implements PhotoInterface
     {
         $this->connection = $connection;
     }
-    public function checkPhoto(int $id): bool
+    public function countPhoto(int $id): int
     {
-        $sqlquery = 'SELECT * FROM photos WHERE people_id = :id';
+        $sqlquery = 'SELECT count(id) FROM photos WHERE people_id = :id';
 
         $statement = $this->connection->prepare($sqlquery);
 
@@ -28,29 +28,25 @@ class PdoPhotoRepository implements PhotoInterface
 
         $photo = $statement->fetch(PDO::FETCH_ASSOC);
 
-        print_r($photo);
+        $photo = $photo['count(id)'];
 
-        if($photo == "")
-        {
-            return  0;
-        }
-        else
-        {
-            return 1;
-        }
+        return $photo;
+
     }
-    public function getPhoto(int $id): Photo
+    public function getPhoto(int $people_id): Photo
     {
-        $sqlquery = 'SELECT * FROM photos WHERE people_id = :id';
+        $sqlquery = 'SELECT * FROM photos WHERE people_id = :people_id';
 
         $statement = $this->connection->prepare($sqlquery);
 
         $statement->execute([
-            ':id' => $id
+            ':id' => $people_id
         ]);
 
         $photo = $statement->fetch(PDO::FETCH_ASSOC);
-        
+
+        print_r($people_id);
+      
         return $Photo = new Photo ($photo['id'],$photo['people_id'],$photo['name'],$photo['type']); 
 
     }    
@@ -104,11 +100,11 @@ class PdoPhotoRepository implements PhotoInterface
         ]);
     }
 
-    public function resize(Photo $photo)
+    public function resize(Photo $photo, int $altura, int $largura)
     {
-        $altura = "200";
-	    $largura = "200";
-        // $filename = $people->getPeopleId().'.'.substr($_FILES['fileToUpload']['type'],6);
+        // $altura = "200";
+	    // $largura = "200";
+        $filename = $photo->getName().$altura.$largura;
 	// echo "Altura pretendida: $altura - largura pretendida: $largura <br>";
         $filename = "teste.jpeg";
 
@@ -130,14 +126,11 @@ class PdoPhotoRepository implements PhotoInterface
                 
                 $nova_altura = $altura ? $altura : floor (($altura_original / $largura_original) * $largura);
                 
-                return $imagem_redimensionada = imagecreatetruecolor($nova_largura, $nova_altura);
-                // imagecopyresampled($imagem_redimensionada, $imagem_temporaria, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
+                $imagem_redimensionada = imagecreatetruecolor($nova_largura, $nova_altura);
+                
+                imagecopyresampled($imagem_redimensionada, $imagem_temporaria, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
                 
                 return imagejpeg($imagem_redimensionada, 'assets/img/' . $filename);
-                
-                // echo "<img src='assets/img/".$_FILES['fileToUpdate']['name']."'>";
-                
-                
             break;
 		
 		//Caso a imagem seja extensão PNG cai nesse CASE
