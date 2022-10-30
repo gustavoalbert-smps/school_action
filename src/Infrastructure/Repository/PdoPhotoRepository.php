@@ -16,7 +16,7 @@ class PdoPhotoRepository implements PhotoInterface
     {
         $this->connection = $connection;
     }
-    public function checkPhoto($id): bool
+    public function checkPhoto(int $id): bool
     {
         $sqlquery = 'SELECT * FROM photos WHERE people_id = :id';
 
