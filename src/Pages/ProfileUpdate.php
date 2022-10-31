@@ -31,11 +31,17 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
     {
         $people_id = $_POST['id'];
 
+        if(is_object($photo = $photoController->Photo($photoRepository,$people_id)))
+        {
+            $photo = $photoController->Photo($photoRepository,$people_id);
+            $photoController->deletePhoto($photoRepository,$photo);
+        }
+
         $photoController->insertPhoto($photoRepository,$people_id,$_FILES);
 
-        $photo = $photoController->Photo($photoRepository,$people_id);
+        // $photo = $photoController->Photo($photoRepository,$people_id);
 
-        $photoController->size($photo,200,200);
+        // $photoController->size($photo,200,200);
 
         header('Location: /pdo/src/Pages/Profile.php?id='.$people_id);
     }
