@@ -24,6 +24,10 @@ class PhotoController
     {
         return $PhotoRepository->insert($people_id,$file);
     }
+    public function deletePhoto(PdoPhotoRepository $PhotoRepository, Photo $photo)
+    {
+        return $PhotoRepository->remove($photo);
+    }
     public function countPhoto(PdoPhotoRepository $PhotoRepository,$id): int
     {
         return $PhotoRepository->countPhoto($id);
