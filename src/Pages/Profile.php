@@ -57,11 +57,11 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
                 
               <img src="assets/img/".<?= $photo->getName().'.'.$photo->getType()?> alt="Profile" class="rounded-circle">
               <h2><?= $people->getName()?></h2>
-              <h3>Web Designer</h3>
+              <h3 class = "mb-3" >Web Designer</h3>
               <form action="ProfileUpdate.php" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="id" value=<?= $id?>>
-                <input type="file" name="img" id="id_img">
-                <input type="submit" value="Enviar">
+                <input class = "form-control mb-3" type="file" name="img" id="id_img">
+                <input class = "form-control  mb-3" type="submit" value="Enviar">
               </form>
               <div class="social-links mt-2">
                 <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
@@ -132,15 +132,6 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
                   <!-- Profile Edit Form -->
                   <form action="ProfileUpdate.php" method="POST" enctype="multipart/form-data">
                     <div class="row mb-3">
-                      <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Imagem do perfil</label>
-                      <div class="col-md-8 col-lg-9">
-                        <img src="assets/img/messages-3.jpg" alt="Profile">
-                        <div class="pt-2">
-                          <input type="file" name="img" id="id_img">
-                          <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
-                          <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
-                        </div>
-                      </div>
                     </div>
 
                     <input type="hidden" name="id" value="<?=$id?>">
