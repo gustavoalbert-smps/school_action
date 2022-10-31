@@ -58,7 +58,58 @@ class PdoPhotoRepository implements PhotoInterface
 
         $statement = $this->connection->prepare($sqlInsert);
 
-       return  $statement-> execute
+        $altura = "200";
+        $largura = "200";
+        $filename = $name;
+    
+        switch($file['img']['type']):
+            case 'image/jpeg';
+            case 'image/pjpeg';
+    
+                $imagem_temporaria = imagecreatefromjpeg($file['img']['tmp_name']);
+    
+                $largura_original = imagesx($imagem_temporaria);
+    
+                $altura_original = imagesy($imagem_temporaria);
+    
+                // echo "largura original: $largura_original - Altura original: $altura_original <br>";
+    
+                $nova_largura = $largura ? $largura : floor (($largura_original / $altura_original) * $altura);
+    
+                $nova_altura = $altura ? $altura : floor (($altura_original / $largura_original) * $largura);
+    
+                $imagem_redimensionada = imagecreatetruecolor($nova_largura, $nova_altura);
+                imagecopyresampled($imagem_redimensionada, $imagem_temporaria, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
+    
+                imagejpeg($imagem_redimensionada, 'assets/img/' . $filename);
+    
+            break;
+            case 'image/png':
+            case 'image/x-png';
+    
+                $imagem_temporaria = imagecreatefrompng ($file['img']['tmp_name']);
+    
+                $largura_original = imagesx($imagem_temporaria);
+                $altura_original = imagesy($imagem_temporaria);
+             
+                $nova_largura = $largura ? $largura : floor(( $largura_original / $altura_original ) * $altura);
+    
+                $nova_altura = $altura ? $altura : floor(( $altura_original / $largura_original ) * $largura);
+    
+                $imagem_redimensionada = imagecreatetruecolor($nova_largura, $nova_altura);
+    
+                    /* Copia a nova imagem da imagem antiga com o tamanho correto */
+                // imagealphablending($imagem_redimensionada, false);
+                // imagesavealpha($imagem_redimensionada, true);
+    
+                imagecopyresampled($imagem_redimensionada, $imagem_temporaria, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
+    
+                    //função imagejpeg que envia para o browser a imagem armazenada no parâmetro passado
+                imagepng($imagem_redimensionada, 'assets/img/'.$filename);
+            break;
+        endswitch; 
+
+        return  $statement-> execute
         ([
             ':people_id'=> $people_id,
             ':name' => $name,
@@ -73,13 +124,14 @@ class PdoPhotoRepository implements PhotoInterface
 
         $statement = $this->connection->prepare($sqlUpdate);
 
-        return $statement->execute
+        $statement->execute
         ([
             'path'=>$photo->getPath(),
             'People_id'=>$photo->getPeople_id(),
             'id'=>$photo->getId()
             
         ]);
+        
     }
     public function save(Photo $photo): bool
     {
@@ -92,72 +144,14 @@ class PdoPhotoRepository implements PhotoInterface
     
     public function remove(Photo $photo):bool
     {
-        $sqlRemove = 'DELETE FROM photo WHERE id = :id';
+        var_dump($photo->getId());
+        
+        $sqlRemove = 'DELETE FROM photos WHERE id = :id'; 
 
         $statement = $this->connection->prepare($sqlRemove);
+
         return $statement->execute([
             ':id' => $photo->getId()
         ]);
-    }
-
-    public function resize(Array $file , $filename)
-    {
-    $altura = "200";
-    $largura = "200";
-    // $filename = $people->getPeopleId().'.'.substr($file['img']['type'],6);
-
-    switch($file['img']['type']):
-        case 'image/jpeg';
-        case 'image/pjpeg';
-
-            $imagem_temporaria = imagecreatefromjpeg($file['img']['tmp_name']);
-
-            $largura_original = imagesx($imagem_temporaria);
-
-            $altura_original = imagesy($imagem_temporaria);
-
-            echo "largura original: $largura_original - Altura original: $altura_original <br>";
-
-            $nova_largura = $largura ? $largura : floor (($largura_original / $altura_original) * $altura);
-
-            $nova_altura = $altura ? $altura : floor (($altura_original / $largura_original) * $largura);
-
-            $imagem_redimensionada = imagecreatetruecolor($nova_largura, $nova_altura);
-            imagecopyresampled($imagem_redimensionada, $imagem_temporaria, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
-
-            imagejpeg($imagem_redimensionada, 'assets/img/' . $filename);
-
-            // echo "<img src='assets/img/".$file['fileToUpdate']['name']."'>";
-
-
-        break;
-        case 'image/png':
-        case 'image/x-png';
-
-            $imagem_temporaria = imagecreatefrompng ($file['img']['tmp_name']);
-
-            $largura_original = imagesx($imagem_temporaria);
-            $altura_original = imagesy($imagem_temporaria);
-         
-            $nova_largura = $largura ? $largura : floor(( $largura_original / $altura_original ) * $altura);
-
-                /* Configura a nova altura */
-            $nova_altura = $altura ? $altura : floor(( $altura_original / $largura_original ) * $largura);
-
-                /* Retorna a nova imagem criada */
-            $imagem_redimensionada = imagecreatetruecolor($nova_largura, $nova_altura);
-
-                /* Copia a nova imagem da imagem antiga com o tamanho correto */
-            // imagealphablending($imagem_redimensionada, false);
-            // imagesavealpha($imagem_redimensionada, true);
-
-            imagecopyresampled($imagem_redimensionada, $imagem_temporaria, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
-
-                //função imagejpeg que envia para o browser a imagem armazenada no parâmetro passado
-            imagepng($imagem_redimensionada, 'assets/img/'.$filename);
-
-            // echo "<img src='assets/img/" .$imgUpload. "'>";
-        break;
-    endswitch; 
     }
 }
