@@ -40,12 +40,12 @@ class PdoPhotoRepository implements PhotoInterface
         $statement = $this->connection->prepare($sqlquery);
 
         $statement->execute([
-            ':id' => $people_id
+            ':people_id' => $people_id
         ]);
 
         $photo = $statement->fetch(PDO::FETCH_ASSOC);
 
-        print_r($people_id);
+        print_r($photo);
       
         return $Photo = new Photo ($photo['id'],$photo['people_id'],$photo['name'],$photo['type']); 
 
@@ -58,14 +58,14 @@ class PdoPhotoRepository implements PhotoInterface
 
         $statement = $this->connection->prepare($sqlInsert);
 
-        $statement-> execute
+       return  $statement-> execute
         ([
             ':people_id'=> $people_id,
             ':name' => $name,
             ':type'=>substr($file['img']['type'],6)
         ]);
-
-        return move_uploaded_file($file['img']['tmp_name'], 'assets/img/'.$name);
+        
+        // return resize($file,$name);
     }
     public function update (Photo $photo): bool
     {
@@ -100,69 +100,64 @@ class PdoPhotoRepository implements PhotoInterface
         ]);
     }
 
-    public function resize(Photo $photo, int $altura, int $largura)
+    public function resize(Array $file , $filename)
     {
-        // $altura = "200";
-	    // $largura = "200";
-        $filename = $photo->getName().$altura.$largura;
-	// echo "Altura pretendida: $altura - largura pretendida: $largura <br>";
-        $filename = "teste.jpeg";
+    $altura = "200";
+    $largura = "200";
+    // $filename = $people->getPeopleId().'.'.substr($file['img']['type'],6);
 
-        echo $photo->getType();
+    switch($file['img']['type']):
+        case 'image/jpeg';
+        case 'image/pjpeg';
 
-	    switch($photo->getType()):
-		    case 'jpeg';
-		    case 'pjpeg';
-               $imagem_temporaria = imagecreatefromjpeg($photo->getName());
-                // $_FILES['fileToUpload']['tmp_name']
-                
-                $largura_original = imagesx($imagem_temporaria);
-                
-                $altura_original = imagesy($imagem_temporaria);
-                
-                echo "largura original: $largura_original - Altura original: $altura_original <br>";
-                
-                $nova_largura = $largura ? $largura : floor (($largura_original / $altura_original) * $altura);
-                
-                $nova_altura = $altura ? $altura : floor (($altura_original / $largura_original) * $largura);
-                
-                $imagem_redimensionada = imagecreatetruecolor($nova_largura, $nova_altura);
-                
-                imagecopyresampled($imagem_redimensionada, $imagem_temporaria, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
-                
-                return imagejpeg($imagem_redimensionada, 'assets/img/' . $filename);
-            break;
-		
-		//Caso a imagem seja extensão PNG cai nesse CASE
-            case 'image/png':
-            case 'image/x-png';
-            
-                $imagem_temporaria = imagecreatefrompng ($_FILES['fileToUpload']['tmp_name']);
-                
-                $largura_original = imagesx($imagem_temporaria);
-                $altura_original = imagesy($imagem_temporaria);
-                // 	// echo "Largura original: $largura_original - Altura original: $altura_original <br> ";
-                    
-                // 	/* Configura a nova largura */
-                $nova_largura = $largura ? $largura : floor(( $largura_original / $altura_original ) * $altura);
+            $imagem_temporaria = imagecreatefromjpeg($file['img']['tmp_name']);
 
-                    /* Configura a nova altura */
-                $nova_altura = $altura ? $altura : floor(( $altura_original / $largura_original ) * $largura);
-                    
-                    /* Retorna a nova imagem criada */
-                $imagem_redimensionada = imagecreatetruecolor($nova_largura, $nova_altura);
-                    
-                    /* Copia a nova imagem da imagem antiga com o tamanho correto */
-                // imagealphablending($imagem_redimensionada, false);
-                // imagesavealpha($imagem_redimensionada, true);
+            $largura_original = imagesx($imagem_temporaria);
 
-                imagecopyresampled($imagem_redimensionada, $imagem_temporaria, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
-                    
-                    //função imagejpeg que envia para o browser a imagem armazenada no parâmetro passado
-                imagepng($imagem_redimensionada, 'assets/img/'.$filename);
-                    
-                // echo "<img src='assets/img/" .$imgUpload. "'>";
-		    break;
-	    endswitch;  
+            $altura_original = imagesy($imagem_temporaria);
+
+            echo "largura original: $largura_original - Altura original: $altura_original <br>";
+
+            $nova_largura = $largura ? $largura : floor (($largura_original / $altura_original) * $altura);
+
+            $nova_altura = $altura ? $altura : floor (($altura_original / $largura_original) * $largura);
+
+            $imagem_redimensionada = imagecreatetruecolor($nova_largura, $nova_altura);
+            imagecopyresampled($imagem_redimensionada, $imagem_temporaria, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
+
+            imagejpeg($imagem_redimensionada, 'assets/img/' . $filename);
+
+            // echo "<img src='assets/img/".$file['fileToUpdate']['name']."'>";
+
+
+        break;
+        case 'image/png':
+        case 'image/x-png';
+
+            $imagem_temporaria = imagecreatefrompng ($file['img']['tmp_name']);
+
+            $largura_original = imagesx($imagem_temporaria);
+            $altura_original = imagesy($imagem_temporaria);
+         
+            $nova_largura = $largura ? $largura : floor(( $largura_original / $altura_original ) * $altura);
+
+                /* Configura a nova altura */
+            $nova_altura = $altura ? $altura : floor(( $altura_original / $largura_original ) * $largura);
+
+                /* Retorna a nova imagem criada */
+            $imagem_redimensionada = imagecreatetruecolor($nova_largura, $nova_altura);
+
+                /* Copia a nova imagem da imagem antiga com o tamanho correto */
+            // imagealphablending($imagem_redimensionada, false);
+            // imagesavealpha($imagem_redimensionada, true);
+
+            imagecopyresampled($imagem_redimensionada, $imagem_temporaria, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
+
+                //função imagejpeg que envia para o browser a imagem armazenada no parâmetro passado
+            imagepng($imagem_redimensionada, 'assets/img/'.$filename);
+
+            // echo "<img src='assets/img/" .$imgUpload. "'>";
+        break;
+    endswitch; 
     }
 }
