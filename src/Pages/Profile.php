@@ -62,7 +62,7 @@ include_once 'elements/head.php';
 
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-              <?php if($photo > 0):?>  
+              <?php if(is_object($photo)):?>  
                 <img src='assets/img/<?= $photo->getName()?>' alt="Profile" class="rounded-circle">
               <?php else:?> 
                 <img src="assets/img/ProfileDefault.png" alt="Profile" class="rounded-circle">
