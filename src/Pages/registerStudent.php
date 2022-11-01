@@ -48,47 +48,61 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
 
         require_once '../Pages/elements/head.php';
 ?>
+        <div class="pagetitle">
         <h1>Cadastrar novo aluno</h1>
-        <form action="registerStudent.php" method="POST">
-            <p>
-                <label for="user">Nome de usuário:</label>
-                <input class="form-field" type="text" name="user" id="user">
-            </p>
-            <p>
-                <label for="password">Senha:</label>
-                <input class="form-field" type="password" name="password" id="password">
-            </p>
-            <p>
-                <label for="name">Nome:</label>
-                <input class="form-field" type="text" name="name" id="name">
-            </p>
-            <p>
-                <label for="birth_date">Data de Nascimento:</label>
-                <input class="form-field" type="date" name="birth_date" id="birth-date">
-            </p>
-            <p>
-                <label for="class">Classe pertencente:</label>
-                <select name="class" id="class">
-                    <?php foreach ($classes as $class) {?>
-                        <option value="<?php echo $class->getId()?>"><?php echo "{$class->getYear()}{$class->getIdentifier()}"?></option>
-                    <?php } ?>
-                </select>
-            </p>
-            <p>
-                <label for="gender">Sexo:</label>
-                <select name="gender" id="gender">
-                    <option value="masculino">Masculino</option>
-                    <option value="feminino">Feminino</option>
-                </select>
-            </p>
-            <p>
-                <button class="btn">Cadastrar</button>
-            </p>
-        </form>
+            <nav>
+                <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="adminPanel.php">Painel do Administrador</a></li>
+                <li class="breadcrumb-item active">Cadastrar Aluno</li>
+                </ol>
+            </nav>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-7 mx-auto">
+                <div class="bg-white rounded-lg shadow-sm p-5">
+                    <form class="form" action="registerStudent.php" method="POST">
+                        <div class="form-floating mb-3">
+                            <label for="user">Nome de usuário</label>
+                            <input class="form-control" type="text" name="user" id="user">
+                        </div>
+                        <div class="form-floating mb-3">
+                            <label for="password">Senha</label>
+                            <input class="form-control" type="password" name="password" id="password">
+                        </div>
+                        <div class="form-floating mb-3">
+                            <label for="name">Nome</label>
+                            <input class="form-control" type="text" name="name" id="name">
+                        </div>
+                        <div class="form-floating mb-3">
+                            <label for="birth_date">Data de Nascimento</label>
+                            <input class="form-control" type="date" name="birth_date" id="birth-date">
+                        </div>
+                        <div class="form-floating mb-3">
+                            <label for="gender">Sexo</label>
+                            <select class="form-select" name="gender" id="gender">
+                                <option value="masculino">Masculino</option>
+                                <option value="feminino">Feminino</option>
+                            </select>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <label for="class">Classe pertencente</label>
+                            <select class="form-select" name="class" id="class">
+                                <?php foreach ($classes as $class) {?>
+                                    <option value="<?php echo $class->getId()?>"><?php echo "{$class->getYear()}{$class->getIdentifier()}"?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <button class="btn">Cadastrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
 
 <?php
     require_once '../Pages/elements/footer.php';
+    } else {
+        header('Location: schoolClassModule.php');
     }
-    header('Location: schoolClassModule.php');
 }
 ?>
