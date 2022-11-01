@@ -16,40 +16,38 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
     $_SESSION = array();
     header('Location: /pdo/src/Pages/index.php');
 } else {
-    $connection = ConnectDatabase::connect();
+    if ($_SESSION['admin']){
+        $connection = ConnectDatabase::connect();
 
-    $classRepository = new PdoSchoolClassRepository($connection);
-    
-    $peopleRepository = new PdoPeopleRepository($connection);
-    $peopleController = new PeopleController($connection);
-
-    $userRepository = new PdoUserRepository($connection);
-    $userController = new UserController($connection);
-
-    $studentRepository = new PdoStudentRepository($connection);
-    $studentController = new StudentController($connection);
-
-    $classes = $classRepository->allClasses();
-
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $peopleController->insertPeople($peopleRepository, $_POST['name'], $_POST['gender'], $_POST['birth_date'], 0);
+        $classRepository = new PdoSchoolClassRepository($connection);
         
-        $id = intval($connection->lastInsertId());
+        $peopleRepository = new PdoPeopleRepository($connection);
+        $peopleController = new PeopleController($connection);
 
-        $bdPeople = $peopleController->getPeople($peopleRepository, $id);
+        $userRepository = new PdoUserRepository($connection);
+        $userController = new UserController($connection);
 
-        $userController->insertUser($userRepository, $_POST['user'], $_POST['password'], 0, $bdPeople->getPeopleId(), $_POST['name'], $_POST['gender'], $_POST['birth_date'], 0);
+        $studentRepository = new PdoStudentRepository($connection);
+        $studentController = new StudentController($connection);
 
-        $studentController->insertStudent($studentRepository, $bdPeople->getPeopleId(), $_POST['name'], $_POST['gender'], $_POST['birth_date'], $_POST['class'], 0);
+        $classes = $classRepository->allClasses();
 
-        header('Location: registerStudent.php');
-    }
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $peopleController->insertPeople($peopleRepository, $_POST['name'], $_POST['gender'], $_POST['birth_date'], 0);
+            
+            $id = intval($connection->lastInsertId());
+
+            $bdPeople = $peopleController->getPeople($peopleRepository, $id);
+
+            $userController->insertUser($userRepository, $_POST['user'], $_POST['password'], 0, $bdPeople->getPeopleId(), $_POST['name'], $_POST['gender'], $_POST['birth_date'], 0);
+
+            $studentController->insertStudent($studentRepository, $bdPeople->getPeopleId(), $_POST['name'], $_POST['gender'], $_POST['birth_date'], $_POST['class'], 0);
+
+            header('Location: registerStudent.php');
+        }
+
+        require_once '../Pages/elements/head.php';
 ?>
-
-<?php
-    require_once '../Pages/elements/head.php';
-?>
-
         <h1>Cadastrar novo aluno</h1>
         <form action="registerStudent.php" method="POST">
             <p>
@@ -91,4 +89,6 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
 <?php
     require_once '../Pages/elements/footer.php';
     }
+    header('Location: schoolClassModule.php');
+}
 ?>
