@@ -58,54 +58,52 @@ class PdoPhotoRepository implements PhotoInterface
 
         $statement = $this->connection->prepare($sqlInsert);
 
-        $altura = "200";
-        $largura = "200";
+        $height = "200";
+        $width = "200";
         $filename = $name;
     
         switch($file['img']['type']):
             case 'image/jpeg';
             case 'image/pjpeg';
     
-                $imagem_temporaria = imagecreatefromjpeg($file['img']['tmp_name']);
+                $tmp_img = imagecreatefromjpeg($file['img']['tmp_name']);
     
-                $largura_original = imagesx($imagem_temporaria);
+                $original_width = imagesx($tmp_img);
     
-                $altura_original = imagesy($imagem_temporaria);
+                $original_height = imagesy($tmp_img);
     
-                // echo "largura original: $largura_original - Altura original: $altura_original <br>";
+                $new_height = $width ? $width : floor (($original_width / $original_height) * $height);
     
-                $nova_largura = $largura ? $largura : floor (($largura_original / $altura_original) * $altura);
+                $new_width = $height ? $height : floor (($original_height / $original_width) * $width);
     
-                $nova_altura = $altura ? $altura : floor (($altura_original / $largura_original) * $largura);
+                $img_resize = imagecreatetruecolor($new_height, $new_width);
+                imagecopyresampled($img_resize, $tmp_img, 0, 0, 0, 0, $new_height, $new_width, $original_width, $original_height);
     
-                $imagem_redimensionada = imagecreatetruecolor($nova_largura, $nova_altura);
-                imagecopyresampled($imagem_redimensionada, $imagem_temporaria, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
-    
-                imagejpeg($imagem_redimensionada, 'assets/img/' . $filename);
+                imagejpeg($img_resize, 'assets/img/' . $filename);
     
             break;
             case 'image/png':
             case 'image/x-png';
     
-                $imagem_temporaria = imagecreatefrompng ($file['img']['tmp_name']);
+                $tmp_img = imagecreatefrompng ($file['img']['tmp_name']);
     
-                $largura_original = imagesx($imagem_temporaria);
-                $altura_original = imagesy($imagem_temporaria);
+                $original_width = imagesx($tmp_img);
+                $original_height = imagesy($tmp_img);
              
-                $nova_largura = $largura ? $largura : floor(( $largura_original / $altura_original ) * $altura);
+                $new_width = $width ? $width : floor(( $original_width / $original_height ) * $height);
     
-                $nova_altura = $altura ? $altura : floor(( $altura_original / $largura_original ) * $largura);
+                $new_width = $altura ? $altura : floor(( $original_height / $original_width ) * $width);
     
-                $imagem_redimensionada = imagecreatetruecolor($nova_largura, $nova_altura);
+                $img_resize = imagecreatetruecolor($new_height, $new_width);
     
                     /* Copia a nova imagem da imagem antiga com o tamanho correto */
-                // imagealphablending($imagem_redimensionada, false);
-                // imagesavealpha($imagem_redimensionada, true);
+                // imagealphablending($img_resize, false);
+                // imagesavealpha($img_resize, true);
     
-                imagecopyresampled($imagem_redimensionada, $imagem_temporaria, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
+                imagecopyresampled($img_resize, $tmp_img, 0, 0, 0, 0, $new_height, $new_width, $original_width, $original_height);
     
                     //função imagejpeg que envia para o browser a imagem armazenada no parâmetro passado
-                imagepng($imagem_redimensionada, 'assets/img/'.$filename);
+                imagepng($img_resize, 'assets/img/'.$filename);
             break;
         endswitch; 
 
