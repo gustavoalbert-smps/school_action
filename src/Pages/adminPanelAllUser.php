@@ -38,16 +38,16 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
             <table class="table table-striped students-table">
                 <thead>
                     <tr class = "title">
-                        <td class="head" align="center">Nome</td>
+                        <td class="head " align="center">Nome</td>
                         <td class="head" align="center">Data de Nascimento</td>
                         <td class="head" align="center">Genero</td>
                     </tr>
                 </thead>    
             <?php foreach ($people as $people):?>
                 <tr>
-                    <td class="student-tr" align="center"><a href="/pdo/src/Pages/Profile.php?id=<?= $people['id']?>"><?= $people['name']?></a></td>
-                    <td class="student-tr" align="center"><?= $people['birth_date']?></td>
-                    <td class="student-tr" align="center"><?= $people['gender']?></td>
+                    <td class="admin-tr name" align="center"><a href="/pdo/src/Pages/Profile.php?id=<?= $people['id']?>"><?= $people['name']?></a></td>
+                    <td class="" align="center"><?= $people['birth_date']?></td>
+                    <td class="" align="center"><?= $people['gender']?></td>
                 </tr>
         </div>
 
