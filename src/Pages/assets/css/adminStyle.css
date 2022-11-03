@@ -1,0 +1,10 @@
+.table-striped .admin-tr.name {
+    transition: 0.5s;
+}
+
+.table-striped .admin-tr.name:hover {
+    -webkit-transform: scale(1.15);
+    transform: scale(1.15);
+    background-color: #999999;
+    
+}
