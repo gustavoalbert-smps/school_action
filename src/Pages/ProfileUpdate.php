@@ -26,11 +26,29 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
 
     $photoController = new photoController($connection);
 
+
     if($_FILES['img']['size'] !== 0)
     {
-        $photoController->insertPhoto($photoRepository,$_POST['id'],$_FILES);
-        header('Location: /pdo/src/Pages/Profile.php?id='.$_POST['id']);
+        $people_id = $_POST['id'];
+
+        try {
+            $photo = $photoController->Photo($photoRepository,$people_id);
+            $photoController->deletePhoto($photoRepository,$photo);
+            $photoController->insertPhoto($photoRepository,$people_id,$_FILES);
+        } catch (\Throwable $th) {
+            $photoController->insertPhoto($photoRepository,$people_id,$_FILES);
+        }
+
+        // $photoController->insertPhoto($photoRepository,$people_id,$_FILES);
+
+        // $photo = $photoController->Photo($photoRepository,$people_id);
+
+        // $photoController->size($photo,200,200);
+
+        header('Location: /pdo/src/Pages/Profile.php?id='.$people_id);
     }
+    else
+    {
 
     $people = $controller->getPeople($peopleRepository, $_POST['id']);
 
@@ -45,6 +63,8 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
         $_POST['phone'], 
         $_POST['email']
     );
+
+    }
 
 
 }
