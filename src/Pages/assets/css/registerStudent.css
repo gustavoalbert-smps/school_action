@@ -1,0 +1,11 @@
+#registration-form fieldset:not(:first-of-type) {
+    display: none;
+}
+
+.progress {
+    height: .65rem;
+}
+
+.progress-bar-striped {
+    background-image: none;
+}
