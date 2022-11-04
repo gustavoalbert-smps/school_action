@@ -72,7 +72,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
                             </div>
                             <div class="form-floating mb-3">
                                 <label for="password">Senha</label>
-                                <input class="form-control" type="password" name="password" id="password">
+                                <input class="form-control" type="text" name="password" id="password">
                             </div>
                             <input type="button" name="next" class="next btn btn-primary mb-3" value="Próximo">
                         </fieldset>
@@ -85,12 +85,17 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
                                 <label for="birth_date">Data de Nascimento</label>
                                 <input class="form-control" type="text" placeholder="Data de Nascimento" onfocus="this.type='date';" onblur="this.type='text';" name="birth_date" id="birth-date">
                             </div>
-                            <div class="form-floating mb-3">
-                                <label for="gender">Sexo</label>
-                                <select class="form-select" name="gender" id="gender">
-                                    <option value="masculino">Masculino</option>
-                                    <option value="feminino">Feminino</option>
-                                </select>
+                            <div class="form-check form-check-inline mb-3">
+                                <input class="form-check-input" type="radio" id="masc" name="gender" value="masculino">
+                                <label class="form-check-label" for="masc">Masculino</label>
+                            </div>
+                            <div class="form-check form-check-inline mb-3">
+                                <input class="form-check-input" type="radio" id="fem" name="gender" value="masculino">
+                                <label class="form-check-label" for="fem">Feminino</label>
+                            </div>
+                            <div class="form-check form-check-inline mb-3">
+                                <input class="form-check-input" type="radio" id="outros" name="gender" value="outros">
+                                <label class="form-check-label" for="outros">Outros</label>
                             </div>
                             <div class="form-floating mb-3">
                                 <label for="class">Classe pertencente</label>
@@ -133,7 +138,6 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
                 percent = percent.toFixed();
                 $(".progress-bar")
                 .css("width",percent+"%")
-                .html(percent+"%");   
             }
             });
         </script>
