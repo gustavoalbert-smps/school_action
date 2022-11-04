@@ -18,31 +18,41 @@ $studentRepository = new PdoStudentRepository($connection);
 $teacherRepository = new PdoTeacherRepository($connection);
 
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if ($userRepository->isValidUser($_POST['user'], $_POST['password'])) {
-        $user = $userRepository->getUserByCredentials($_POST['user'], $_POST['password']);
-        
-        $people = $peopleRepository->getPeople($user->getPeopleId());
+if ($_SERVER['REQUEST_METHOD'] === 'POST')
+{
+  if ($userRepository->isValidUser($_POST['user'], $_POST['password']))
+  {
+    
+    $user = $userRepository->getUserByCredentials($_POST['user'], $_POST['password']);
+      
+      $people = $peopleRepository->getPeople($user->getPeopleId());
 
-        $_SESSION['user'] = $user->getUser();
-        $_SESSION['password'] = $user->getPassword();
-        $_SESSION['teacher'] = $user->getIsTeacher();
-        $_SESSION['people_id'] = $user->getReferenceId();
-        $_SESSION['name'] = $people->getName();
-        $_SESSION['birth_date'] = $people->getBirthDate();
-        $_SESSION['gender'] = $people->getGender();
-        $_SESSION['admin'] = $people->getIsAdmin();
-        
-        if ($people->getIsAdmin() === 1) {
-            header('Location: /pdo/src/Pages/adminPanel.php');
-        } else {
-            if ($user->getIsTeacher() === 0) {
-                header('Location: /pdo/src/Pages/studentsModule.php');
-            } else {
-                header('Location: /pdo/src/Pages/schoolClassModule.php');
-            }
-        }
-    }
+      $_SESSION['user'] = $user->getUser();
+      $_SESSION['password'] = $user->getPassword();
+      $_SESSION['teacher'] = $user->getIsTeacher();
+      $_SESSION['people_id'] = $user->getReferenceId();
+      $_SESSION['name'] = $people->getName();
+      $_SESSION['birth_date'] = $people->getBirthDate();
+      $_SESSION['gender'] = $people->getGender();
+      $_SESSION['admin'] = $people->getIsAdmin();
+
+      
+      
+      if ($people->getIsAdmin() === 1) 
+      {
+          header('Location: /pdo/src/Pages/adminPanel.php');
+      } else {
+          if ($user->getIsTeacher() === 0) {
+              header('Location: /pdo/src/Pages/studentsModule.php');
+          } else {
+              header('Location: /pdo/src/Pages/schoolClassModule.php');
+          }
+      }
+  }
+  else
+  {
+    header('location: /elements/err-invalid-user.html');
+  }
 }
 
 ?>
