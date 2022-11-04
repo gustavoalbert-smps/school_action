@@ -65,6 +65,7 @@ class PdoUserRepository implements UserInterface
 
     public function isValidUser(string $user, string $password): bool 
     {
+    
         $sqlQuery = 'SELECT id, user FROM users WHERE user = :user AND password = :password;';
 
         $statement = $this->connection->prepare($sqlQuery);
@@ -75,11 +76,11 @@ class PdoUserRepository implements UserInterface
         
         $row = $statement->rowCount();
 
-        if (!is_null($row)) {
-            return true;
+        if ($row == false) {
+            return false;
         }
 
-        return false;
+        return true;
     }
 
     public function getUserByCredentials(string $user, string $password): User
