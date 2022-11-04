@@ -17,6 +17,14 @@ $peopleRepository = new PdoPeopleRepository($connection);
 $studentRepository = new PdoStudentRepository($connection);
 $teacherRepository = new PdoTeacherRepository($connection);
 
+$msg = "";
+
+if($_SESSION['msg'] != "")
+{
+  $msg = $_SESSION['msg'];
+
+  $_SESSION['msg'] = ""; 
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST')
 {
@@ -51,8 +59,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
   }
   else
   {
-    header('location: /elements/err-invalid-user.html');
+    header('location: /pdo/src/Pages/elements/err-invalid-user.php');
   }
+
+
 }
 
 ?>
@@ -128,6 +138,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                   </div>
 
                   <form class="row g-3 needs-validation" novalidate>
+                    <?php if($msg != ""):?>
+                      <div class="alert alert-danger" role="alert">
+                        <?= $msg ?>
+                      </div>
+                    <?php endif?>
 
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">Usuario</label>
