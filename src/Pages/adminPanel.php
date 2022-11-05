@@ -47,47 +47,51 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
           </div>
         </div>
       </div>
-      <div class="card">  
+      <div class="">  
         <div class="col">
           <div class="row mb-3">
-            <div class="d-flex justify-content-around p-2">
-              <div class="cardAdmin col-sm-4 mb-3" style="max-width: 18rem;">
-                <div class="text-center"> 
-                  <img class = "rounded" src="../Pages/imgs/people.svg" alt="people" style="width: 4rem;"> 
-                  <div class="card-body">
-                    <h5 class="card-title"><a href ="adminPanelAllUser.php">Total de usuários</a></h5>
-                    <p class="card-text"><?= $people?></p>
-                    <p><p></p></p>
-                  </div>
+            <div class = "mb-3">
+              <h1>Bem Vindo(a) ao School Action!</h1>
+              <h5>Aqui você encontra todas as ferramentas de configurações do sistema</h5>
+            </div>
+            <div class = "col">
+                <div class="row">
+                      <ul class = "list-group mx-3" >
+                        <li class="list-group-item active"> <h6><i class="fa-solid fa-user-tie mx-2"></i>Professor</h6></li>  
+                        <li class="list-group-item">Cadastrar</li>
+                        <li class="list-group-item">Atualizar</li>
+                        <li class="list-group-item">Apagar</li>
+                      </ul>
                 </div>
-              </div>
-            <div class="cardAdmin col-sm-4 mb-3" style="max-width: 18rem;">
-              <div class="text-center"> 
-              <img class="rounded" src="../Pages/imgs/teacher.svg" alt="teacher" style="width: 4rem;">
-              <div class="card-body">
-                <h5 class="card-title">Professores</h5>
-                <p class="card-text"><?= $teachers?></p>
-                <p><p></p></p>
-              </div>
+            </div>
+            <div class = "col">
+                <div class="row">
+                </div>
+                <div class="row">
+                      <ul class = "list-group mx-3" >
+                        <li class="list-group-item active"> <h6><i class="bi bi-file-earmark"></i>Aluno</h6></li>  
+                        <li class="list-group-item">Cadastrar</li>
+                        <li class="list-group-item">Atualizar</li>
+                        <li class="list-group-item">Apagar</li>
+                      </ul>
+                </div>
+            </div>
+            <div class = "col">
+                <div class="row">
+                </div>
+                <div class="row">
+                      <ul class = "list-group mx-3" >
+                        <li class="list-group-item active"> <h6><i class="fa-solid fa-book"></i> Disciplinas</h6></li>  
+                        <li class="list-group-item">Cadastrar</li>
+                        <li class="list-group-item">Atualizar</li>
+                        <li class="list-group-item">Apagar</li>
+                      </ul>
+                </div>
             </div>
           </div>
-        <div class="cardAdmin col-sm-4 mb-3" style="max-width: 18rem;">
-        <div class="text-center">  
-          <img class = "rounded" src="../Pages/imgs/group-students.svg" alt="group-students" style="width: 4rem;">
-          <div class="card-body">
-            <h5 class="card-title">Estudantes</h5>
-            <p class="card-text"><?= $teachers?></p>
-            <p><p></p></p>
-          </div> 
         </div>
       </div>
     </div>
-  </div>
-  </div>
-  </div>
-  
-      
-
 <?php 
     include_once 'elements/footer.php';
     } else {
