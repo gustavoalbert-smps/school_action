@@ -47,6 +47,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
           </div>
         </div>
       </div>
+      <div class="card">  
         <div class="col">
           <div class="row mb-3">
             <div class="d-flex justify-content-around p-2">
@@ -82,13 +83,10 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
       </div>
     </div>
   </div>
-  <div class="col">
-    <div class="row">
-      <input class="col mx-sm-3" type="text">
-      <input class = "col" type="text">
-    </div>
   </div>
-</div>  
+  </div>
+  
+      
 
 <?php 
     include_once 'elements/footer.php';
