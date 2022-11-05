@@ -47,51 +47,47 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
           </div>
         </div>
       </div>
-      <div class="">  
+      <!--Card menu-->
+      <div class = "row">
+       <!--Card 1-->
         <div class="col">
-          <div class="row mb-3">
-            <div class = "mb-3">
-              <h1>Bem Vindo(a) ao School Action!</h1>
-              <h5>Aqui você encontra todas as ferramentas de configurações do sistema</h5>
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+            <h5 class="card-title class-identifier ">Todos os Usuarios</h5>
+
             </div>
-            <div class = "col">
-                <div class="row">
-                      <ul class = "list-group mx-3" >
-                        <li class="list-group-item active"> <h6><i class="fa-solid fa-user-tie mx-2"></i>Professor</h6></li>  
-                        <li class="list-group-item">Cadastrar</li>
-                        <li class="list-group-item">Atualizar</li>
-                        <li class="list-group-item">Apagar</li>
-                      </ul>
-                </div>
+          </div>
+        </div>
+       <!--Card 2--> 
+        <div class="col">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title class-identifier ">Todos os Usuarios</h5>
             </div>
-            <div class = "col">
-                <div class="row">
-                </div>
-                <div class="row">
-                      <ul class = "list-group mx-3" >
-                        <li class="list-group-item active"> <h6><i class="bi bi-file-earmark"></i>Aluno</h6></li>  
-                        <li class="list-group-item">Cadastrar</li>
-                        <li class="list-group-item">Atualizar</li>
-                        <li class="list-group-item">Apagar</li>
-                      </ul>
-                </div>
+          </div>
+        </div>
+        <!--Card 3-->
+        <div class="col">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+             <h5 class="card-title class-identifier ">Todos os Usuarios</h5>
             </div>
-            <div class = "col">
-                <div class="row">
-                </div>
-                <div class="row">
-                      <ul class = "list-group mx-3" >
-                        <li class="list-group-item active"> <h6><i class="fa-solid fa-book"></i> Disciplinas</h6></li>  
-                        <li class="list-group-item">Cadastrar</li>
-                        <li class="list-group-item">Atualizar</li>
-                        <li class="list-group-item">Apagar</li>
-                      </ul>
-                </div>
+          </div>
+        </div>
+        <!--Card 4-->
+        <div class="col">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title class-identifier ">Todos os Usuarios</h5>
             </div>
           </div>
         </div>
       </div>
     </div>
+       <!--end menu-->
+
+     
+
 <?php 
     include_once 'elements/footer.php';
     } else {
