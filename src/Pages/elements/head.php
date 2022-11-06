@@ -1,3 +1,7 @@
+<?php
+  session_start();
+  $id = $_SESSION['people_id'];
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -229,7 +233,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+              <a class="dropdown-item d-flex align-items-center" href="../Pages/Profile.php?id=<?= $id ?>">
                 <i class="bi bi-person"></i>
                 <span>Meu Perfil</span>
               </a>
