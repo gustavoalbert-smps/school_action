@@ -6,7 +6,3 @@
 
     header('location: ..');
 ?>
-
-<!-- <div class="notification" id="invalid-user">
-    <p>Usuário ou senha inválidos</p>
-</div> -->
