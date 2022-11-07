@@ -45,8 +45,6 @@ class PdoPhotoRepository implements PhotoInterface
 
         $photo = $statement->fetch(PDO::FETCH_ASSOC);
 
-        print_r($photo);
-      
         return $Photo = new Photo ($photo['id'],$photo['people_id'],$photo['name'],$photo['type']); 
 
     }    
