@@ -18,7 +18,12 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
 
     $studentRepository = new PdoStudentRepository($connection);
 
-    $class = $classRepository->getClass(intval($_GET['id']));
+    try {
+        $class = $classRepository->getClass(intval($_GET['id']));
+    } catch (\Throwable $th) {
+        header('Location: /pdo/src/Pages/schoolClassModule.php');
+    }
+    
 
     $students = [];
     $students += $studentRepository->getStudentsByClass(intval($_GET['id']));
