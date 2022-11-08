@@ -14,27 +14,51 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
 
         $connection = ConnectDatabase::connect();
 
-        
-
         include_once 'elements/head.php';
+        $reponsiveBody;
 ?>
 
         <body>
-            <?php $reponsiveBody;?>
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-7 mx-auto">
+                    <div class="col-lg-10 mx-auto">
                         <div class="row">
-                            <div class="card d-inline-flex">
-                                <div class="col">
-                                    <img class="img-fluid" src="imgs/student-registeruser.svg" alt="student">
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-body register-card">
+                                        <h4 class="card-title">
+                                            Cadastrar Estudante
+                                        </h4>
+                                        <div class="row align-items-end">
+                                            <div class="col student-img">
+                                                <img id="student-register" class="img-fluid" src="imgs/student-registeruser.svg" alt="student-register-icon">
+                                            </div>
+                                            <div class="col add-card">
+                                                <a id="add-link" href="#"><img id="add-icon" class="img-fluid" src="imgs/add-icon.svg" alt="add-icon"></a>    
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <button class="btn" onclick="<?php $responsiveBody ="student";?>">
-                                    <img class="img-fluid" src="../Pages/imgs/add-icon.svg" alt="add-icon">
-                                </button>
+                            </div>
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-body register-card">
+                                        <h4 class="card-title">
+                                            Cadastrar Professor
+                                        </h4>
+                                        <div class="row align-items-end">
+                                            <div class="col">
+                                                <img id="teacher-register" class="img-fluid" src="imgs/teacher-icon.svg" alt="teacher-register-icon">
+                                            </div>
+                                            <div class="col add-card">
+                                                <a id="add-link" href="#"><img id="add-icon" class="img-fluid" src="imgs/add-icon.svg" alt="add-icon"></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <?php echo var_dump($responsiveBody == 'student');?>
+                        <?php echo var_dump($responsiveBody === 'student');?>
                         <?php if ($responsiveBody == "student") {
                             include_once 'elements/studentRegisterForm.php';
                         }

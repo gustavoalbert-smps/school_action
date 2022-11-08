@@ -38,6 +38,7 @@
   <link href="assets/css/schoolClass.css" rel="stylesheet">
   <link href="assets/css/schoolClassModule.css" rel="stylesheet">
   <link href="assets/css/adminStyle.css" rel="stylesheet">
+  <link href="assets/css/registerUser.css" rel="stylesheet">
 
   <!-- Scripts -->
   <script src="https://kit.fontawesome.com/075cada2e7.js" crossorigin="anonymous"></script>

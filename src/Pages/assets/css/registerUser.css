@@ -1,0 +1,33 @@
+.register-card {
+    padding: 20px;
+}
+
+.register-card .card-title {
+    padding-top: 0;
+}
+
+#student-register {
+    width: 100px;
+    max-width: 220px;
+}
+
+#teacher-register {
+    width: 100px;
+    max-width: 220px;
+}
+
+#add-icon {
+    width: 50px;
+}
+
+.student-img {
+    flex-grow: 1;
+}
+
+.add-card {
+    flex-grow: 0.25;
+}
+
+#add-link {
+    text-align: end;
+}
