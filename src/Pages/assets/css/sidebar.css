@@ -6,3 +6,10 @@
 .sidebar-nav .nav-link:hover i {
     color: #4154f1;
 }
+
+.sidebar-nav .nav-link.collapsed svg {
+    min-width: 20px;
+    margin-right: 10px;
+    font-size: 16px;
+    font-weight: 900;
+}

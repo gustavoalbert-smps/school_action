@@ -65,7 +65,8 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
 
 <?php
     include_once '../Pages/elements/footer.php';
+    } else {
+        header('Location: schoolClassModule.php');
     }
-    header('Location: schoolClassModule.php');
 }
 ?>
