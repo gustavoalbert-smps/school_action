@@ -21,10 +21,9 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
     try {
         $class = $classRepository->getClass(intval($_GET['id']));
     } catch (\Throwable $th) {
-        header('Location: /pdo/src/Pages/schoolClassModule.php');
+        header('location: /pdo/src/Pages/elements/pages-error-404.php');
     }
-    
-
+        
     $students = [];
     $students += $studentRepository->getStudentsByClass(intval($_GET['id']));
     require_once '../Pages/elements/head.php';
