@@ -52,7 +52,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
 
       <div class="row">
           <div class="col">
-          <div class="card">
+          <div class="panel-card">
               <ul class="list-group list-group-flush text-center">
                 <li class="list-group-item">Usuarios</li>
                 <li class="list-group-item">150</li>
@@ -60,7 +60,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
             </div>
           </div>
           <div class="col">
-            <div class="card">
+            <div class="panel-card">
               <ul class="list-group list-group-flush text-center">
                 <li class="list-group-item">Professores</li>
                 <li class="list-group-item">230</li>
@@ -68,7 +68,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
             </div>
           </div>
           <div class="col">
-            <div class="card">
+            <div class="panel-card">
               <ul class="list-group list-group-flush text-center">
                 <li class="list-group-item">Estudantes</li>
                 <li class="list-group-item">430</li>
@@ -76,7 +76,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
             </div>
           </div>
           <div class="col">
-          <div class="card">
+          <div class="panel-card">
               <ul class="list-group list-group-flush text-center">
                 <li class="list-group-item">Coordenadores</li>
                 <li class="list-group-item">30</li>
@@ -87,7 +87,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
 
       <div class="row">
         <div class="col">
-          <div class="card">
+          <div class="panel-card">
             <table class="table table-borderless text-center">
               <thead>
                 <tr class = "bg-success">
