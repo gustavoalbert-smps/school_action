@@ -1,5 +1,4 @@
 <?php
-  session_start();
   $id = $_SESSION['people_id'];
 ?>
 <!DOCTYPE html>
@@ -39,6 +38,7 @@
   <link href="assets/css/schoolClassModule.css" rel="stylesheet">
   <link href="assets/css/registerStudent.css" rel="stylesheet">
   <link href="assets/css/adminStyle.css" rel="stylesheet">
+  <link href="assets/css/registerUser.css" rel="stylesheet">
 
 
   <!-- Scripts -->
