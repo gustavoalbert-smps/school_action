@@ -39,8 +39,6 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
 
         $classes = $classRepository->allClasses();
 
-        include_once 'elements/head.php';
-
         $reponsiveBody = '';
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -151,7 +149,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
                                     </div>
                                 </div>
                                 <?php if ($reponsiveBody == "student") {
-                                    include_once 'studentRegisterForm.php';
+                                    include_once 'elements/studentRegisterForm.php';
                                 }
                                 ?>
                             </div>
@@ -219,7 +217,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
                                     </div>
                                 </div>
                                 <?php if ($reponsiveBody == "teacher") {
-                                    include_once 'teacherRegisterForm.php';
+                                    include_once 'elements/teacherRegisterForm.php';
                                 }
                                 ?>
                             </div>
@@ -230,6 +228,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
 <?php
             }
         } else {
+            include_once 'elements/head.php';
 ?>
             <body>
                 <div class="container">
