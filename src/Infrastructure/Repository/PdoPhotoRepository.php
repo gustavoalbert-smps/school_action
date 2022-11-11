@@ -107,6 +107,29 @@ class PdoPhotoRepository implements PhotoInterface
                     //função imagejpeg que envia para o browser a imagem armazenada no parâmetro passado
                 imagepng($img_resize, 'assets/img/'.$filename);
             break;
+
+            case 'image/webp':
+                    
+                    $tmp_img = imagecreatefromwebp ($file['img']['tmp_name']);
+        
+                    $original_width = imagesx($tmp_img);
+                    $original_height = imagesy($tmp_img);
+                 
+                    $new_width = $width ? $width : floor(( $original_width / $original_height ) * $height);
+        
+                    $new_height = $height ? $height : floor(( $original_height / $original_width ) * $width);
+        
+                    $img_resize = imagecreatetruecolor($new_height, $new_width);
+        
+                        /* Copia a nova imagem da imagem antiga com o tamanho correto */
+                    // imagealphablending($img_resize, false);
+                    // imagesavealpha($img_resize, true);
+        
+                    imagecopyresampled($img_resize, $tmp_img, 0, 0, 0, 0, $new_height, $new_width, $original_width, $original_height);
+        
+                        //função imagejpeg que envia para o browser a imagem armazenada no parâmetro passado
+                    imagepng($img_resize, 'assets/img/'.$filename);
+                break;
         endswitch; 
 
         return  $statement-> execute
