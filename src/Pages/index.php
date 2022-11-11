@@ -17,32 +17,52 @@ $peopleRepository = new PdoPeopleRepository($connection);
 $studentRepository = new PdoStudentRepository($connection);
 $teacherRepository = new PdoTeacherRepository($connection);
 
+$msg = "";
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if ($userRepository->isValidUser($_POST['user'], $_POST['password'])) {
-        $user = $userRepository->getUserByCredentials($_POST['user'], $_POST['password']);
-        
-        $people = $peopleRepository->getPeople($user->getPeopleId());
+if($_SESSION['msg'] != "")
+{
+  $msg = $_SESSION['msg'];
 
-        $_SESSION['user'] = $user->getUser();
-        $_SESSION['password'] = $user->getPassword();
-        $_SESSION['teacher'] = $user->getIsTeacher();
-        $_SESSION['people_id'] = $user->getReferenceId();
-        $_SESSION['name'] = $people->getName();
-        $_SESSION['birth_date'] = $people->getBirthDate();
-        $_SESSION['gender'] = $people->getGender();
-        $_SESSION['admin'] = $people->getIsAdmin();
-        
-        if ($people->getIsAdmin() === 1) {
-            header('Location: /pdo/src/Pages/adminPanel.php');
-        } else {
-            if ($user->getIsTeacher() === 0) {
-                header('Location: /pdo/src/Pages/studentsModule.php');
-            } else {
-                header('Location: /pdo/src/Pages/schoolClassModule.php');
-            }
-        }
-    }
+  $_SESSION['msg'] = ""; 
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST')
+{
+  if ($userRepository->isValidUser($_POST['user'], $_POST['password']))
+  {
+    
+    $user = $userRepository->getUserByCredentials($_POST['user'], $_POST['password']);
+      
+      $people = $peopleRepository->getPeople($user->getPeopleId());
+
+      $_SESSION['user'] = $user->getUser();
+      $_SESSION['password'] = $user->getPassword();
+      $_SESSION['teacher'] = $user->getIsTeacher();
+      $_SESSION['people_id'] = $user->getReferenceId();
+      $_SESSION['name'] = $people->getName();
+      $_SESSION['birth_date'] = $people->getBirthDate();
+      $_SESSION['gender'] = $people->getGender();
+      $_SESSION['admin'] = $people->getIsAdmin();
+
+      
+      
+      if ($people->getIsAdmin() === 1) 
+      {
+          header('Location: /pdo/src/Pages/adminPanel.php');
+      } else {
+          if ($user->getIsTeacher() === 0) {
+              header('Location: /pdo/src/Pages/studentsModule.php');
+          } else {
+              header('Location: /pdo/src/Pages/schoolClassModule.php');
+          }
+      }
+  }
+  else
+  {
+    header('location: /pdo/src/Pages/elements/err-invalid-user.php');
+  }
+
+
 }
 
 ?>
@@ -118,6 +138,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   </div>
 
                   <form class="row g-3 needs-validation" novalidate>
+                    <?php if($msg != ""):?>
+                      <div class="alert alert-danger" role="alert">
+                        <?= $msg ?>
+                      </div>
+                    <?php endif?>
 
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">Usuario</label>

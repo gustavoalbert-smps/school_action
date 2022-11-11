@@ -1,3 +1,6 @@
+<?php
+  $id = $_SESSION['people_id'];
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -33,10 +36,15 @@
   <link href="assets/css/sidebar.css" rel="stylesheet">
   <link href="assets/css/schoolClass.css" rel="stylesheet">
   <link href="assets/css/schoolClassModule.css" rel="stylesheet">
+
   <link href="assets/css/admin.css" rel="stylesheet">
+
+  <link href="assets/css/registerStudent.css" rel="stylesheet">
+  <link href="assets/css/registerUser.css" rel="stylesheet">
 
   <!-- Scripts -->
   <script src="https://kit.fontawesome.com/075cada2e7.js" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
   <!-- =======================================================
 
@@ -229,7 +237,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+              <a class="dropdown-item d-flex align-items-center" href="../Pages/Profile.php?id=<?= $id ?>">
                 <i class="bi bi-person"></i>
                 <span>Meu Perfil</span>
               </a>

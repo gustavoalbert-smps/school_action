@@ -13,8 +13,12 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
 } else {
     $connection = ConnectDatabase::connect();
     $repository = new PdoStudentRepository($connection);
-
-    $student = $repository->getStudent(intval($_GET['id']));
+    try {
+        $student = $repository->getStudent(intval($_GET['id']));
+    } catch (\Throwable $th) {
+        header("location:/pdo/src/Pages/elements/pages-error-404.php");
+    }
+    
 
 ?>
 

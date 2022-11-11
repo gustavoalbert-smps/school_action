@@ -39,7 +39,8 @@ class PdoTeacherRepository implements TeacherInterface
 
         return new Teacher(
             $teacher['id'], 
-            $people['id'], 
+            $people['id'],
+            $teacher['ability'],
             $people['name'], 
             $people['gender'], 
             new DateTimeImmutable($people['birth_date']), 
@@ -90,24 +91,25 @@ class PdoTeacherRepository implements TeacherInterface
 
     public function insert(Teacher $teacher): bool
     {
-        $sqlInsert = 'INSERT INTO teachers (people_id) VALUES (:people_id);';
+        $sqlInsert = 'INSERT INTO teachers (people_id, ability) VALUES (:people_id, :graduation);';
 
         $statement = $this->connection->prepare($sqlInsert);
 
         return $statement->execute([
             ':people_id' => $teacher->getPeopleId(),
-            
+            ':graduation' => $teacher->getGraduation()
         ]);
     }
 
     public function update(Teacher $teacher): bool
     {
-        $sqlUpdate = 'UPDATE teachers SET people_id = :people_id WHERE id = :id;';
+        $sqlUpdate = 'UPDATE teachers SET people_id = :people_id, ability = :graduation WHERE id = :id;';
 
         $statement = $this->connection->prepare($sqlUpdate);
 
         return $statement->execute([
             ':people_id' => $teacher->getPeopleId(),
+            ':graduation' => $teacher->getGraduation(),
             ':id' => $teacher->getId()
         ]);
     }

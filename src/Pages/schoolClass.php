@@ -18,8 +18,12 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
 
     $studentRepository = new PdoStudentRepository($connection);
 
-    $class = $classRepository->getClass(intval($_GET['id']));
-
+    try {
+        $class = $classRepository->getClass(intval($_GET['id']));
+    } catch (\Throwable $th) {
+        header('location: /pdo/src/Pages/elements/pages-error-404.php');
+    }
+        
     $students = [];
     $students += $studentRepository->getStudentsByClass(intval($_GET['id']));
     require_once '../Pages/elements/head.php';
