@@ -63,7 +63,9 @@ class PdoPhotoRepository implements PhotoInterface
         switch($file['img']['type']):
             case 'image/jpeg';
             case 'image/pjpeg';
-    
+
+           
+
                 $tmp_img = imagecreatefromjpeg($file['img']['tmp_name']);
     
                 $original_width = imagesx($tmp_img);
@@ -82,7 +84,9 @@ class PdoPhotoRepository implements PhotoInterface
             break;
             case 'image/png':
             case 'image/x-png';
-    
+                
+                
+                
                 $tmp_img = imagecreatefrompng ($file['img']['tmp_name']);
     
                 $original_width = imagesx($tmp_img);
@@ -90,7 +94,7 @@ class PdoPhotoRepository implements PhotoInterface
              
                 $new_width = $width ? $width : floor(( $original_width / $original_height ) * $height);
     
-                $new_width = $altura ? $altura : floor(( $original_height / $original_width ) * $width);
+                $new_height = $height ? $height : floor(( $original_height / $original_width ) * $width);
     
                 $img_resize = imagecreatetruecolor($new_height, $new_width);
     
