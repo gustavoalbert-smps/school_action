@@ -38,7 +38,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
             if ($studentController->removeStudent($studentRepository, $student) && 
                 $userController->removeUser($userRepository, $user) && 
                 $peopleController->removePeople($peopleRepository, $people)){
-                header('Location: studentsModule.php');
+                header('Location: adminPanel.php');
             } else {
                 echo 'erro';
             }
