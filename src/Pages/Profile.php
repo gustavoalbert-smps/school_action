@@ -68,7 +68,7 @@ include_once 'elements/head.php';
                 <img src="assets/img/ProfileDefault.png" alt="Profile" class="rounded-circle">
               <?php endif;?>  
               <h2><?= $people->getName()?></h2>
-              <h3 class = "mb-3" >Web Designer</h3>
+              <h3 class = "mb-3 text-danger">*Formatos permitidos jpeg, png e webp</h3>
               <form action="ProfileUpdate.php" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="id" value=<?= $id?>>
                 <input class = "form-control mb-3" type="file" name="img" id="id_img">
