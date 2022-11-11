@@ -16,6 +16,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
   header('Location: /pdo/src/Pages/index.php');
 } else {
   if ($_SESSION['admin'] === 1){
+   
     $connection = ConnectDatabase::connect();
 
     $userRepository = new PdoUserRepository($connection);
@@ -25,11 +26,14 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
 
     $userController = new UserController($connection);
 
+    $arrayPeople = $userController->Users($peopleRepository); 
+
     $people = $userController->totalUsers($peopleRepository);
 
     $teachers = $userController->totalUsersType('teacher');
 
     $students = $userController->totalUsersType('');
+
     
     include_once 'elements/head.php';
 ?>
@@ -54,32 +58,32 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
           <div class="col">
           <div class="panel-card">
               <ul class="list-group list-group-flush text-center">
-                <li class="list-group-item">Usuarios</li>
-                <li class="list-group-item">150</li>
+                <li class="panel-list-group list-group-item">Usuarios</li>
+                <li class="list-group-item"><?= $people ?></li>
               </ul>
             </div>
           </div>
           <div class="col">
             <div class="panel-card">
               <ul class="list-group list-group-flush text-center">
-                <li class="list-group-item">Professores</li>
-                <li class="list-group-item">230</li>
+                <li class="list-group-item panel-list-group">Professores</li>
+                <li class="list-group-item"><?= $teachers?></li>
               </ul>
             </div>
           </div>
           <div class="col">
             <div class="panel-card">
               <ul class="list-group list-group-flush text-center">
-                <li class="list-group-item">Estudantes</li>
-                <li class="list-group-item">430</li>
+                <li class="panel-list-group list-group-item">Estudantes</li>
+                <li class="list-group-item"><?= $students?></li>
               </ul>
             </div>
           </div>
           <div class="col">
           <div class="panel-card">
               <ul class="list-group list-group-flush text-center">
-                <li class="list-group-item">Coordenadores</li>
-                <li class="list-group-item">30</li>
+                <li class="panel-list-group list-group-item">Coordenadores</li>
+                <li class="list-group-item">3</li>
               </ul>
             </div>
           </div>
@@ -87,41 +91,25 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
 
       <div class="row">
         <div class="col">
-          <div class="panel-card">
-            <table class="table table-borderless text-center">
+          <div class="">
+            <table class="panel-table table-borderless panel-table-striped text-center">
               <thead>
-                <tr class = "bg-success">
-                  <th scope="col">Nome</th>
-                  <th scope="col">Sobrenome</th>
-                  <th scope="col">Categoria</th>
-                  <th scope="col">Status</th>
+                <tr class = "panel-table-header">
+                  <th class = "head" scope="col">Nome</th>
+                  <th class = "head" scope="col">Data de nascimento</th>
+                  <th class = "head" scope="col">Sexo</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class = "text-justify">
-                  <td>Bridie Kessler</td>
-                  <td><a href="#" class="text-primary">Blanditiis dolor omnis similique</a></td>
-                  <td>$47</td>
-                  <td><span class="badge bg-warning">Pending</span></td>
+              <?php foreach ($arrayPeople as $arrayPeople):?>
+                <tr class = "text-center panel-admin-tr name">
+                    
+                    <td class="" align="center"><a href="/pdo/src/Pages/Profile.php?id=<?= $arrayPeople['id']?>"><?= $arrayPeople['name']?></a></td>
+                    <td class><a href="/pdo/src/Pages/Profile.php?id=<?= $arrayPeople['id']?>"><?= $arrayPeople['birth_date']?></td>
+                    <td><a href="/pdo/src/Pages/Profile.php?id=<?= $arrayPeople['id']?>"><?= $arrayPeople['gender']?></td>
+                
                 </tr>
-                <tr class = "text-justify">
-                  <td>Ashleigh Langosh</td>
-                  <td><a href="#" class="text-primary">At recusandae consectetur</a></td>
-                  <td>$147</td>
-                  <td><span class="badge bg-success">Approved</span></td>
-                </tr>
-                <tr class = "text-justify">
-                  <td>Angus Grady</td>
-                  <td><a href="#" class="text-primar">Ut voluptatem id earum et</a></td>
-                  <td>$67</td>
-                  <td><span class="badge bg-danger">Rejected</span></td>
-                </tr>
-                <tr class = "text-justify">
-                  <td>Raheem Lehner</td>
-                  <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
-                  <td>$165</td>
-                  <td><span class="badge bg-success">Approved</span></td>
-                </tr>
+                <?php endforeach?>
               </tbody>
             </table>
           </div>
