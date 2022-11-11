@@ -16,6 +16,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
   header('Location: /pdo/src/Pages/index.php');
 } else {
   if ($_SESSION['admin'] === 1){
+   
     $connection = ConnectDatabase::connect();
 
     $userRepository = new PdoUserRepository($connection);
@@ -25,60 +26,95 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
 
     $userController = new UserController($connection);
 
+    $arrayPeople = $userController->Users($peopleRepository); 
+
     $people = $userController->totalUsers($peopleRepository);
 
     $teachers = $userController->totalUsersType('teacher');
 
     $students = $userController->totalUsersType('');
+
     
     include_once 'elements/head.php';
 ?>
+    <div class="container">
+      <div class="col">
+        <div class="row mb-3">
+          <div class="pagetitle">
+            <h1>Painel do Administrador</h1>
+            <nav>
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item active">Dashboard</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+      </div>
 
-    <div class="pagetitle">
-      <h1>Painel do Administrador</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
-        </ol>
-      </nav>
-    </div>
-    <div class="d-flex justify-content-around p-2">
-        <div class="cardAdmin col-sm-4 mb-3" style="max-width: 18rem;">
-        <div class="text-center"> 
-            <img class = "rounded" src="../Pages/imgs/people.svg" alt="people" style="width: 4rem;">
-        
-                <div class="card-body">
-                    <h5 class="card-title"><a href ="adminPanelAllUser.php">Total de usuários</a></h5>
-                    <p class="card-text"><?= $people?></p>
-                    <p><p></p></p>
-                  </div>
-                </div>
-        </div>
-        <div class="cardAdmin col-sm-4 mb-3" style="max-width: 18rem;">
-        <div class="text-center"> 
-          <img class="rounded" src="../Pages/imgs/teacher.svg" alt="teacher" style="width: 4rem;">
-        
-                <div class="card-body">
-                    <h5 class="card-title">Professores</h5>
-                    <p class="card-text"><?= $teachers?></p>
-                    <p><p></p></p>
-                </div>
-                </div>
-        </div>
-        <div class="cardAdmin col-sm-4 mb-3" style="max-width: 18rem;">
-        <div class="text-center">  
-            <img class = "rounded" src="../Pages/imgs/group-students.svg" alt="group-students" style="width: 4rem;">
-        
-            <div class="card-body">
-                <h5 class="card-title">Estudantes</h5>
-                <p class="card-text"><?= $teachers?></p>
-                <p><p></p></p>
-                </div> 
+      <!-- end page title -->
+
+      <div class="row">
+          <div class="col">
+          <div class="panel-card">
+              <ul class="list-group list-group-flush text-center">
+                <li class="panel-list-group list-group-item">Usuarios</li>
+                <li class="list-group-item"><?= $people ?></li>
+              </ul>
             </div>
+          </div>
+          <div class="col">
+            <div class="panel-card">
+              <ul class="list-group list-group-flush text-center">
+                <li class="list-group-item panel-list-group">Professores</li>
+                <li class="list-group-item"><?= $teachers?></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col">
+            <div class="panel-card">
+              <ul class="list-group list-group-flush text-center">
+                <li class="panel-list-group list-group-item">Estudantes</li>
+                <li class="list-group-item"><?= $students?></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col">
+          <div class="panel-card">
+              <ul class="list-group list-group-flush text-center">
+                <li class="panel-list-group list-group-item">Coordenadores</li>
+                <li class="list-group-item">3</li>
+              </ul>
+            </div>
+          </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="">
+            <table class="panel-table table-borderless panel-table-striped text-center">
+              <thead>
+                <tr class = "panel-table-header">
+                  <th class = "head" scope="col">Nome</th>
+                  <th class = "head" scope="col">Data de nascimento</th>
+                  <th class = "head" scope="col">Sexo</th>
+                </tr>
+              </thead>
+              <tbody>
+              <?php foreach ($arrayPeople as $arrayPeople):?>
+                <tr class = "text-center panel-admin-tr name">
+                    
+                    <td class="" align="center"><a href="/pdo/src/Pages/Profile.php?id=<?= $arrayPeople['id']?>"><?= $arrayPeople['name']?></a></td>
+                    <td class><a href="/pdo/src/Pages/Profile.php?id=<?= $arrayPeople['id']?>"><?= $arrayPeople['birth_date']?></td>
+                    <td><a href="/pdo/src/Pages/Profile.php?id=<?= $arrayPeople['id']?>"><?= $arrayPeople['gender']?></td>
+                
+                </tr>
+                <?php endforeach?>
+              </tbody>
+            </table>
+          </div>
         </div>
-    </div>
-  </main>
+      </div>
 
 <?php 
     include_once 'elements/footer.php';
