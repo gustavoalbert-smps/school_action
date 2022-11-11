@@ -55,3 +55,8 @@
 #add-link {
     text-align: end;
 }
+
+.modal-confirm {
+    color: #636363;
+    width: 325px;
+}

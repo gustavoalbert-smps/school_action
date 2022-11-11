@@ -44,15 +44,26 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (isset($_POST['recording-user'])) {
                 if ($_POST['form-type'] === 'student') {
-                    $peopleController->insertPeople($peopleRepository, $_POST['name'], $_POST['gender'], $_POST['birth_date'], 0);
-            
-                    $id = intval($connection->lastInsertId());
-
-                    $bdPeople = $peopleController->getPeople($peopleRepository, $id);
-
-                    $userController->insertUser($userRepository, $_POST['user'], $_POST['password'], 0, $bdPeople->getPeopleId(), $_POST['name'], $_POST['gender'], $_POST['birth_date'], 0);
 
                     try {
+                        $peopleController->insertPeople($peopleRepository, $_POST['name'], $_POST['gender'], $_POST['birth_date'], 0);
+                        
+                        $id = intval($connection->lastInsertId());
+
+                        $bdPeople = $peopleController->getPeople($peopleRepository, $id);
+
+                        $userController->insertUser(
+                            $userRepository, 
+                            $_POST['user'], 
+                            $_POST['password'], 
+                            0, 
+                            $bdPeople->getPeopleId(), 
+                            $_POST['name'], 
+                            $_POST['gender'], 
+                            $_POST['birth_date'], 
+                            0
+                        );
+
                         $studentController->insertStudent(
                             $studentRepository, 
                             $bdPeople->getPeopleId(), 
@@ -63,19 +74,49 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
                             0
                         );
                     } catch (\Throwable $th) {
-                        echo 'algo de errado no seu cadastro';
+                        echo "{$th->getMessage()}";
+                        // ' <div class="modal fade" tabindex="-1">
+                        //     <div class="modal-dialog modal-confirm">
+                        //         <div class="modal-content">
+                        //             <div class="modal-header">
+                        //                 <div class="icon-box">
+                        //                     <i class="material-icons">&#xE5CD;</i>
+                        //                     <h4 class="modal-title w-100">Desculpe!</h4>
+                        //                 </div>
+                        //             </div>
+                        //             <div class="modal-body">
+                        //                 <p class="text-center">
+                        //                     O cadastro falhou. Por favor volte e tente novamente.
+                        //                 </p>
+                        //             </div>
+                        //             <div class="modal-footer">
+                        //                 <button class="btn btn-danger btn-block" data-dismiss="modal">OK</button>
+                        //             </div>
+                        //         </div>
+                        //     </div>
+                        // </div>'
                     }
 
                 } elseif ($_POST['form-type'] === 'teacher') {
-                    $peopleController->insertPeople($peopleRepository, $_POST['name'], $_POST['gender'], $_POST['birth_date'], 0);
-            
-                    $id = intval($connection->lastInsertId());
-
-                    $bdPeople = $peopleController->getPeople($peopleRepository, $id);
-
-                    $userController->insertUser($userRepository, $_POST['user'], $_POST['password'], 0, $bdPeople->getPeopleId(), $_POST['name'], $_POST['gender'], $_POST['birth_date'], 0);
-
+                    
                     try {
+                        $peopleController->insertPeople($peopleRepository, $_POST['name'], $_POST['gender'], $_POST['birth_date'], 0);
+            
+                        $id = intval($connection->lastInsertId());
+
+                        $bdPeople = $peopleController->getPeople($peopleRepository, $id);
+
+                        $userController->insertUser(
+                            $userRepository, 
+                            $_POST['user'], 
+                            $_POST['password'], 
+                            0, 
+                            $bdPeople->getPeopleId(), 
+                            $_POST['name'], 
+                            $_POST['gender'], 
+                            $_POST['birth_date'], 0
+                        );
+
                         $teacherController->insertTeacher(
                             $teacherRepository, 
                             $bdPeople->getPeopleId(), 
@@ -86,7 +127,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
                             0
                         );
                     } catch (\Throwable $th) {
-                        echo 'algo de errado no seu cadastro';
+                        echo "{$th->getMessage()}";
                     }
                 }
                 header('Location: registerUser.php');

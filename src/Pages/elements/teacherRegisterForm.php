@@ -6,22 +6,22 @@
         <fieldset>
             <div class="form-floating mb-3">
                 <label for="user">Nome de usuário</label>
-                <input class="form-control" type="text" name="user" id="user">
+                <input class="form-control" type="text" name="user" id="user" required>
             </div>
             <div class="form-floating mb-3">
                 <label for="password">Senha</label>
-                <input class="form-control" type="text" name="password" id="password">
+                <input class="form-control" type="text" name="password" id="password" required>
             </div>
             <input type="button" name="next" class="next btn btn-primary mb-3" value="Próximo">
         </fieldset>
         <fieldset>
         <div class="form-floating mb-3">
                 <label for="name">Nome</label>
-                <input class="form-control" type="text" name="name" id="name">
+                <input class="form-control" type="text" name="name" id="name" required>
             </div>
             <div class="form-floating mb-3">
                 <label for="birth_date">Data de Nascimento</label>
-                <input class="form-control" type="text" placeholder="Data de Nascimento" onfocus="this.type='date';" onblur="this.type='text';" name="birth_date" id="birth-date">
+                <input class="form-control" type="text" placeholder="Data de Nascimento" onfocus="this.type='date';" onblur="this.type='text';" name="birth_date" id="birth-date" required>
             </div>
             <div class="form-check form-check-inline mb-3">
                 <input class="form-check-input" type="radio" id="masc" name="gender" value="masculino">
@@ -37,7 +37,7 @@
             </div>
             <div class="form-floating mb-3">
                 <label for="graduation">Formação</label>
-                <input class="form-control" type="text" id="graduation" name="graduation">
+                <input class="form-control" type="text" id="graduation" name="graduation" required>
             </div>
             <input type="button" name="previous" class="previous btn btn-secondary" value="Voltar">
             <input type="submit" name="submit" class="submit btn btn-primary">
