@@ -28,8 +28,12 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
   $peopleRepository = new PdoPeopleRepository($connection);
   
   $peopleController = new PeopleController($connection);
-  
-  $people = $peopleController -> getPeople($peopleRepository,$id);
+  try {
+    $people = $peopleController -> getPeople($peopleRepository,$id);
+  } catch (\Throwable $th) {
+    header('location: /pdo/src/Pages/elements/pages-error-404.php');
+  }
+    
 
     if($photoController -> countPhoto($photoRepository,$id) > 0)
     {
