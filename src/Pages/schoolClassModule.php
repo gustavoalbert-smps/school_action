@@ -16,6 +16,12 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
     $_SESSION = array();
     header('Location: /pdo/src/Pages/index.php');
 } else {
+
+    if($_SESSION['admin'] == true)
+    {
+        header('location: /pdo/src/Pages/adminSchoolClassModule.php');
+    }
+
     $connection = ConnectDatabase::connect();
 
     $teacherRepository = new PdoTeacherRepository($connection);
