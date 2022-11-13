@@ -28,7 +28,7 @@ class SchoolClassController
 
     public function getAllClass(PdoSchoolClassRepository $schoolClassRepository): array
     {       
-        return $schoolClassRepository->allClasses();
+        return $schoolClassRepository->allClasses();      
     }
 }
 ?>

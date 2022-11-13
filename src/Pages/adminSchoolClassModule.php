@@ -33,23 +33,30 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
 
     // $allClasses = $allClasses[0];
 
-     print_r($allClasses[1]);
+    // print_r($allClasses[0]['Alura\Pdo\Domain\Model\SchoolClassid']);
+
+    foreach($allClasses as $classes)
+    {
+        print_r($classes->getId());
+    }
+    
+    
     // $classes = $schoolClassController->findingClasses($schoolClassRepository, $innerJoin);
 
-    // $studentRepository = new PdoStudentRepository($connection);
-    // $studentController = new StudentController($connection);
+    $studentRepository = new PdoStudentRepository($connection);
+    $studentController = new StudentController($connection);
 
-    // require_once 'elements/head.php';
+    require_once 'elements/head.php';
 ?>
 
-    <?php foreach ($allClasses as $allClasse):?>
+    <?php foreach ($allClasses as $classes):?>
         <div class="card class-card">
             <div class="card-body">
-                <h5 class="card-title class-identifier">TURMA <?php echo $allClasse[0].$allClasse[1];?></h5>
+                <h5 class="card-title class-identifier">TURMA <?= $classes->getYear().$classes->getIdentifier()?></h5>
                 <div class="class-text">
                     <p class="card-text class-shift">
                         <?php 
-                        if ($class->getShift() === 'manha'){
+                        if ($classes->getShift() === 'manha'){
                             $shift = 'MANHÃ';
                         } else {
                             $shift = 'TARDE';
@@ -58,10 +65,10 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
                         ?>
                     </p>
                     <p class="card-text class-students">
-                        <?php echo $studentController->numberOfStudentsByClass($studentRepository, $class->getId());?> ESTUDANTES
+                        <?php echo $studentController->numberOfStudentsByClass($studentRepository, $classes->getId());?> ESTUDANTES
                     </p>
                 </div>
-                <a href="schoolClass.php?id=<?php echo $class->getId();?>" class="stretched-link"></a>
+                <a href="schoolClass.php?id=<?php echo $classes->getId();?>" class="stretched-link"></a>
             </div>
         </div>
     <?php endforeach;?>
