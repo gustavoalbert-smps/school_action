@@ -75,26 +75,6 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
                         );
                     } catch (\Throwable $th) {
                         echo "{$th->getMessage()}";
-                        // ' <div class="modal fade" tabindex="-1">
-                        //     <div class="modal-dialog modal-confirm">
-                        //         <div class="modal-content">
-                        //             <div class="modal-header">
-                        //                 <div class="icon-box">
-                        //                     <i class="material-icons">&#xE5CD;</i>
-                        //                     <h4 class="modal-title w-100">Desculpe!</h4>
-                        //                 </div>
-                        //             </div>
-                        //             <div class="modal-body">
-                        //                 <p class="text-center">
-                        //                     O cadastro falhou. Por favor volte e tente novamente.
-                        //                 </p>
-                        //             </div>
-                        //             <div class="modal-footer">
-                        //                 <button class="btn btn-danger btn-block" data-dismiss="modal">OK</button>
-                        //             </div>
-                        //         </div>
-                        //     </div>
-                        // </div>'
                     }
 
                 } elseif ($_POST['form-type'] === 'teacher') {

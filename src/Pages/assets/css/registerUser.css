@@ -60,3 +60,8 @@
     color: #636363;
     width: 325px;
 }
+
+.registration-alert {
+    display: none;
+    margin-top: 1rem;
+}
