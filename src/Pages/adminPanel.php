@@ -26,7 +26,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
 
     $userController = new UserController($connection);
 
-    $AllUsers = $userController->getAllUsers($peopleRepository); 
+    $getAllUsers = $userController->getAllUsers($peopleRepository); 
 
     $getUsersCount = $userController->getPeopleCount($peopleRepository);
 
@@ -101,7 +101,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
                 </tr>
               </thead>
               <tbody>
-              <?php foreach ($AllUsers as $Users):?>
+              <?php foreach ($getAllUsers as $Users):?> 
                 <tr class = "text-center panel-admin-tr name">
                     
                     <td class="" align="center"><a href="/pdo/src/Pages/Profile.php?id=<?= $Users['id']?>"><?= $Users['name']?></a></td>
