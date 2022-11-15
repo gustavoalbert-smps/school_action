@@ -17,7 +17,7 @@ $peopleRepository = new PdoPeopleRepository($connection);
 $studentRepository = new PdoStudentRepository($connection);
 $teacherRepository = new PdoTeacherRepository($connection);
 
-$msg = "";
+// $msg = "";
 
 if($_SESSION['msg'] != "")
 {

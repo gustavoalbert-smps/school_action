@@ -22,17 +22,17 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
     $userRepository = new PdoUserRepository($connection);
     $peopleRepository = new PdoPeopleRepository($connection);
     $studentRepository = new PdoStudentRepository($connection);
-    $eacherRepository = new PdoTeacherRepository($connection);
+    $teacherRepository = new PdoTeacherRepository($connection);
 
     $userController = new UserController($connection);
 
-    $arrayPeople = $userController->Users($peopleRepository); 
+    $AllUsers = $userController->getAllUsers($peopleRepository); 
 
-    $people = $userController->totalUsers($peopleRepository);
+    $getUsersCount = $userController->getPeopleCount($peopleRepository);
 
-    $teachers = $userController->totalUsersType('teacher');
+    $getTeachersCount = $userController->totalUsersType('teacher');
 
-    $students = $userController->totalUsersType('');
+    $getStudentsCount = $userController->totalUsersType('');
 
     
     include_once 'elements/head.php';
@@ -59,7 +59,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
           <div class="panel-card">
               <ul class="list-group list-group-flush text-center">
                 <li class="panel-list-group list-group-item">Usuarios</li>
-                <li class="list-group-item"><?= $people ?></li>
+                <li class="list-group-item"><?= $getUsersCount ?></li>
               </ul>
             </div>
           </div>
@@ -67,7 +67,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
             <div class="panel-card">
               <ul class="list-group list-group-flush text-center">
                 <li class="list-group-item panel-list-group">Professores</li>
-                <li class="list-group-item"><?= $teachers?></li>
+                <li class="list-group-item"><?= $getTeachersCount?></li>
               </ul>
             </div>
           </div>
@@ -75,7 +75,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
             <div class="panel-card">
               <ul class="list-group list-group-flush text-center">
                 <li class="panel-list-group list-group-item">Estudantes</li>
-                <li class="list-group-item"><?= $students?></li>
+                <li class="list-group-item"><?= $getStudentsCount?></li>
               </ul>
             </div>
           </div>
@@ -101,12 +101,12 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
                 </tr>
               </thead>
               <tbody>
-              <?php foreach ($arrayPeople as $arrayPeople):?>
+              <?php foreach ($AllUsers as $Users):?>
                 <tr class = "text-center panel-admin-tr name">
                     
-                    <td class="" align="center"><a href="/pdo/src/Pages/Profile.php?id=<?= $arrayPeople['id']?>"><?= $arrayPeople['name']?></a></td>
-                    <td class><a href="/pdo/src/Pages/Profile.php?id=<?= $arrayPeople['id']?>"><?= $arrayPeople['birth_date']?></td>
-                    <td><a href="/pdo/src/Pages/Profile.php?id=<?= $arrayPeople['id']?>"><?= $arrayPeople['gender']?></td>
+                    <td class="" align="center"><a href="/pdo/src/Pages/Profile.php?id=<?= $Users['id']?>"><?= $Users['name']?></a></td>
+                    <td class><a href="/pdo/src/Pages/Profile.php?id=<?= $Users['id']?>"><?= $Users['birth_date']?></td>
+                    <td><a href="/pdo/src/Pages/Profile.php?id=<?= $Users['id']?>"><?= $Users['gender']?></td>
                 
                 </tr>
                 <?php endforeach?>

@@ -25,12 +25,12 @@ class UserController
         return $userRepository->getUserByPeopleId($peopleId);
     }
 
-    public function totalUsers(PdoPeopleRepository $peopleRepository): int
+    public function getPeopleCount(PdoPeopleRepository $peopleRepository): int
     {
         return $peopleRepository->getAllPeopleCount();
     }
 
-    public function Users(PdoPeopleRepository $peopleRepository): array
+    public function getAllUsers(PdoPeopleRepository $peopleRepository): array
     {
         return $peopleRepository->getAllPeople();
     }
