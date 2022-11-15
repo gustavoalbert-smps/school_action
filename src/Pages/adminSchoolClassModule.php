@@ -17,24 +17,31 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
     header('Location: /pdo/src/Pages/index.php');
 } else {
 
-    if($_SESSION['admin'] == true)
-    {
-        header('location: /pdo/src/Pages/adminSchoolClassModule.php');
-    }
-
     $connection = ConnectDatabase::connect();
 
-    $teacherRepository = new PdoTeacherRepository($connection);
-    $teacherController = new TeacherController($connection);
+    // $teacherRepository = new PdoTeacherRepository($connection);
+    // $teacherController = new TeacherController($connection);
 
-    $teacher = $teacherController->getTeacherWithPeopleId($teacherRepository, $_SESSION['people_id']);
+    // $teacher = $teacherController->getTeacherWithPeopleId($teacherRepository, $_SESSION['people_id']);
 
-    $innerJoin = $teacherController->teacherClasses($teacherRepository, $teacher->getId());
+    // $innerJoin = $teacherController->teacherClasses($teacherRepository, $teacher->getId());
 
     $schoolClassRepository = new PdoSchoolClassRepository($connection);
     $schoolClassController = new SchoolClassController($connection);
 
-    $classes = $schoolClassController->findingClasses($schoolClassRepository, $innerJoin);
+    $allClasses = $schoolClassController -> getAllClass($schoolClassRepository);
+
+    // $allClasses = $allClasses[0];
+
+    // print_r($allClasses[0]['Alura\Pdo\Domain\Model\SchoolClassid']);
+
+    foreach($allClasses as $classes)
+    {
+        print_r($classes->getId());
+    }
+    
+    
+    // $classes = $schoolClassController->findingClasses($schoolClassRepository, $innerJoin);
 
     $studentRepository = new PdoStudentRepository($connection);
     $studentController = new StudentController($connection);
@@ -42,14 +49,14 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
     require_once 'elements/head.php';
 ?>
 
-    <?php foreach ($classes as $class):?>
+    <?php foreach ($allClasses as $classes):?>
         <div class="card class-card">
             <div class="card-body">
-                <h5 class="card-title class-identifier">TURMA <?php echo "{$class->getYear()}{$class->getIdentifier()}";?></h5>
+                <h5 class="card-title class-identifier">TURMA <?= $classes->getYear().$classes->getIdentifier()?></h5>
                 <div class="class-text">
                     <p class="card-text class-shift">
                         <?php 
-                        if ($class->getShift() === 'manha'){
+                        if ($classes->getShift() === 'manha'){
                             $shift = 'MANHÃ';
                         } else {
                             $shift = 'TARDE';
@@ -58,10 +65,10 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
                         ?>
                     </p>
                     <p class="card-text class-students">
-                        <?php echo $studentController->numberOfStudentsByClass($studentRepository, $class->getId());?> ESTUDANTES
+                        <?php echo $studentController->numberOfStudentsByClass($studentRepository, $classes->getId());?> ESTUDANTES
                     </p>
                 </div>
-                <a href="schoolClass.php?id=<?php echo $class->getId();?>" class="stretched-link"></a>
+                <a href="schoolClass.php?id=<?php echo $classes->getId();?>" class="stretched-link"></a>
             </div>
         </div>
     <?php endforeach;?>
