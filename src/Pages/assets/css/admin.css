@@ -56,8 +56,8 @@
 }
 
 .panel-table-striped .panel-admin-tr.name:hover {
-  -webkit-transform: scale(1.15);
-  transform: scale(1.15);
+  /* -webkit-transform: scale(1.15); */
+  /* transform: scale(1.15); */
   background-color:#f6f9ff
   
 }

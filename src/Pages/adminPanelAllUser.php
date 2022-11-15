@@ -35,7 +35,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
 ?>
 
         <div id="table-container">
-            <table class="table table-striped students-table">
+            <table class="table panel-table-striped">
                 <thead>
                     <tr class = "title">
                         <td class="head " align="center">Nome</td>
