@@ -2,7 +2,7 @@
     <div class="progress mb-3">
         <div class="progress-bar progress-bar-striped bg-primary active" role="progressbar"></div>
     </div>
-    <form class="form" id="registration-form" onsubmit="return formValidation2()" action="registerUser.php" method="POST">
+    <form class="form" id="registration-form" onsubmit="return formValidationTeacher();" action="registerUser.php" method="POST">
         <fieldset>
             <div class="form-floating mb-3">
                 <label for="user">Nome de usuário</label>
@@ -28,7 +28,7 @@
                 <label class="form-check-label" for="masc">Masculino</label>
             </div>
             <div class="form-check form-check-inline mb-3">
-                <input class="form-check-input" type="radio" id="fem" name="gender" value="masculino">
+                <input class="form-check-input" type="radio" id="fem" name="gender" value="feminino">
                 <label class="form-check-label" for="fem">Feminino</label>
             </div>
             <div class="form-check form-check-inline mb-3">
@@ -49,36 +49,43 @@
     </form>
 
     <div class="alert alert-danger alert-dismissible fade show registration-alert" role="alert" id="username-empty">
-        Seu nome de usuário não pode ser vazio
+        Nome de usuário não pode ser vazio.
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <div class="alert alert-danger alert-dismissible fade show registration-alert" role="alert" id="username-length">
-        Seu nome de usuário deve entre 5 a 15 caracteres.
+        Nome de usuário deve entre 5 a 15 caracteres.
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <div class="alert alert-danger alert-dismissible fade show registration-alert" role="alert" id="password-empty">
-        Por favor insira uma senha.
+        Por favor, insira uma senha.
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <div class="alert alert-danger alert-dismissible fade show registration-alert" role="alert" id="password-length">
-        Sua senha deve estar entre 6 a 12 caracteres.
+        A senha deve estar entre 6 a 12 caracteres.
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <div class="alert alert-danger alert-dismissible fade show registration-alert" role="alert" id="incorrect-name">
-        Por favor insira o seu nome corretamente.
+        Insira o nome corretamente.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div class="alert alert-danger alert-dismissible fade show registration-alert" role="alert" id="birth-date-empty">
+        Informe uma data de nascimento.
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <div class="alert alert-danger alert-dismissible fade show registration-alert" role="alert" id="radios-empty">
-        Por favor marque uma opção!
+        Por favor, marque uma opção.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div class="alert alert-danger alert-dismissible fade show registration-alert" role="alert" id="graduation-empty">
+        Informe a formação do professor!
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 
     <script>
-        function formValidation1() {
+
+        function formValidationUser() {
             var username = document.getElementsByName("user")[0].value;
             var password = document.getElementsByName("password")[0].value;
-
-            console.log(username);
             
             if (username.length == 0) {
                 $('#username-empty').show();
@@ -102,13 +109,15 @@
             return true;
         }
 
-        function formValidation2() {
+        function formValidationTeacher() {
             var username = document.getElementsByName("user")[0].value;
             var password = document.getElementsByName("password")[0].value;
             var name = document.getElementsByName("name")[0].value;
             var regName = /\d+$/g;
+            var birthDate = document.getElementsByName("birth_date")[0].value;
             var radios = document.getElementsByName("gender");
             var radioValid = false;
+            var graduation = document.getElementsByName("graduation")[0].value;
 
             if (username.length == 0) {
                 $('#username-empty').show();
@@ -130,9 +139,15 @@
                 return false;
             }
 
-            if (name == "" || regName.test(name)) {
+            if (name.length == 0 || regName.test(name)) {
                 $('#incorrect-name').show();
                 document.getElementsByName("name")[0].focus();
+                return false;
+            }
+
+            if (birthDate.length == 0) {
+                $('#birth-date-empty').show();
+                document.getElementsByName("birth_date")[0].focus();
                 return false;
             }
 
@@ -146,6 +161,12 @@
                 $('#radios-empty').show();
                 return false;
             }
+
+            if (graduation.length == 0) {
+                $('#graduation-empty').show();
+                document.getElementsByName("graduation")[0].focus();
+                return false;
+            }
             return true;
         }
 
@@ -154,7 +175,7 @@
             var current = 1,current_step,next_step,steps;
             steps = $("fieldset").length;
             $(".next").click(function(){
-                var valid = formValidation1();
+                var valid = formValidationUser();
 
                 if(valid) {
                     current_step = $(this).parent();
