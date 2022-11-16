@@ -54,7 +54,11 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
 
       <!-- end page title -->
 
-      <div class="row">
+      <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #5F6B74;">
+          <a href="#">teste</a>
+      </nav>
+
+      <div class="row mt-3">
           <div class="col">
           <div class="panel-card">
               <ul class="list-group list-group-flush text-center">
@@ -66,8 +70,9 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
           <div class="col">
             <div class="panel-card">
               <ul class="list-group list-group-flush text-center">
-                <li class="list-group-item panel-list-group">Professores</li>
-                <li class="list-group-item"><?= $teachers?></li>
+                <img src='imgs/teacher-icon.svg' alt="Image de um professor">
+                <!-- <li class="list-group-item panel-list-group">Professores</li> -->
+                <li class="list-group-item">Modulo Professores</li>
               </ul>
             </div>
           </div>
