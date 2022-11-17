@@ -54,9 +54,6 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
 
       <!-- end page title -->
 
-      <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #5F6B74;">
-          <a href="#">teste</a>
-      </nav>
 
       <div class="row mt-3">
           <div class="col">
