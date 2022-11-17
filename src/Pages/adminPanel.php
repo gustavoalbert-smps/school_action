@@ -89,7 +89,20 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
             </div>
           </div>
       </div>
-
+      <div class="col mb-3">
+        <div class="row">
+          <div class="form-group">
+            <label for="form-control">Quantidade de linhas: </label>
+            <select class="form-control" name="" id="">
+              <option>10</option>
+              <option>100</option>
+              <option>1000</option>
+              <option>10000</option>
+              <option>999999</option>
+            </select>
+          </div>
+        </div>
+      </div>
       <div class="row">
         <div class="col">
           <div class="">
