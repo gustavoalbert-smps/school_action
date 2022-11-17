@@ -67,8 +67,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
           <div class="col">
             <div class="panel-card">
               <ul class="list-group list-group-flush text-center">
-                <img src='imgs/teacher-icon.svg' alt="Image de um professor">
-                <!-- <li class="list-group-item panel-list-group">Professores</li> -->
+                <li class="list-group-item panel-list-group">Professores</li>
                 <li class="list-group-item">Modulo Professores</li>
               </ul>
             </div>
