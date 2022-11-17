@@ -59,7 +59,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
           <div class="col">
           <div class="panel-card">
               <ul class="list-group list-group-flush text-center">
-                <li class="panel-list-group list-group-item">Usuarios</li>
+                <li class=" bg-primary panel-list-group list-group-item">Usuarios</li>
                 <li class="list-group-item"><?= $people ?></li>
               </ul>
             </div>
@@ -67,7 +67,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
           <div class="col">
             <div class="panel-card">
               <ul class="list-group list-group-flush text-center">
-                <li class="list-group-item panel-list-group">Professores</li>
+                <li class="bg-primary list-group-item panel-list-group">Professores</li>
                 <li class="list-group-item">Modulo Professores</li>
               </ul>
             </div>
@@ -75,7 +75,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
           <div class="col">
             <div class="panel-card">
               <ul class="list-group list-group-flush text-center">
-                <li class="panel-list-group list-group-item">Estudantes</li>
+                <li class="bg-primary panel-list-group list-group-item">Estudantes</li>
                 <li class="list-group-item"><?= $students?></li>
               </ul>
             </div>
@@ -83,32 +83,49 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
           <div class="col">
           <div class="panel-card">
               <ul class="list-group list-group-flush text-center">
-                <li class="panel-list-group list-group-item">Coordenadores</li>
+                <li class="bg-primary panel-list-group list-group-item">Coordenadores</li>
                 <li class="list-group-item">3</li>
               </ul>
             </div>
           </div>
       </div>
-      <div class="col mb-3">
-        <div class="row">
-          <div class="form-group">
-            <label for="form-control">Quantidade de linhas: </label>
-            <select class="form-control" name="" id="">
-              <option>10</option>
-              <option>100</option>
-              <option>1000</option>
-              <option>10000</option>
-              <option>999999</option>
-            </select>
+      <!-- filtro -->
+      <div class="panel-card">
+        <form action="#" method = "POST">
+          <div class="col mb-3">
+            <div class="row">
+              <div class="panel-form-group">
+                <label for="form-control">Filtrar por Usarios: </label>
+                <select class="form-control" name="" id="">
+                  <option>Todos</option>
+                  <option>Professores</option>
+                  <option>Alunos</option>
+                  <option>Coordenadores</option>
+                </select>
+                <div class="mb-4">
+                  <label for="form-control">Quantidade de linhas: </label>
+                    <select class="form-control" name="" id="">
+                      <option>10</option>
+                      <option>100</option>
+                      <option>1000</option>
+                      <option>10000</option>
+                      <option>999999</option>
+                    </select>
+                </div>
+
+                <button class = " form-control btn btn-primary" type="submit">Enviar</button>
+              </div>
+            </div>
           </div>
-        </div>
+        </form>
       </div>
+      <!-- end filtro -->
       <div class="row">
         <div class="col">
           <div class="">
             <table class="panel-table table-borderless panel-table-striped text-center">
               <thead>
-                <tr class = "panel-table-header">
+                <tr class = "bg-primary panel-table-header">
                   <th class = "head" scope="col">Nome</th>
                   <th class = "head" scope="col">Data de nascimento</th>
                   <th class = "head" scope="col">Sexo</th>
