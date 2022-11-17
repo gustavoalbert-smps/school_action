@@ -80,126 +80,126 @@
         Informe a formação do professor!
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
+</div>
 
-    <script>
+<script>
 
-        function formValidationUser() {
-            var username = document.getElementsByName("user")[0].value;
-            var password = document.getElementsByName("password")[0].value;
-            
-            if (username.length == 0) {
-                $('#username-empty').show();
-                document.getElementsByName("user")[0].focus();
-                return false;
-            } else if (username.length > 15 || username.length < 5) {
-                $('#username-length').show();
-                udocument.getElementsByName("user")[0].focus();
-                return false;
-            }
-
-            if (password.length == 0) {
-                $('#password-empty').show();
-                document.getElementsByName("password")[0].focus();
-                return false;
-            } else if (password.length > 12 || password.length < 6) {
-                $('#password-length').show();
-                document.getElementsByName("password")[0].focus();
-                return false;
-            }
-            return true;
+    function formValidationUser() {
+        var username = document.getElementsByName("user")[0].value;
+        var password = document.getElementsByName("password")[0].value;
+        
+        if (username.length == 0) {
+            $('#username-empty').show();
+            document.getElementsByName("user")[0].focus();
+            return false;
+        } else if (username.length > 15 || username.length < 5) {
+            $('#username-length').show();
+            udocument.getElementsByName("user")[0].focus();
+            return false;
         }
 
-        function formValidationTeacher() {
-            var username = document.getElementsByName("user")[0].value;
-            var password = document.getElementsByName("password")[0].value;
-            var name = document.getElementsByName("name")[0].value;
-            var regName = /\d+$/g;
-            var birthDate = document.getElementsByName("birth_date")[0].value;
-            var radios = document.getElementsByName("gender");
-            var radioValid = false;
-            var graduation = document.getElementsByName("graduation")[0].value;
+        if (password.length == 0) {
+            $('#password-empty').show();
+            document.getElementsByName("password")[0].focus();
+            return false;
+        } else if (password.length > 12 || password.length < 6) {
+            $('#password-length').show();
+            document.getElementsByName("password")[0].focus();
+            return false;
+        }
+        return true;
+    }
 
-            if (username.length == 0) {
-                $('#username-empty').show();
-                document.getElementsByName("user")[0].focus();
-                return false;
-            } else if (username.length > 15 || username.length < 5) {
-                $('#username-length').show();
-                document.getElementsByName("user")[0].focus();
-                return false;
-            }
+    function formValidationTeacher() {
+        var username = document.getElementsByName("user")[0].value;
+        var password = document.getElementsByName("password")[0].value;
+        var name = document.getElementsByName("name")[0].value;
+        var regName = /\d+$/g;
+        var birthDate = document.getElementsByName("birth_date")[0].value;
+        var radios = document.getElementsByName("gender");
+        var radioValid = false;
+        var graduation = document.getElementsByName("graduation")[0].value;
 
-            if (password.length == 0) {
-                $('#password-empty').show();
-                document.getElementsByName("password")[0].focus();
-                return false;
-            } else if (password.length > 12 || password.length < 6) {
-                $('#password-length').show();
-                document.getElementsByName("password")[0].focus();
-                return false;
-            }
-
-            if (name.length == 0 || regName.test(name)) {
-                $('#incorrect-name').show();
-                document.getElementsByName("name")[0].focus();
-                return false;
-            }
-
-            if (birthDate.length == 0) {
-                $('#birth-date-empty').show();
-                document.getElementsByName("birth_date")[0].focus();
-                return false;
-            }
-
-            var i = 0;
-            while (!radioValid && i < radios.length) {
-                if (radios[i].checked) radioValid = true;
-                i++;
-            }
-
-            if (!radioValid) {
-                $('#radios-empty').show();
-                return false;
-            }
-
-            if (graduation.length == 0) {
-                $('#graduation-empty').show();
-                document.getElementsByName("graduation")[0].focus();
-                return false;
-            }
-            return true;
+        if (username.length == 0) {
+            $('#username-empty').show();
+            document.getElementsByName("user")[0].focus();
+            return false;
+        } else if (username.length > 15 || username.length < 5) {
+            $('#username-length').show();
+            document.getElementsByName("user")[0].focus();
+            return false;
         }
 
+        if (password.length == 0) {
+            $('#password-empty').show();
+            document.getElementsByName("password")[0].focus();
+            return false;
+        } else if (password.length > 12 || password.length < 6) {
+            $('#password-length').show();
+            document.getElementsByName("password")[0].focus();
+            return false;
+        }
 
-        $(document).ready(function(){
-            var current = 1,current_step,next_step,steps;
-            steps = $("fieldset").length;
-            $(".next").click(function(){
-                var valid = formValidationUser();
+        if (name.length == 0 || regName.test(name)) {
+            $('#incorrect-name').show();
+            document.getElementsByName("name")[0].focus();
+            return false;
+        }
 
-                if(valid) {
-                    current_step = $(this).parent();
-                    next_step = $(this).parent().next();
-                    next_step.show();
-                    current_step.hide();
-                    setProgressBar(++current);    
-                }
-            });
-            $(".previous").click(function(){
+        if (birthDate.length == 0) {
+            $('#birth-date-empty').show();
+            document.getElementsByName("birth_date")[0].focus();
+            return false;
+        }
+
+        var i = 0;
+        while (!radioValid && i < radios.length) {
+            if (radios[i].checked) radioValid = true;
+            i++;
+        }
+
+        if (!radioValid) {
+            $('#radios-empty').show();
+            return false;
+        }
+
+        if (graduation.length == 0) {
+            $('#graduation-empty').show();
+            document.getElementsByName("graduation")[0].focus();
+            return false;
+        }
+        return true;
+    }
+
+
+    $(document).ready(function(){
+        var current = 1,current_step,next_step,steps;
+        steps = $("fieldset").length;
+        $(".next").click(function(){
+            var valid = formValidationUser();
+
+            if(valid) {
                 current_step = $(this).parent();
-                next_step = $(this).parent().prev();
+                next_step = $(this).parent().next();
                 next_step.show();
                 current_step.hide();
-                setProgressBar(--current);
-            });
-            setProgressBar(current);
-            // Change progress bar action
-            function setProgressBar(curStep){
-                var percent = parseFloat(100 / steps) * curStep;
-                percent = percent.toFixed();
-                $(".progress-bar")
-                .css("width",percent+"%")
+                setProgressBar(++current);    
             }
         });
-    </script>
-</div>
+        $(".previous").click(function(){
+            current_step = $(this).parent();
+            next_step = $(this).parent().prev();
+            next_step.show();
+            current_step.hide();
+            setProgressBar(--current);
+        });
+        setProgressBar(current);
+        // Change progress bar action
+        function setProgressBar(curStep){
+            var percent = parseFloat(100 / steps) * curStep;
+            percent = percent.toFixed();
+            $(".progress-bar")
+            .css("width",percent+"%")
+        }
+    });
+</script>

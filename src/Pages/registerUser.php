@@ -70,7 +70,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
                             $_POST['name'], 
                             $_POST['gender'], 
                             $_POST['birth_date'], 
-                            $_POST['class'], 
+                            $_POST['school_class'], 
                             0
                         );
                     } catch (\Throwable $th) {
