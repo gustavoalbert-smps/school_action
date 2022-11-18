@@ -17,7 +17,15 @@ class TeacherController
         $this->connection = $connection;
     }
 
-    public function insertTeacher(PdoTeacherRepository $teacherRepository, int $peopleId, string $graduation, string $name, string $gender, string $birthDate, int $isAdmin) {
+    public function getAllTeachers(PdoTeacherRepository $teacherRepository): array
+    {
+        $teachers = $teacherRepository->getAllTeachers();
+
+        return $teachers;
+    }
+
+    public function insertTeacher(PdoTeacherRepository $teacherRepository, int $peopleId, string $graduation, string $name, string $gender, string $birthDate, int $isAdmin) 
+    {
         $teacher = new Teacher(null, $peopleId, $graduation, $name, $gender, new DateTimeImmutable($birthDate), $isAdmin);
 
         return $teacherRepository->save($teacher);
