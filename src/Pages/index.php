@@ -17,17 +17,9 @@ $peopleRepository = new PdoPeopleRepository($connection);
 $studentRepository = new PdoStudentRepository($connection);
 $teacherRepository = new PdoTeacherRepository($connection);
 
-// $msg = "";
-
-if($_SESSION['msg'] != "")
-{
-  $msg = $_SESSION['msg'];
-
-  $_SESSION['msg'] = ""; 
-}
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST')
 {
+  $loginErrorMessage = "";
   if ($userRepository->isValidUser($_POST['user'], $_POST['password']))
   {
     
@@ -56,13 +48,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
               header('Location: /pdo/src/Pages/schoolClassModule.php');
           }
       }
-  }
-  else
-  {
-    header('location: /pdo/src/Pages/elements/err-invalid-user.php');
-  }
+  } else {
+    
+    $_SESSION['login_error'] = "Nome de usuário ou senha inválido";
 
+    if($_SESSION['login_error'] != "") {
+      $loginErrorMessage = $_SESSION['login_error'];
 
+      $_SESSION['login_error'] = ""; 
+    }
+  }
 }
 
 ?>
@@ -108,8 +103,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
   ======================================================== -->
 </head>
 
-    <!-- falta configurar o erro para quando o usuario digitado for invalido (elements/err-invalid-user.html) -->
-
 <body>
     
 <main>
@@ -135,15 +128,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                   <div class="pt-4 pb-2">
                     <h5 class="card-title text-center pb-0 fs-4">Faça login na sua conta</h5>
                     <p class="text-center small">Digite seu nome de usuário e senha para entrar</p>
+                    <?php if ($_SERVER['REQUEST_METHOD'] === 'POST'):?>
+                      <?php if($loginErrorMessage != ""):?>
+                        <div class="alert alert-danger" role="alert">
+                          <?php echo $loginErrorMessage; ?>
+                        </div>
+                      <?php endif?>
+                    <?php endif?>
                   </div>
 
-                  <form class="row g-3 needs-validation" novalidate>
-                    <?php $msg; if($msg != ""):?>
-                      <div class="alert alert-danger" role="alert">
-                        <?= $msg ?>
-                      </div>
-                    <?php endif?>
-
+                  <form class="row g-3 needs-validation">
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">Usuario</label>
                       <div class="input-group has-validation">
