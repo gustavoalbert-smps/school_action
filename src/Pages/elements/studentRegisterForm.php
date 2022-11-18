@@ -2,7 +2,7 @@
     <div class="progress mb-3">
         <div class="progress-bar progress-bar-striped bg-primary active" role="progressbar"></div>
     </div>
-    <form class="form" name="form" id="registration-form" onsubmit="return formValidationStudent()" action="registerUser.php" method="POST">
+    <form class="form" name="form" id="registration-form" onsubmit="return formValidationStep2()" action="registerUser.php" method="POST">
         <fieldset>
             <div class="form-floating mb-3">
                 <label for="user">Nome de usuário</label>
@@ -88,7 +88,7 @@
 </div>
 
 <script>
-    function formValidationUser() {
+    function formValidationStep1() {
         var username = document.getElementsByName("user")[0].value;
         var password = document.getElementsByName("password")[0].value;
 
@@ -114,7 +114,7 @@
         return true;
     }
 
-    function formValidationStudent() {
+    function formValidationStep2() {
         const form = document.getElementsByName("form");
         var username = document.getElementsByName("user")[0].value;
         var password = document.getElementsByName("password")[0].value;
@@ -182,7 +182,7 @@
         var current = 1,current_step,next_step,steps;
         steps = $("fieldset").length;
         $(".next").click(function(){
-            var valid = formValidationUser();
+            var valid = formValidationStep1();
 
             if(valid) {
                 current_step = $(this).parent();
