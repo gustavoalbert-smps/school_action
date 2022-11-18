@@ -25,5 +25,10 @@ class SchoolClassController
 
         return $listOfClassses;
     }
+
+    public function getAllClass(PdoSchoolClassRepository $schoolClassRepository): array
+    {       
+        return $schoolClassRepository->allClasses();      
+    }
 }
 ?>

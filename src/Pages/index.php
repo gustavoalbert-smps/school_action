@@ -17,7 +17,7 @@ $peopleRepository = new PdoPeopleRepository($connection);
 $studentRepository = new PdoStudentRepository($connection);
 $teacherRepository = new PdoTeacherRepository($connection);
 
-$msg = "";
+// $msg = "";
 
 if($_SESSION['msg'] != "")
 {
@@ -138,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                   </div>
 
                   <form class="row g-3 needs-validation" novalidate>
-                    <?php if($msg != ""):?>
+                    <?php $msg; if($msg != ""):?>
                       <div class="alert alert-danger" role="alert">
                         <?= $msg ?>
                       </div>

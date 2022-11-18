@@ -2,7 +2,7 @@
    
    session_start();
 
-   $_SESSION['msg'] = "Nome de usuário ou senha inválidos";
+   $_SESSION['msg'] = "Nome de usuário ou senha inválido";
 
     header('location: ..');
 ?>

@@ -44,38 +44,59 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (isset($_POST['recording-user'])) {
                 if ($_POST['form-type'] === 'student') {
-                    $peopleController->insertPeople($peopleRepository, $_POST['name'], $_POST['gender'], $_POST['birth_date'], 0);
-            
-                    $id = intval($connection->lastInsertId());
-
-                    $bdPeople = $peopleController->getPeople($peopleRepository, $id);
-
-                    $userController->insertUser($userRepository, $_POST['user'], $_POST['password'], 0, $bdPeople->getPeopleId(), $_POST['name'], $_POST['gender'], $_POST['birth_date'], 0);
 
                     try {
+                        $peopleController->insertPeople($peopleRepository, $_POST['name'], $_POST['gender'], $_POST['birth_date'], 0);
+                        
+                        $id = intval($connection->lastInsertId());
+
+                        $bdPeople = $peopleController->getPeople($peopleRepository, $id);
+
+                        $userController->insertUser(
+                            $userRepository, 
+                            $_POST['user'], 
+                            $_POST['password'], 
+                            0, 
+                            $bdPeople->getPeopleId(), 
+                            $_POST['name'], 
+                            $_POST['gender'], 
+                            $_POST['birth_date'], 
+                            0
+                        );
+
                         $studentController->insertStudent(
                             $studentRepository, 
                             $bdPeople->getPeopleId(), 
                             $_POST['name'], 
                             $_POST['gender'], 
                             $_POST['birth_date'], 
-                            $_POST['class'], 
+                            $_POST['school_class'], 
                             0
                         );
                     } catch (\Throwable $th) {
-                        echo 'algo de errado no seu cadastro';
+                        echo "{$th->getMessage()}";
                     }
 
                 } elseif ($_POST['form-type'] === 'teacher') {
-                    $peopleController->insertPeople($peopleRepository, $_POST['name'], $_POST['gender'], $_POST['birth_date'], 0);
-            
-                    $id = intval($connection->lastInsertId());
-
-                    $bdPeople = $peopleController->getPeople($peopleRepository, $id);
-
-                    $userController->insertUser($userRepository, $_POST['user'], $_POST['password'], 0, $bdPeople->getPeopleId(), $_POST['name'], $_POST['gender'], $_POST['birth_date'], 0);
-
+                    
                     try {
+                        $peopleController->insertPeople($peopleRepository, $_POST['name'], $_POST['gender'], $_POST['birth_date'], 0);
+            
+                        $id = intval($connection->lastInsertId());
+
+                        $bdPeople = $peopleController->getPeople($peopleRepository, $id);
+
+                        $userController->insertUser(
+                            $userRepository, 
+                            $_POST['user'], 
+                            $_POST['password'], 
+                            0, 
+                            $bdPeople->getPeopleId(), 
+                            $_POST['name'], 
+                            $_POST['gender'], 
+                            $_POST['birth_date'], 0
+                        );
+
                         $teacherController->insertTeacher(
                             $teacherRepository, 
                             $bdPeople->getPeopleId(), 
@@ -86,7 +107,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
                             0
                         );
                     } catch (\Throwable $th) {
-                        echo 'algo de errado no seu cadastro';
+                        echo "{$th->getMessage()}";
                     }
                 }
                 header('Location: registerUser.php');
