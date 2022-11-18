@@ -36,6 +36,7 @@
   <link href="assets/css/sidebar.css" rel="stylesheet">
   <link href="assets/css/schoolClass.css" rel="stylesheet">
   <link href="assets/css/schoolClassModule.css" rel="stylesheet">
+  <link href="assets/css/adminMatters.css" rel="stylesheet">
 
   <link href="assets/css/admin.css" rel="stylesheet">
 
