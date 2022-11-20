@@ -25,17 +25,21 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
     $studentRepository = new PdoStudentRepository($connection);
     $teacherRepository = new PdoTeacherRepository($connection);
 
-    $userController = new UserController($connection);
-
     $setLimit = 0;
 
-    $getLimitUsersArray = $userController->getLimitUsers($userRepository, $setLimit); 
+    $userController = new UserController($connection);
 
-    // foreach($getLimitUsersArray as $User)
-    // {
-    //   print_r($User['id']);
-    // }
-    // print_r($getLimitUsersArray);
+    if($_SERVER['REQUEST_METHOD'] === 'POST')
+
+    {
+      (int) $getPostLimit = $_POST['limitValue'];
+
+      (int) $setLimit = $getPostLimit;
+
+      $getLimitUsersArray = $userController->getLimitUsers($userRepository, $setLimit);
+    }
+
+     
 
     $getUsersCount = $userController->getPeopleCount($peopleRepository);
 
@@ -113,12 +117,12 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
                 </select>
                 <div class="mb-4">
                   <label for="form-control">Quantidade de linhas: </label>
-                    <select class="form-control" name="" id="">
-                      <option value = "10">10</option>
-                      <option value = "100">100</option>
-                      <option value = "1000">1000</option>
-                      <option value = "10000">10000</option>
-                      <option value = "999999">999999</option>
+                    <select class="form-control" name="limitValue" id="">
+                      <option value = "10" <?php if($getPostLimit == 10){ echo "selected";}?>>10</option>
+                      <option value = "100" <?php if($getPostLimit == 100){ echo "selected";}?>>100</option>
+                      <option value = "1000" <?php if($getPostLimit == 1000){ echo "selected";}?>>1000</option>
+                      <option value = "10000" <?php if($getPostLimit == 10000){ echo "selected";}?>>10000</option>
+                      <option value = "999999" <?php if($getPostLimit == 999999){ echo "selected";}?>>999999</option>
                     </select>
                 </div>
 
