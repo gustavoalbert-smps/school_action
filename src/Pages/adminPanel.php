@@ -15,7 +15,8 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
   $_SESSION = array();
   header('Location: /pdo/src/Pages/index.php');
 } else {
-  if ($_SESSION['admin'] === 1){
+    
+    if ($_SESSION['admin'] === 1){
    
     $connection = ConnectDatabase::connect();
 
@@ -26,7 +27,15 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
 
     $userController = new UserController($connection);
 
-    $getAllUsers = $userController->getAllUsers($peopleRepository); 
+    $setLimit = 0;
+
+    $getLimitUsersArray = $userController->getLimitUsers($userRepository, $setLimit); 
+
+    // foreach($getLimitUsersArray as $User)
+    // {
+    //   print_r($User['id']);
+    // }
+    // print_r($getLimitUsersArray);
 
     $getUsersCount = $userController->getPeopleCount($peopleRepository);
 
@@ -34,8 +43,8 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
 
     $getStudentsCount = $userController->totalUsersType('');
 
-    
     include_once 'elements/head.php';
+
 ?>
     <div class="container">
       <div class="col">
@@ -65,7 +74,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
             </div>
           </div>
           <div class="col">
-            <div class="panel-card">>>>>>>> development
+            <div class="panel-card">
               <ul class="list-group list-group-flush text-center">
                 <li class="list-group-item panel-list-group">Professores</li>
                 <li class="list-group-item"><?= $getTeachersCount?></li>
@@ -91,25 +100,25 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
       </div>
       <!-- filtro -->
       <div class="panel-card">
-        <form action="#" method = "POST">
+        <form action="adminPanel.php" method = "POST">
           <div class="col mb-3">
             <div class="row">
               <div class="panel-form-group">
                 <label for="form-control">Filtrar por Usarios: </label>
                 <select class="form-control" name="" id="">
-                  <option>Todos</option>
-                  <option>Professores</option>
-                  <option>Alunos</option>
+                  <option value = "filterAll">Todos</option>
+                  <option value = "filterTeacher">Professores</option>
+                  <option value = "filterStudent">Alunos</option>
                   <option>Coordenadores</option>
                 </select>
                 <div class="mb-4">
                   <label for="form-control">Quantidade de linhas: </label>
                     <select class="form-control" name="" id="">
-                      <option>10</option>
-                      <option>100</option>
-                      <option>1000</option>
-                      <option>10000</option>
-                      <option>999999</option>
+                      <option value = "10">10</option>
+                      <option value = "100">100</option>
+                      <option value = "1000">1000</option>
+                      <option value = "10000">10000</option>
+                      <option value = "999999">999999</option>
                     </select>
                 </div>
 
@@ -132,7 +141,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
                 </tr>
               </thead>
               <tbody>
-              <?php foreach ($getAllUsers as $Users):?> 
+              <?php foreach ($getLimitUsersArray as $Users):?> 
                 <tr class = "text-center panel-admin-tr name">
                     
                     <td class="" align="center"><a href="/pdo/src/Pages/Profile.php?id=<?= $Users['id']?>"><?= $Users['name']?></a></td>
@@ -149,7 +158,9 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
 
 <?php 
     include_once 'elements/footer.php';
+    
     } else {
+
       if ($_SESSION['teacher'] === 0) {
         header('Location: /pdo/src/Pages/studentsModule.php');
       } else {
