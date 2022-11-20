@@ -48,6 +48,26 @@ class PdoUserRepository implements UserInterface
         );
     }
 
+    public function getLimitPeople(int $setLimit): array
+    {
+        $initLimit = 0;
+
+        $sqlQuery = "SELECT * FROM people LIMIT :setLimit";
+
+        $statement = $this->connection->prepare($sqlQuery);
+
+
+        $statement->bindParam(':setLimit', $setLimit, PDO::PARAM_INT);
+
+        $statement->execute();
+
+        $userLimit = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        // print_r($userLimit);
+
+        return $userLimit;
+    }
+
     public function getUserByPeopleId(int $peopleId): User
     {
         $sqlQuery = 'SELECT * FROM users WHERE people_id = :id;';
