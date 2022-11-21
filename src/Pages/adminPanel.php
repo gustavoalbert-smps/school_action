@@ -35,11 +35,9 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
       (int) $getPostLimit = $_POST['limitValue'];
 
       (int) $setLimit = $getPostLimit;
-
-      $getLimitUsersArray = $userController->getLimitUsers($userRepository, $setLimit);
     }
 
-     
+    $getLimitUsersArray = $userController->getLimitUsers($userRepository, $setLimit);
 
     $getUsersCount = $userController->getPeopleCount($peopleRepository);
 
@@ -118,11 +116,11 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
                 <div class="mb-4">
                   <label for="form-control">Quantidade de linhas: </label>
                     <select class="form-control" name="limitValue" id="">
-                      <option value = "10" <?php if($getPostLimit == 10){ echo "selected";}?>>10</option>
-                      <option value = "100" <?php if($getPostLimit == 100){ echo "selected";}?>>100</option>
-                      <option value = "1000" <?php if($getPostLimit == 1000){ echo "selected";}?>>1000</option>
-                      <option value = "10000" <?php if($getPostLimit == 10000){ echo "selected";}?>>10000</option>
-                      <option value = "999999" <?php if($getPostLimit == 999999){ echo "selected";}?>>999999</option>
+                      <option value = "10" <?php if(isset($getPostLimit)){if($getPostLimit == 10){ echo "selected";}}?>>10</option>
+                      <option value = "100" <?php if(isset($getPostLimit)){if($getPostLimit == 100){ echo "selected";}}?>>100</option>
+                      <option value = "1000" <?php if(isset($getPostLimit)){if($getPostLimit == 1000){ echo "selected";}}?>>1000</option>
+                      <option value = "10000" <?php if(isset($getPostLimit)){if($getPostLimit == 10000){ echo "selected";}}?>>10000</option>
+                      <option value = "999999" <?php if(isset($getPostLimit)){if($getPostLimit == 999999){ echo "selected";}}?>>999999</option>
                     </select>
                 </div>
 
@@ -148,12 +146,12 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
               <?php foreach ($getLimitUsersArray as $Users):?> 
                 <tr class = "text-center panel-admin-tr name">
                     
-                    <td class="" align="center"><a href="/pdo/src/Pages/Profile.php?id=<?= $Users['id']?>"><?= $Users['name']?></a></td>
-                    <td class><a href="/pdo/src/Pages/Profile.php?id=<?= $Users['id']?>"><?= $Users['birth_date']?></td>
-                    <td><a href="/pdo/src/Pages/Profile.php?id=<?= $Users['id']?>"><?= $Users['gender']?></td>
+                  <td class="" align="center"><a href="/pdo/src/Pages/Profile.php?id=<?= $Users['id']?>"><?= $Users['name']?></a></td>
+                  <td class><a href="/pdo/src/Pages/Profile.php?id=<?= $Users['id']?>"><?= $Users['birth_date']?></td>
+                  <td><a href="/pdo/src/Pages/Profile.php?id=<?= $Users['id']?>"><?= $Users['gender']?></td>
                 
                 </tr>
-                <?php endforeach?>
+              <?php endforeach?>
               </tbody>
             </table>
           </div>
