@@ -70,7 +70,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
           <div class="col">
           <div class="panel-card">
               <ul class="list-group list-group-flush text-center">
-                <li class="panel-list-group list-group-item">Usuarios</li>
+                <li class=" bg-primary panel-list-group list-group-item">Usuarios</li>
                 <li class="list-group-item"><?= $getUsersCount ?></li>
               </ul>
             </div>
@@ -78,7 +78,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
           <div class="col">
             <div class="panel-card">
               <ul class="list-group list-group-flush text-center">
-                <li class="list-group-item panel-list-group">Professores</li>
+                <li class="bg-primary list-group-item panel-list-group">Professores</li>
                 <li class="list-group-item"><?= $getTeachersCount?></li>
               </ul>
             </div>
@@ -86,7 +86,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
           <div class="col">
             <div class="panel-card">
               <ul class="list-group list-group-flush text-center">
-                <li class="panel-list-group list-group-item">Estudantes</li>
+                <li class="bg-primary panel-list-group list-group-item">Estudantes</li>
                 <li class="list-group-item"><?= $getStudentsCount?></li>
               </ul>
             </div>
