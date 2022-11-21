@@ -10,6 +10,10 @@
     padding-left: .375rem;
 }
 
+.form-body {
+    height: 100%;
+}
+
 .matter .label {
     display: inline-block;
     padding: 1rem;
@@ -17,7 +21,7 @@
     transition: border-color .15s ease-in-out
 }
 
-.matter .form-check-input +.label{
+.matter .form-check-input+.label {
     width: 100%;
 }
 
@@ -28,11 +32,43 @@
 
 .matter-check {
     display: inline-block;
+    color: #012970;
     margin-bottom: .85rem;
+    border-radius: .375rem;
 }
 
 .fa-solid {
     margin-right: 0.5rem!important;
+}
+
+@media (min-width:767.98px) {
+    .matter-check {
+        max-width: 125px;
+        min-width: 125px;
+    }
+    .matter .label {
+        font-size: 15px;
+    }
+}
+
+@media (min-width:1200px) {
+    .matter-check {
+        max-width: 105px;
+        min-width: 105px;
+    }
+    .matter .label {
+        padding: .5rem;
+    }
+}
+
+@media (min-width:1270px) {
+    .matter-check {
+        max-width: 115px;
+        min-width: 115px;
+    }
+    .matter .label {
+        padding: .75rem;
+    }
 }
 
 @media (min-width:1399.98px) {
@@ -42,26 +78,8 @@
     }
 }
 
-@media (max-width:1200px) {
-    .matter-check {
-        max-width: 125px;
-        min-width: 125px;
-    }
-}
-
-@media (max-width:991.98px) {
-    .matter-check {
-        max-width: 105px;
-        min-width: 105px;
-    }
+@media (min-width:1499.98px) {
     .matter .label {
-        font-size: 15px;
-    }
-}
-
-@media (max-width:767.98px) {
-    .matter-check {
-        max-width: 85px;
-        min-width: 85px;
+        font-size: 17px;
     }
 }

@@ -42,26 +42,68 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
                                     <p>Matérias</p>
                                     <div class="form-check matter d-flex flex-wrap justify-content-between">
                                         <label class="form-check-label matter-check text-center shadow" for="math">
-                                            <input id="math" class="form-check-input" type="checkbox" value="matemática" name="matter" >
-                                            <span class="label text-break"><i class="bi bi-calculator-fill me-2"></i>Matemática</span>
+                                            <div class="form-body d-flex align-items-center">
+                                                <input id="math" class="form-check-input" type="checkbox" value="matemática" name="matter" >
+                                                <span class="label text-break"><i class="bi bi-calculator-fill me-2"></i>Matemática</span>
+                                            </div>
                                         </label>
-                                        <label for="port" class="form-check-label matter-check text-center shadow">
-                                            <input id="port" class="form-check-input" type="checkbox" value="português" name="matter" >
-                                            <span class="label text-break"><i class="fa-solid fa-language"></i>Português</span>
+                                        <label class="form-check-label matter-check text-center shadow" for="port">
+                                            <div class="form-body d-flex align-items-center">
+                                                <input id="port" class="form-check-input" type="checkbox" value="português" name="matter">
+                                                <span class="label text-break"><i class="fa-solid fa-language"></i>Português</span>
+                                            </div>
                                         </label>
-                                        <label for="geo" class="form-check-label matter-check text-center shadow">
-                                            <input id="geo" class="form-check-input" type="checkbox" value="geografia" name="matter">
-                                            <span class="label text-break">Geografia</span>
+                                        <label class="form-check-label matter-check text-center shadow" for="geo">
+                                            <div class="form-body d-flex align-items-center">
+                                                <input id="geo" class="form-check-input" type="checkbox" value="geografia" name="matter">
+                                                <span class="label text-break"><i class="fa-solid fa-earth-americas"></i>Geografia</span>
+                                            </div>
                                         </label>
-                                        <label for="hist" class="form-check-label matter-check text-center shadow">
-                                            <input id="hist" class="form-check-input" type="checkbox" value="história" name="matter">
-                                            <span class="label text-break">História</span>
+                                        <label class="form-check-label matter-check text-center shadow" for="hist">
+                                            <div class="form-body d-flex align-items-center">
+                                                <input id="hist" class="form-check-input" type="checkbox" value="história" name="matter">
+                                                <span class="label text-break"><i class="bi bi-hourglass-split me-2"></i>História</span>
+                                            </div>
                                         </label>
-                                        <label for="chem" class="form-check-label matter-check text-center shadow">
-                                            <input id="chem" class="form-check-input" type="checkbox" value="química" name="matter">
-                                            <span class="label text-break">Química</span>
+                                        <label class="form-check-label matter-check text-center shadow" for="chem">
+                                            <div class="form-body d-flex align-items-center">
+                                                <input id="chem" class="form-check-input" type="checkbox" value="química" name="matter">
+                                                <span class="label text-break"><i class="fa-solid fa-flask-vial"></i>Química</span>
+                                            </div>
                                         </label>
-                                        <!-- label.form-check-label.matter-check.text-center.shadow-sm>input.form-check-input+span.label -->
+                                        <!-- label.form-check-label.matter-check.text-center.shadow>div.form-body.d-flex.align-items-center>input.form-check-input+span.label.text-break -->
+                                    </div>
+                                    <div class="form-check matter d-flex flex-wrap justify-content-between">
+                                        <label class="form-check-label matter-check text-center shadow" for="phys">
+                                            <div class="form-body d-flex align-items-center">
+                                                <input id="phys" class="form-check-input" type="checkbox" value="fisíca" name="matter">
+                                                <span class="label text-break"><i class="fa-solid fa-atom"></i>Fisíca</span>
+                                            </div>
+                                        </label>
+                                        <label class="form-check-label matter-check text-center shadow" for="bio">
+                                            <div class="form-body d-flex align-items-center">
+                                                <input id="bio" class="form-check-input" type="checkbox" value="biologia" name="matter">
+                                                <span class="label text-break"><i class="fa-solid fa-seedling"></i>Biologia</span>
+                                            </div>
+                                        </label>
+                                        <label class="form-check-label matter-check text-center shadow" for="art">
+                                            <div class="form-body d-flex align-items-center">
+                                                <input id="art" class="form-check-input" type="checkbox" value="artes" name="matter">
+                                                <span class="label text-break"><i class="fa-solid fa-palette"></i>Artes</span>
+                                            </div>
+                                        </label>
+                                        <label class="form-check-label matter-check text-center shadow" for="philo">
+                                            <div class="form-body d-flex align-items-center">
+                                                <input id="philo" class="form-check-input" type="checkbox" value="filosofia" name="matter">
+                                                <span class="label text-break"><i class="fa-solid fa-brain"></i>Filosofia</span>
+                                            </div>
+                                        </label>
+                                        <label class="form-check-label matter-check text-center shadow" for="socio">
+                                            <div class="form-body d-flex align-items-center">
+                                                <input id="socio" class="form-check-input" type="checkbox" value="sociologia" name="matter">
+                                                <span class="label text-break"><i class="fa-solid fa-scale-balanced"></i>Sociologia</span>
+                                            </div>
+                                        </label>
                                     </div>
                                 </div>
                             </form>
