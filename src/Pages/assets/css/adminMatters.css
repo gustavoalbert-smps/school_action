@@ -6,7 +6,7 @@
     padding: .375rem;
 }
 
-.checkoption-matter p {
+.checkoption-matter .matter-title {
     padding-left: .375rem;
 }
 
@@ -14,8 +14,13 @@
     height: 100%;
 }
 
+.form-body .matter-name {
+    margin-bottom: 0;
+}
+
 .matter .label {
     display: inline-block;
+    height: 100%;
     padding: 1rem;
     border: 5px hidden;
     transition: border-color .15s ease-in-out
