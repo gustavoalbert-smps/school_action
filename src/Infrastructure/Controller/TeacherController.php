@@ -40,5 +40,10 @@ class TeacherController
     {
         return $teacherRepository->getTeacherByPeopleId($peopleId);
     }
+
+    public function getTeachersWithSpecificGraduation(PdoTeacherRepository $teacherRepository, string $graduation): array
+    {
+        return $teacherRepository->getTeachersByGraduation($graduation);
+    }
 }
 ?>
