@@ -6,7 +6,7 @@
     padding: .375rem;
 }
 
-.checkoption-matter .matter-title {
+.input-title {
     padding-left: .375rem;
 }
 
@@ -44,6 +44,14 @@
 
 .fa-solid {
     margin-right: 0.5rem!important;
+}
+
+.workload-label {
+    padding-left: .375rem;
+}
+
+.select-form {
+    max-width: 305px;
 }
 
 @media (min-width:767.98px) {
