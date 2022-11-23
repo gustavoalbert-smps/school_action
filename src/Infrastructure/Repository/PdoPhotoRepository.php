@@ -56,10 +56,62 @@ class PdoPhotoRepository implements PhotoInterface
 
         $statement = $this->connection->prepare($sqlInsert);
 
+        $this->moveTofold($name , $file);
+
+        return  $statement-> execute
+        ([
+            ':people_id'=> $people_id,
+            ':name' => $name,
+            ':type'=>substr($file['img']['type'],6)
+        ]);
+        
+        // return resize($file,$name);
+    }
+    public function update (Photo $photo): bool
+    {
+        $sqlUpdate = 'UPDATE photos SET path = :path, people_id = :people_id WHERE id = :id';
+
+        $statement = $this->connection->prepare($sqlUpdate);
+
+        $statement->execute
+        ([
+            'path'=>$photo->getPath(),
+            'People_id'=>$photo->getPeople_id(),
+            'id'=>$photo->getId()
+            
+        ]);
+        
+    }
+    public function save(Photo $photo): bool
+    {
+        if ($photo->getPeople_id() === null) {
+            return $this->insert($photo);
+        }
+
+        return $this->update($photo);
+    }
+    
+    public function remove(Photo $photo):bool
+    {
+        var_dump($photo->getId());
+        
+        $sqlRemove = 'DELETE FROM photos WHERE id = :id'; 
+
+        $statement = $this->connection->prepare($sqlRemove);
+
+        return $statement->execute([
+            ':id' => $photo->getId()
+        ]);
+    }
+
+    public function moveToFold($name, $file)
+
+    {
+
         $height = "200";
         $width = "200";
         $filename = $name;
-    
+
         switch($file['img']['type']):
             case 'image/jpeg';
             case 'image/pjpeg';
@@ -131,50 +183,5 @@ class PdoPhotoRepository implements PhotoInterface
                     imagepng($img_resize, 'assets/img/'.$filename);
                 break;
         endswitch; 
-
-        return  $statement-> execute
-        ([
-            ':people_id'=> $people_id,
-            ':name' => $name,
-            ':type'=>substr($file['img']['type'],6)
-        ]);
-        
-        // return resize($file,$name);
-    }
-    public function update (Photo $photo): bool
-    {
-        $sqlUpdate = 'UPDATE photos SET path = :path, people_id = :people_id WHERE id = :id';
-
-        $statement = $this->connection->prepare($sqlUpdate);
-
-        $statement->execute
-        ([
-            'path'=>$photo->getPath(),
-            'People_id'=>$photo->getPeople_id(),
-            'id'=>$photo->getId()
-            
-        ]);
-        
-    }
-    public function save(Photo $photo): bool
-    {
-        if ($photo->getPeople_id() === null) {
-            return $this->insert($photo);
-        }
-
-        return $this->update($photo);
-    }
-    
-    public function remove(Photo $photo):bool
-    {
-        var_dump($photo->getId());
-        
-        $sqlRemove = 'DELETE FROM photos WHERE id = :id'; 
-
-        $statement = $this->connection->prepare($sqlRemove);
-
-        return $statement->execute([
-            ':id' => $photo->getId()
-        ]);
     }
 }
