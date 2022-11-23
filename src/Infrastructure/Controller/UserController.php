@@ -35,6 +35,21 @@ class UserController
         return $peopleRepository->getAllPeople();
     }
 
+    public function getLimitUsers(PdoUserRepository $userRepository, int $setLimit): array
+    {   
+        if($setLimit == 0)
+        {
+            (int)$setValueDefault = 10;
+
+            return $userRepository->getLimitPeople($setValueDefault);
+        }
+        elseif((int)$setLimit != "")
+        {
+            return $userRepository->getLimitPeople((int)$setLimit);
+        }
+        
+    }
+
     public function totalUsersType(string $user): int
     {
         if  ($user === 'teacher') {
