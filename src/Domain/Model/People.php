@@ -4,7 +4,7 @@ namespace Alura\Pdo\Domain\Model;
 
 class People 
 {
-    protected ?int $peopleId;
+    private ?int $peopleId;
     protected string $name;
     protected string $gender;
     protected \DateTimeInterface $birthDate;

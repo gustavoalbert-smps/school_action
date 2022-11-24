@@ -24,6 +24,11 @@ class PeopleController
     {
         return $peopleRepository->getPeople($id);
     }
+    
+    public function getPeopleAsArray(PdoPeopleRepository $peopleRepository, int $id): array
+    {
+        return $peopleRepository->getPeopleAsArray($id);
+    }
 
     public function insertPeople(PdoPeopleRepository $peopleRepository, string $name, string $gender, string $birthDate, int $admin): People
     {
