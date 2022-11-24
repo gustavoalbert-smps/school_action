@@ -68,6 +68,33 @@ class PdoUserRepository implements UserInterface
         return $userLimit;
     }
 
+    public function filterTypeAndLimit($type, int $limit)
+    {
+        switch ($type) {
+            case 'teachers':
+                $sqlQuery = "SELECT teachers.id, people.name, people.birth_date, people.gender FROM teachers INNER JOIN people ON people_id = people.id LIMIT :setLimit";
+                break;
+
+            case 'students':
+                $sqlQuery = "SELECT people.id,people.name, people.birth_date, people.gender FROM students INNER JOIN people ON people_id = people.id LIMIT :setLimit";
+                break;
+            
+            default:
+                return $this->getLimitPeople($limit);
+                break;
+        }
+
+       $statement = $this->connection->prepare($sqlQuery);
+
+       $statement -> bindparam(':setLimit', $limit, PDO::PARAM_INT);
+
+       $statement -> execute();
+
+       $userType = $statement->fetchall(PDO::FETCH_ASSOC); 
+
+       return $userType;
+    }
+
     public function getUserByPeopleId(int $peopleId): User
     {
         $sqlQuery = 'SELECT * FROM users WHERE people_id = :id;';

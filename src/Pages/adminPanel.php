@@ -27,18 +27,24 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
 
     $setLimit = 0;
 
+    $type = '';
+
     $userController = new UserController($connection);
 
     if($_SERVER['REQUEST_METHOD'] === 'POST')
 
     {
-      (int) $getPostLimit = $_POST['limitValue'];
+      (int) $setLimit = $_POST['limitValue'];
 
-      (int) $setLimit = $getPostLimit;
+      echo $setLimit; 
+
+      (int) $type = $_POST['userType'];
+
+      echo $type;
 
     }
 
-    $getLimitUsersArray = $userController->getLimitUsers($userRepository, $setLimit);
+    $getLimitUsersArray = $userController->getPeoplePerTypeAndLimit($userRepository, $type, $setLimit);
 
     $getUsersCount = $userController->getPeopleCount($peopleRepository);
 
@@ -108,10 +114,10 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
             <div class="row">
               <div class="panel-form-group">
                 <label for="form-control">Filtrar por Usarios: </label>
-                <select class="form-control" name="" id="">
-                  <option value = "all">Todos</option>
-                  <option value = "teacher">Professores</option>
-                  <option value = "student">Alunos</option>
+                <select class="form-control" name="userType" id="">
+                  <option value = "people" <?php if(isset($type)){if($type == 'people'){ echo "selected";}}?>>Todos</option>
+                  <option value = "teachers" <?php if(isset($type)){if($type == 'teachers'){ echo "selected";}}?>>Professores</option>
+                  <option value = "students" <?php if(isset($type)){if($type == 'students'){ echo "selected";}}?>>Alunos</option>
                   <option>Coordenadores</option>
                 </select>
                 <div class="mb-4">
