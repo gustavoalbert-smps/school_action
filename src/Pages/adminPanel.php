@@ -35,6 +35,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
       (int) $getPostLimit = $_POST['limitValue'];
 
       (int) $setLimit = $getPostLimit;
+
     }
 
     $getLimitUsersArray = $userController->getLimitUsers($userRepository, $setLimit);
@@ -108,9 +109,9 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
               <div class="panel-form-group">
                 <label for="form-control">Filtrar por Usarios: </label>
                 <select class="form-control" name="" id="">
-                  <option value = "filterAll">Todos</option>
-                  <option value = "filterTeacher">Professores</option>
-                  <option value = "filterStudent">Alunos</option>
+                  <option value = "all">Todos</option>
+                  <option value = "teacher">Professores</option>
+                  <option value = "student">Alunos</option>
                   <option>Coordenadores</option>
                 </select>
                 <div class="mb-4">
