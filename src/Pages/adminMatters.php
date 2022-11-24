@@ -28,19 +28,6 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
         $matterController = new MatterController($connection);
         $matterRepository = new PdoMatterRepository($connection);
 
-        $varGraduation = $_COOKIE["graduation"];
-
-        if (isset($varGraduation)) {
-            echo 'deu erro';
-        } else {
-            if ($varGraduation === "") {
-                $teachers = $teacherController->getAllTeachers($teacherRepository);
-            } else {
-                $teachers = $teacherController->getTeachersWithSpecificGraduation($teacherRepository,$varGraduation);
-            }
-        }
-        
-
         $classes = $schoolClassController->getAllClass($schoolClassRepository);
 
         include_once 'elements/head.php';
@@ -194,7 +181,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
                                         <div class="col select-form">
                                             <label for="workload" class="form-label workload-label input-title">Carga horária</label>
                                             <select id="workload" class="form-select" name="workload">
-                                                    <option value="default" selected>Selecione uma opção...</option>
+                                                    <option value="default" selected disabled>Selecione uma opção...</option>
                                                     <option value="40">40 horas</option>
                                                     <option value="60">60 horas</option>
                                                     <option value="80">80 horas</option>
@@ -205,7 +192,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
                                         <div class="col select-form">
                                             <label for="class" class="form-label input-title">Turma</label>
                                             <select id="class" class="form-select" name="class">
-                                                <option value="default" selected>Selecione uma opção...</option>
+                                                <option value="default" selected disabled>Selecione uma opção...</option>
                                                 <?php foreach ($classes as $class) {?>
                                                     <option value="<?php echo $class->getId()?>"><?php echo "{$class->getYear()}{$class->getIdentifier()}"?></option>
                                                 <?php } ?>
@@ -214,10 +201,7 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
                                         <div class="col select-form">
                                             <label for="teacher" class="form-label input-title">Professor</label>
                                             <select id="teacher" class="form-select" name="teacher">
-                                                <option value="default" selected>Selecione uma opção...</option>
-                                                <?php foreach ($teachers as $teacher) {?>
-                                                    <option value="<?php echo $teacher->getId();?>"><?php echo $teacher->getPeopleId();?></option>
-                                                <?php } ?>
+                                                <option value="default" selected disabled>Selecione uma opção...</option>
                                             </select>
                                         </div>
                                     </div>
@@ -241,10 +225,62 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
                         
                         $(group).prop("checked", false);
                         $(this).prop("checked", true);
+
+                        loadTeachers(graduation);
                     } else {
                         $(this).prop("checked", false);
                     }
                 });
+
+                function getCookie(nome) {
+                    const value =  `${document.cookie}`;
+                    const parts = value.split(`; ${name}=`);
+                    if (parts.length === 2) return parts.pop().split(';').shift();
+                }
+
+                function loadTeachers(graduation) {
+                    $.ajax({
+                        url: 'loadTeachers.php',
+                        method: 'POST',
+                        data: {'graduation':graduation},
+                        dataType: 'JSON'
+                    }).done(function(res) {
+                        if (res.status == 'sucess') {
+                            let newOptions = new Map();
+
+                            for (var i = 0; i <= (res.data.length -1); i++) {
+                                for (var j = 0; j <= (res.peoples.length -1); j++) {
+                                    if (res.data[i].people_id === res.peoples[j].id) {
+                                        newOptions.set(i, {value: res.data[i].id, text: res.peoples[j].name})
+                                    }
+                                }
+                            }
+                            createOptions(newOptions);
+                        }
+                    });
+                }
+
+                function createOptions(option) {
+                    let select = document.querySelector("select[name='teacher']");
+
+                    while (select.children.length) {
+                        select.removeChild(select.lastChild);
+                    }
+
+                    let defaultOpt = document.createElement('option');
+                    defaultOpt.disabled = true;
+                    defaultOpt.selected = true;
+                    defaultOpt.textContent = 'Selecione uma opção';
+                    select.appendChild(defaultOpt);
+
+                    option.forEach(function(option) {
+                        let optionElement = document.createElement('option');
+                        optionElement.value = option.value;
+                        optionElement.textContent = option.text;
+
+                        select.appendChild(optionElement)
+                    });
+                }
             </script>
         </body>
 
