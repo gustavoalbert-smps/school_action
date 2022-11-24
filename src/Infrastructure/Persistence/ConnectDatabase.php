@@ -16,7 +16,9 @@ class ConnectDatabase
     $user = "b52465a7c79918";
     $pass = "e99bcde1";
 
-    $connection = new PDO("mysql:host=$host;dbname=$db",$user,$pass);
+    $options = array(\PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
+
+    $connection = new PDO("mysql:host=$host;dbname=$db",$user,$pass, $options);
     
     $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
