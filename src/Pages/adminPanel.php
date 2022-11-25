@@ -123,11 +123,11 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
                 <div class="mb-4">
                   <label for="form-control">Quantidade de linhas: </label>
                     <select class="form-control" name="limitValue" id="">
-                      <option value = "10" <?php if(isset($getPostLimit)){if($getPostLimit == 10){ echo "selected";}}?>>10</option>
-                      <option value = "100" <?php if(isset($getPostLimit)){if($getPostLimit == 100){ echo "selected";}}?>>100</option>
-                      <option value = "1000" <?php if(isset($getPostLimit)){if($getPostLimit == 1000){ echo "selected";}}?>>1000</option>
-                      <option value = "10000" <?php if(isset($getPostLimit)){if($getPostLimit == 10000){ echo "selected";}}?>>10000</option>
-                      <option value = "999999" <?php if(isset($getPostLimit)){if($getPostLimit == 999999){ echo "selected";}}?>>999999</option>
+                      <option value = "10" <?php if(isset($setLimit)){if($setLimit == 10){ echo "selected";}}?>>10</option>
+                      <option value = "100" <?php if(isset($setLimit)){if($setLimit == 100){ echo "selected";}}?>>100</option>
+                      <option value = "1000" <?php if(isset($setLimit)){if($setLimit == 1000){ echo "selected";}}?>>1000</option>
+                      <option value = "10000" <?php if(isset($setLimit)){if($setLimit == 10000){ echo "selected";}}?>>10000</option>
+                      <option value = "999999" <?php if(isset($setLimit)){if($setLimit == 999999){ echo "selected";}}?>>999999</option>
                     </select>
                 </div>
 
