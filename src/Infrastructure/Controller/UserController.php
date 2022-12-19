@@ -50,6 +50,21 @@ class UserController
         
     }
 
+    public function getPeoplePerTypeAndLimit(PDOUserRepository $userRepository ,string $type, int $limit)
+    {
+        // echo $type;
+        // if($type $limit == 0)
+        // {
+        //     $type = 'teachers';
+
+        //     $limit = 10;
+
+        //     return $userRepository->filterTypeAndLimit($type, $limit);
+        // }
+
+        return $userRepository->filterTypeAndLimit($type, $limit);
+    }
+
     public function totalUsersType(string $user): int
     {
         if  ($user === 'teacher') {

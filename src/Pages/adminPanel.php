@@ -27,17 +27,24 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
 
     $setLimit = 0;
 
+    $type = '';
+
     $userController = new UserController($connection);
 
     if($_SERVER['REQUEST_METHOD'] === 'POST')
 
     {
-      (int) $getPostLimit = $_POST['limitValue'];
+      (int) $setLimit = $_POST['limitValue'];
 
-      (int) $setLimit = $getPostLimit;
+      echo $setLimit; 
+
+      (int) $type = $_POST['userType'];
+
+      echo $type;
+
     }
 
-    $getLimitUsersArray = $userController->getLimitUsers($userRepository, $setLimit);
+    $getLimitUsersArray = $userController->getPeoplePerTypeAndLimit($userRepository, $type, $setLimit);
 
     $getUsersCount = $userController->getPeopleCount($peopleRepository);
 
@@ -107,20 +114,20 @@ if (empty($_SESSION['user']) || empty($_SESSION['password'])) {
             <div class="row">
               <div class="panel-form-group">
                 <label for="form-control">Filtrar por Usarios: </label>
-                <select class="form-control" name="" id="">
-                  <option value = "filterAll">Todos</option>
-                  <option value = "filterTeacher">Professores</option>
-                  <option value = "filterStudent">Alunos</option>
+                <select class="form-control" name="userType" id="">
+                  <option value = "people" <?php if(isset($type)){if($type == 'people'){ echo "selected";}}?>>Todos</option>
+                  <option value = "teachers" <?php if(isset($type)){if($type == 'teachers'){ echo "selected";}}?>>Professores</option>
+                  <option value = "students" <?php if(isset($type)){if($type == 'students'){ echo "selected";}}?>>Alunos</option>
                   <option>Coordenadores</option>
                 </select>
                 <div class="mb-4">
                   <label for="form-control">Quantidade de linhas: </label>
                     <select class="form-control" name="limitValue" id="">
-                      <option value = "10" <?php if(isset($getPostLimit)){if($getPostLimit == 10){ echo "selected";}}?>>10</option>
-                      <option value = "100" <?php if(isset($getPostLimit)){if($getPostLimit == 100){ echo "selected";}}?>>100</option>
-                      <option value = "1000" <?php if(isset($getPostLimit)){if($getPostLimit == 1000){ echo "selected";}}?>>1000</option>
-                      <option value = "10000" <?php if(isset($getPostLimit)){if($getPostLimit == 10000){ echo "selected";}}?>>10000</option>
-                      <option value = "999999" <?php if(isset($getPostLimit)){if($getPostLimit == 999999){ echo "selected";}}?>>999999</option>
+                      <option value = "10" <?php if(isset($setLimit)){if($setLimit == 10){ echo "selected";}}?>>10</option>
+                      <option value = "100" <?php if(isset($setLimit)){if($setLimit == 100){ echo "selected";}}?>>100</option>
+                      <option value = "1000" <?php if(isset($setLimit)){if($setLimit == 1000){ echo "selected";}}?>>1000</option>
+                      <option value = "10000" <?php if(isset($setLimit)){if($setLimit == 10000){ echo "selected";}}?>>10000</option>
+                      <option value = "999999" <?php if(isset($setLimit)){if($setLimit == 999999){ echo "selected";}}?>>999999</option>
                     </select>
                 </div>
 
